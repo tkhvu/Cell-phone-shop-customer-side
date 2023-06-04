@@ -1,0 +1,29 @@
+<div class="center">
+  <h1>התחברות</h1>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <p>שם משתמש</p>
+    <mat-form-field appearance="fill" for="name">
+      <input matInput name="first" ngModel>
+    </mat-form-field>
+    <div>
+      <p>סיסמה</p>
+      <mat-form-field appearance="fill" for="name">
+        <input matInput name="last" ngModel>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="warn" class="login-btn">התחברות</button>
+  </form>
+
+  <div>
+    <button mat-stroked-button color="warn" routerLink="/Createaccount">יצירת חשבון</button>
+  </div>
+</div>
+<!-- <button mat-button routerLink="/Login">יצירת חשבון</button> -->
+
+<!-- 
+
+
+  <mat-form-field appearance="fill" for="name">שם משתמש 
+    <input matInput name="first" ngModel>
+</mat-form-field> -->

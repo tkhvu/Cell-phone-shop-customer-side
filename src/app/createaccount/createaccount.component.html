@@ -1,0 +1,120 @@
+<div class="center">
+<h1>הרשמה</h1>
+
+<form (ngSubmit)="onSubmit1()" #heroForm="ngForm">
+        
+    <p>שם פרטי</p>
+    <mat-form-field>
+        <input matInput name="first" [(ngModel)]="model.first" ngModel>
+    </mat-form-field>
+    <div>
+        <p>שם משפחה</p>
+    <mat-form-field>
+        <input matInput name="Family" [(ngModel)]="model.Family" ngModel>
+    </mat-form-field>
+</div>
+<p> כתובת אימייל</p> 
+<mat-form-field>
+    <input matInput name="email" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+    required [(ngModel)]="model.email" ngModel>
+  
+  </mat-form-field>
+<!-- 
+  <p> כתובת אימייל</p> 
+  <mat-form-field>
+    <input matInput [formControl]="email" required [(ngModel)]="model.email" ngModel>
+    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field> -->
+
+  <p>שם משתמש</p>
+  <mat-form-field>
+      <input matInput  pattern="(?=.*[a-z]).{8,}" name="Username" required [(ngModel)]="model.Username" ngModel>
+  </mat-form-field>
+  
+<p>סיסמה</p> 
+  <mat-form-field>
+    <input matInput #input [type]="hide ? 'password' : 'text'" required 
+     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="password"  [(ngModel)]="model.password" ngModel>
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
+    [attr.aria-pressed]="hide">
+    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+   <div *ngIf="input.value.length >1">
+            Name is required
+      </div>
+  <div>
+    <button mat-raised-button color="warn"  type="submit" [disabled]="!heroForm.form.valid">הרשמה</button>
+  </div>
+
+  </form>
+</div>
+
+
+
+
+<!-- 
+
+
+      <form (ngSubmit)="onSubmit1()" #heroForm="ngForm">
+       
+        <p>שם פרטי</p>
+        <mat-form-field for="name">
+            <input matInput name="first" [(ngModel)]="model.first" ngModel >
+        </mat-form-field>
+        <div>
+            <p>שם משפחה</p>
+        <mat-form-field for="name">
+            <input matInput name="Family" [(ngModel)]="model.Family" ngModel>
+        </mat-form-field>
+    </div>
+    <p> כתובת אימייל</p> 
+    <mat-form-field for="name">
+        <input matInput placeholder="pat@example.com" required pattern=".+@globex\.com" size="30" required name="email" [(ngModel)]="model.email" ngModel>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    
+      <p>שם משתמש</p>
+      <mat-form-field for="name">
+          <input matInput  pattern="(?=.*[a-z]).{8,}" name="Username" [(ngModel)]="model.Username" ngModel>
+      </mat-form-field>
+      
+    <p>סיסמה</p> 
+      <mat-form-field for="name">
+        <input matInput [type]="hide ? 'password' : 'text'" required 
+         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="password"  [(ngModel)]="model.password" ngModel>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+  
+        
+
+  
+        <button type="submit" [disabled]="!heroForm.form.valid">Submit</button>
+     
+  
+      </form>
+      <label for="email">Enter your globex.com email:</label>
+
+<input type="email" id="email"
+       pattern=".+@globex\.com" size="30" required> -->
+
+     
+<!-- 
+    <div [hidden]="!submitted">
+       {{ model | json}}
+     -->
+
+<!--        
+        <mat-form-field>
+          <mat-label>Enter some input</mat-label>
+          <input matInput #input maxlength="10" placeholder="Ex. Nougat">
+          <mat-hint align="end">{{input.value.length}}/10</mat-hint>
+     
+        </mat-form-field >
+        <div *ngIf="input.value.length >1">
+            Name is required
+      </div>
+    -->

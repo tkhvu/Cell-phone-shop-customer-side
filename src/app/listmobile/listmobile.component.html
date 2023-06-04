@@ -1,0 +1,15 @@
+<div  *ngIf="!listmobileview">
+    <mat-grid-list cols="5" rowHeight="1:1">
+      <mat-grid-tile  *ngFor="let mobile of listmobileMock">
+        <button (click)="onSelect(mobile)">
+          <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="232" height="232">
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+    </div>
+
+    
+
+<div *ngFor="let mobile of dataSource">{{mobile.name}}</div>
+
+
