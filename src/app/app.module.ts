@@ -21,6 +21,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { LoginComponent } from './login/login.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { TryComponent } from './try/try.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { StrengthCheckerComponent } from './createaccount/strength-checker.component';
 
 
 
@@ -33,6 +35,7 @@ import { TryComponent } from './try/try.component';
     LoginComponent,
     CreateaccountComponent,
     TryComponent,
+    StrengthCheckerComponent
     
   ],
   imports: [
@@ -52,6 +55,7 @@ import { TryComponent } from './try/try.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule
   ],
  
   providers: [],

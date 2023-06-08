@@ -1,29 +1,52 @@
 <div class="center">
   <h1>התחברות</h1>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+
+  <form #heroForm="ngForm" (ngSubmit)="onSubmit(heroForm)" >
+        
+  <p>שם משתמש</p>
+  <mat-form-field>
+      <input matInput  name="Username" required ngModel="">
+  </mat-form-field>
+  
+<p>סיסמה</p> 
+  <mat-form-field>
+    <input matInput  required name="password"
+     ngModel>
+  </mat-form-field>
+   <!-- <div *ngIf="input.value.length >1">
+            Name is required
+      </div> -->
+  <div>
+    <button mat-raised-button color="warn"  type="submit" [disabled]="!heroForm.form.valid" >התחברות</button>
+  </div>
+
+  </form>
+
+  <button mat-raised-button routerLink="/Createaccount">הרשמה </button>
+</div>
+
+  <!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <p>שם משתמש</p>
     <mat-form-field appearance="fill" for="name">
-      <input matInput name="first" ngModel>
+      <input matInput name="first" >
     </mat-form-field>
     <div>
       <p>סיסמה</p>
-      <mat-form-field appearance="fill" for="name">
-        <input matInput name="last" ngModel>
+      <mat-form-field appearance="fill" for="last">
+        <input matInput  password="last" >
       </mat-form-field>
     </div>
-    <button mat-raised-button color="warn" class="login-btn">התחברות</button>
+    <button mat-raised-button color="warn" class="login-btn"  >התחברות</button>
   </form>
 
   <div>
     <button mat-stroked-button color="warn" routerLink="/Createaccount">יצירת חשבון</button>
   </div>
-</div>
-<!-- <button mat-button routerLink="/Login">יצירת חשבון</button> -->
-
-<!-- 
+</div> -->
 
 
-  <mat-form-field appearance="fill" for="name">שם משתמש 
-    <input matInput name="first" ngModel>
-</mat-form-field> -->
+
+
+

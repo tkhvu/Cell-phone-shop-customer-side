@@ -11,8 +11,5 @@ export class AppComponent {
   listmobileview: boolean = true;
 
   wagon: boolean = true;
-
-  
-
-
+  value: number | undefined;
 }

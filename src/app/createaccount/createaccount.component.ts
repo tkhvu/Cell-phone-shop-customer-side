@@ -10,35 +10,18 @@ import { USER1 } from '../hero';
   styleUrls: ['./createaccount.component.css']
 })
 export class CreateaccountComponent {
+  
+  constructor(private api: ApiService, private fb: FormBuilder) { }
+  passwordIsValid = false;
 
-  form?: FormGroup;
-
-  constructor(private api: ApiService, private formBuilder: FormBuilder) { }
-
-  ngOnInit(): void {
-    this.form = this.formBuilder.group(
-      {
-        
-        email: ['', [Validators.required, Validators.email]],
-       
-        
-      },
-      
-    );
+  passwordValid(event: any) {
+    this.passwordIsValid = event;
   }
 
 
-  // email = new FormControl('', [
-  //   Validators.required,
-  //   Validators.minLength(10),
-  // ]);
-  // getErrorMessage() {
-  //   if (this.email.hasError('required')) {
-  //     return 'Not a valid email';
-  //   }
 
-  //   return this.email.hasError('email') ? 'Not a valid email' : '';
-  // }
+
+
 
   onSubmit(f: NgForm) {
     console.log(f.value)
@@ -50,10 +33,9 @@ export class CreateaccountComponent {
   hide = true;
 
   async onSelect(name: any ) {
-    //showSpinner = true
+
     await this.api.user(name)
-    //showSpinner = false
-    //
+    
     this.dataSource.push(name);
     
     console.log(this.dataSource);
@@ -65,14 +47,9 @@ model = new USER1( '', '','', '','',);
 
 submitted = false;
 
-onSubmit1() { this.submitted = true;
+onSubmit1() { 
+  this.submitted = true;
   this.onSelect(this.model)
   console.log(this.model) }
-newHero() {
-  this.model = new USER1( '', '','', '','',);
-}
-
-
-
 
 }

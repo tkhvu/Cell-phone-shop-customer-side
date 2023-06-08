@@ -1,19 +1,20 @@
 <mat-toolbar>
     <button mat-raised-button matBadge="8" matBadgePosition="before" matBadgeColor="accent">
-        Action
+      <span class="material-icons">shopping_cart</span>
     </button>
+
+    <span *ngIf="api.Connected.length <1">
     <button mat-button routerLink="/Login">התחברות/הרשמה</button>
+  </span>
+  <span *ngIf="api.Connected.length >1">
+    <button mat-button (click)="api.Connected = ''">התנתקות</button> {{api.Connected}}שלום
+  </span>
     <span class="example-spacer"></span>
-    <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button> -->
-    <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button> -->
+ 
 
     <span>צלצולים</span>
 
 </mat-toolbar>
 
-
 <router-outlet></router-outlet>
+

@@ -11,8 +11,8 @@ import { events, USER } from '../interfaces';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-
-
+  Connected:any = "";
+  t: string = "";
 
   public getshps(): Observable<events[]>  {
    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getshps";
@@ -55,6 +55,17 @@ export class ApiService {
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/user";
      return this.http.post<USER[]>(url, name)
      .subscribe();
+   }
+
+
+   public userMatch() {
+    
+ 
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/category" + this.t;
+     return this.http.get<USER>(url)
+     //  .subscribe((data) => {
+     //   this.dataSource = data;
+     // })
    }
 }
 

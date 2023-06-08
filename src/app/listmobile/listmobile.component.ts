@@ -21,6 +21,18 @@ export class ListmobileComponent implements OnInit {
     })
   }
 
+
+ a = "";
+ b = "dffdf2222E";
+
+  userMatch(){
+    this.api.t = "/?category=" + this.a + "&password=" + this.b;
+    this.api.userMatch()
+    .subscribe((data) => {
+      console.log(data)
+    })
+  }
+
   onSelect(mobile: any ) {
     this.api.Cartmobile(mobile)
     this.dataSource.push(mobile);
