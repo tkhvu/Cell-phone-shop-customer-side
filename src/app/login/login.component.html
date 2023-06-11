@@ -11,13 +11,19 @@
   </mat-form-field>
   
 <p>סיסמה</p> 
-  <mat-form-field>
+  <!-- <mat-form-field>
     <input matInput  required name="password"
      ngModel>
-  </mat-form-field>
-   <!-- <div *ngIf="input.value.length >1">
-            Name is required
-      </div> -->
+  </mat-form-field> -->
+
+
+    <mat-form-field>
+      <input matInput required name="password" ngModel [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
   <div>
     <button mat-raised-button color="warn"  type="submit" [disabled]="!heroForm.form.valid" >התחברות</button>
   </div>
@@ -26,6 +32,7 @@
 
   <button mat-raised-button routerLink="/Createaccount">הרשמה </button>
 </div>
+
 
   <!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <p>שם משתמש</p>
@@ -46,7 +53,7 @@
   </div>
 </div> -->
 
-
-
-
+<div *ngIf="!c">
+<div *ngIf="api.a <1">Zalmala will wait to connect</div>
+</div>
 

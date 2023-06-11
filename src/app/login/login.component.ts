@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {NgForm} from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
 import { USER1 } from '../hero';
-import { json } from 'express';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +11,16 @@ import { json } from 'express';
 })
 export class LoginComponent {
 
-  constructor(private api: ApiService){}
+  constructor(public api: ApiService,   private router: Router,){}
   model = new USER1( '', '');
+  hide = true;
 
   a = this.model.Username;
   b = this.model.password;
-
+  c = true
+v:any
   onSubmit(heroForm:any) {
+    this.c = !this.c;
     this.a = heroForm.value.Username;
     this.b = heroForm.value.password;
     console.log(this.a, this.b)
@@ -26,10 +29,28 @@ export class LoginComponent {
 
   userMatch(){
     this.api.t = "/?category=" + this.a + "&password=" + this.b;
+    this.connect(this.v)
     this.api.userMatch()
     .subscribe((data:any) => {
-      console.log(data[0].Username)
-      this.api.Connected = data[0].Username;
+      // if(data = null){this.api.a = 2}
+      // console.log("api a==", this.api.a)
+      console.log(data[0].first)
+      this.connect(data[0].first)
+      this.api.Connected = data[0].first;
     })
   }
+
+  connect(v:string = ""){
+    if(v.length >0 ){this.api.a = 2, 
+      this.navigateToAbout()};
+      console.log(this.api.a)
+  }
+
+  // goBack() {
+  //   this.location.onUrlChange('/Shop');
+  // }
+  navigateToAbout(){
+  this.api.navigateToAbout() 
+ }
+
 }

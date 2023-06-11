@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Albums, Albums1 } from '../albums';
 import { events, USER } from '../interfaces';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -10,9 +11,10 @@ import { events, USER } from '../interfaces';
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,  private router: Router) { }
   Connected:any = "";
   t: string = "";
+  a:number = 0;
 
   public getshps(): Observable<events[]>  {
    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getshps";
@@ -67,6 +69,11 @@ export class ApiService {
      //   this.dataSource = data;
      // })
    }
+
+
+   public navigateToAbout() {
+    this.router.navigate(['/Shop']);
+  }  
 }
 
 

@@ -23,6 +23,7 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
 import { TryComponent } from './try/try.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { StrengthCheckerComponent } from './createaccount/strength-checker.component';
+import { ShopComponent } from './shop/shop.component';
 
 
 
@@ -35,7 +36,8 @@ import { StrengthCheckerComponent } from './createaccount/strength-checker.compo
     LoginComponent,
     CreateaccountComponent,
     TryComponent,
-    StrengthCheckerComponent
+    StrengthCheckerComponent,
+    ShopComponent
     
   ],
   imports: [
@@ -55,7 +57,8 @@ import { StrengthCheckerComponent } from './createaccount/strength-checker.compo
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    
   ],
  
   providers: [],
