@@ -11,20 +11,20 @@ import { Router } from '@angular/router';
 })
 export class ApiService {
 
-  constructor(private http: HttpClient,  private router: Router) { }
-  Connected:any = "";
+  constructor(private http: HttpClient, private router: Router) { }
+  Connected: any = "";
   t: string = "";
-  a:number = 0;
+  a: number = 0;
 
-  public getshps(): Observable<events[]>  {
-   const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getshps";
-    return this.http.get<events[]>(url,) ;
+  public getshps(): Observable<events[]> {
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getshps";
+    return this.http.get<events[]>(url,);
   }
 
-  
+
   // public getmobile(): Observable<Albums1[]>  {
   //   // const url: string = "https://jsonplaceholder.typicode.com/albums";
-    
+
   // // const httpOptions = {
   // //   headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
   // // };
@@ -33,9 +33,9 @@ export class ApiService {
   //   // .subscribe((res)=>{ console.log(res) });
   // }
   public getmobile() {
-    
- 
-   const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getmobile";
+
+
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getmobile";
     return this.http.get<events[]>(url)
     //  .subscribe((data) => {
     //   this.dataSource = data;
@@ -44,36 +44,36 @@ export class ApiService {
 
 
   public Cartmobile(mobile: events[]) {
-    
- 
-   const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/Cartmobile";
+
+
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/Cartmobile";
     return this.http.post<events[]>(url, mobile)
-    .subscribe();
+      .subscribe();
   }
 
   public user(name: USER[]) {
-    
- 
+
+
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/user";
-     return this.http.post<USER[]>(url, name)
-     .subscribe();
-   }
+    return this.http.post<USER[]>(url, name)
+      .subscribe();
+  }
 
 
-   public userMatch() {
-    
- 
+  public userMatch() {
+
+
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/category" + this.t;
-     return this.http.get<USER>(url)
-     //  .subscribe((data) => {
-     //   this.dataSource = data;
-     // })
-   }
+    return this.http.get<USER>(url)
+    //  .subscribe((data) => {
+    //   this.dataSource = data;
+    // })
+  }
 
 
-   public navigateToAbout() {
+  public navigateToAbout() {
     this.router.navigate(['/Shop']);
-  }  
+  }
 }
 
 
