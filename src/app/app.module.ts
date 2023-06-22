@@ -5,25 +5,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { ListmobileComponent } from './listmobile/listmobile.component';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { WagonComponent } from './wagon/wagon.component';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MaterialComponent } from './material/material.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatBadgeModule} from '@angular/material/badge';
-import {FormBuilder, Validators, ReactiveFormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatBadgeModule } from '@angular/material/badge';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
 import { LoginComponent } from './login/login.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { TryComponent } from './try/try.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StrengthCheckerComponent } from './createaccount/strength-checker.component';
 import { ShopComponent } from './shop/shop.component';
+import { MatCardModule } from '@angular/material/card';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 
@@ -38,7 +40,7 @@ import { ShopComponent } from './shop/shop.component';
     TryComponent,
     StrengthCheckerComponent,
     ShopComponent
-    
+
   ],
   imports: [
     BrowserModule,
@@ -58,9 +60,12 @@ import { ShopComponent } from './shop/shop.component';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    
+    MatCardModule,
+    ScrollingModule,
+     
+
   ],
- 
+
   providers: [],
   bootstrap: [AppComponent]
 })

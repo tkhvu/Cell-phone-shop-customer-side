@@ -14,5 +14,8 @@ export class MaterialComponent {
 
   Connected = true;  
 
- 
+  LogOut(){
+    this.api.Connected = ''
+ this.api.navigateToLogin()
+ }
 }

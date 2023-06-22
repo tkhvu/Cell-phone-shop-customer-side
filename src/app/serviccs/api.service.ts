@@ -13,8 +13,11 @@ export class ApiService {
 
   constructor(private http: HttpClient, private router: Router) { }
   Connected: any = "";
+  Username: string = "";
+  User: any = [];
   t: string = "";
   a: number = 0;
+  id: any = "";
 
   public getshps(): Observable<events[]> {
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getshps";
@@ -70,9 +73,40 @@ export class ApiService {
     // })
   }
 
+   addid() {
 
-  public navigateToAbout() {
-    this.router.navigate(['/Shop']);
+
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/love" + this.id;
+   this.http.get(url)
+     .subscribe()
+  }
+
+  public getUsers() {
+
+
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getUsers";
+    return this.http.get<USER[]>(url)
+    //  .subscribe((data) => {
+    //   this.dataSource = data;
+    // })
+  }
+
+  public deletelove() {
+
+
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/deleteOne" + this.id;
+
+    return this.http.get<USER[]>(url)
+    .subscribe()
+  }
+
+
+  public navigateToshop() {
+    this.router.navigate(['/shop']);
+  }
+
+  public navigateToLogin() {
+    this.router.navigate(['/Login']);
   }
 }
 

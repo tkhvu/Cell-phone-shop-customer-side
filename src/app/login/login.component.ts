@@ -15,20 +15,20 @@ export class LoginComponent {
   model = new USER1('', '');
   hide = true;
 
-  a = this.model.Username;
+  Username = this.model.Username;
   b = this.model.password;
   c = true
   v: any
   onSubmit(heroForm: any) {
     this.c = !this.c;
-    this.a = heroForm.value.Username;
+    this.Username = heroForm.value.Username;
     this.b = heroForm.value.password;
-    console.log(this.a, this.b)
+    console.log(this.Username, this.b)
     this.userMatch()
   }
 
   userMatch() {
-    this.api.t = "/?category=" + this.a + "&password=" + this.b;
+    this.api.t = "/?category=" + this.Username + "&password=" + this.b;
     this.connect(this.v)
     this.api.userMatch()
       .subscribe((data: any) => {
@@ -37,13 +37,15 @@ export class LoginComponent {
         console.log(data[0].first)
         this.connect(data[0].first)
         this.api.Connected = data[0].first + " " + data[0].Family;
+        this.api.Username = data[0].first;
+        this.api.User = data;
       })
   }
 
   connect(v: string = "") {
     if (v.length > 0) {
       this.api.a = 2,
-      this.navigateToAbout()
+      this.api.navigateToshop()
     };
     console.log(this.api.a)
   }
@@ -51,7 +53,5 @@ export class LoginComponent {
   goBack() {
     
   }
-  navigateToAbout() {
-    this.api.navigateToAbout()
-  }
+
 }

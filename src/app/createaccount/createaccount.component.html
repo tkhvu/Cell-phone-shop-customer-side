@@ -19,19 +19,19 @@
 <input matInput formControlName="email" required [(ngModel)]="model.email" ngModel>
 
 </mat-form-field>
-<div *ngIf="bioSection.controls['email']">{{getErrorMessage()}}</div>
+<div *ngIf="bioSection.controls['email'].touched">{{getErrorMessage()}}</div>
 
 <p>שם משתמש</p>
 <mat-form-field>
   <input matInput  formControlName="Username" required [(ngModel)]="model.Username" ngModel>
 </mat-form-field>
-<div *ngIf="bioSection.controls['Username']">{{getErrorMessageUsername()}}</div>
+<div *ngIf="bioSection.controls['Username'].touched">{{getErrorMessageUsername()}}</div>
 
 <p>סיסמה</p> 
 <mat-form-field>
 <input matInput #input [type]="hide ? 'password' : 'text'" required formControlName="password"  [(ngModel)]="model.password" ngModel>
 </mat-form-field>
-<div *ngIf="bioSection.controls['password']">{{getErrorMessagepassword()}}</div>
+<div *ngIf="bioSection.controls['password'].touched">{{getErrorMessagepassword()}}</div>
 
 <strength-checker
 barLabel="חוזק סיסמה:"

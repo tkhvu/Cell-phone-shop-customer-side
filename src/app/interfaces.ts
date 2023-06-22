@@ -1,24 +1,28 @@
 export interface events {
-    id?: number;
-    price: number;
-    name?: string;
-    src?: string;
-  }
+  id?: number;
+  price: number;
+  name?: string;
+  src?: string;
+  love?: any;
+  _id?: any;
+}
 
-  export interface USER {
-    first?: string;
-    Family?: string;
-    email?: string;
-    Username?: string;
-    password?: any;
+export interface USER {
+  first?: string;
+  Family?: string;
+  email?: string;
+  Username?: string;
+  password?: any;
+  _id?:string;
+  love:any;
 
-  }
+}
 
- 
 
-    export interface USER1 {
-       id: number,
-       name: string,
-       power: string,
-       alterEgo?: string
-    }
+
+export interface USER1 {
+  id: number,
+  name: string,
+  power: string,
+  alterEgo?: string
+}

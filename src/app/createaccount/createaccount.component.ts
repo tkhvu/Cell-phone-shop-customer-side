@@ -25,7 +25,7 @@ export class CreateaccountComponent {
     Family: new FormControl(''),
     email: new FormControl(null, [Validators.required, Validators.email,]),
     Username: new FormControl(null, [
-      Validators.pattern('^[a-zA-Z0-9]+$'),
+      Validators.pattern("^[A-Za-z][A-Za-z0-9_]{7,29}$"),
       Validators.required
     ]),
     password: new FormControl(null, [
@@ -53,25 +53,26 @@ export class CreateaccountComponent {
   }
 
   getErrorMessage() {
-    return this.bioSection.controls['email'].hasError('required') ? 'You must enter a value' :
-      this.bioSection.controls['email'].hasError('email') ? 'Not a valid email' :
+    return this.bioSection.controls['email'].hasError('required') ? 'עליך להזין ערך' :
+      this.bioSection.controls['email'].hasError('email') ? 'אימייל לא חוקי' :
         '';
   }
 
   getErrorMessageUsername() {
-    return this.bioSection.controls['Username'].hasError('required') ? 'You must enter a value' :
+    return this.bioSection.controls['Username'].hasError('required') ? 'עליך להזין ערך' :
       this.bioSection.controls['Username'].hasError('pattern') ? 'Not a valid Username' :
         '';
   }
 
   getErrorMessagepassword() {
-    return this.bioSection.controls['password'].hasError('required') ? 'You must enter a value' :
+    
+    return this.bioSection.controls['password'].hasError('required') ? 'עליך להזין ערך' :
       this.bioSection.controls['password'].hasError('pattern') ? 'מינימום 8 תווים וחובה אותיות גדולות וקטנות באנגלית ומספרים' :
         '';
   }
 
   navigateToAbout() {
-    this.api.navigateToAbout()
+    this.api.navigateToshop()
   }
 
 }
