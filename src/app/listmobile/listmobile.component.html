@@ -25,45 +25,93 @@
 </mat-card>
 </mat-grid-list> -->
 
-<mat-grid-list cols="5" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let mobile of listmobileMock; let a = index">
+<!-- <mat-grid-list cols="5" rowHeight="1:1">
+  <mat-grid-tile *ngFor="let mobile of listmobileMock">
     <mat-card>
 
       <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="232" height="202">
       <p> {{ mobile.price }} שח {{mobile.name}}
       </p>
       <mat-card-actions>
-        <!-- {{like(mobile._id, a)}} -->
         <button mat-icon-button *ngIf="mobile.love === true" (click)="mobile.love =false; deletelove(mobile._id)">
           <mat-icon>favorite </mat-icon>
 
         </button>
 
-        <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; deletelove(mobile._id)">
+        <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addid(mobile._id)">
           <mat-icon>favorite_border </mat-icon>
 
         </button>
         <button mat-raised-button color="warn" (click)="onSelect(mobile)">
           הוספה לסל
         </button>
-        <button mat-button (click)="id = mobile._id; addid(mobile._id)">push1</button>
+
 
       </mat-card-actions>
     </mat-card>
 
   </mat-grid-tile>
-</mat-grid-list>
-<!-- <button  mat-button (click)="hhh(mobile._id)">hhh</button> -->
+</mat-grid-list> -->
 
 
 <!-- 
-<div *ngFor="let Username of love">
-  {{Username.love}}</div> -->
+<cdk-virtual-scroll-viewport itemSize="230" class="viewport"  >
+  <mat-grid-list cols="5" rowHeight="1:1">
+    <mat-grid-tile *cdkVirtualFor="let mobile of listmobileMock">
+      <mat-card>
 
-<!-- 
- <ul>
-    <li *ngFor="let user of love[0].love">
-    {{user}}
-      
-    </li>
-  </ul> -->
+        <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="232" height="202">
+        <p> {{ mobile.price }} שח {{mobile.name}}
+        </p>
+        <mat-card-actions>
+          <button mat-icon-button *ngIf="mobile.love === true" (click)="mobile.love =false; deletelove(mobile._id)">
+            <mat-icon>favorite </mat-icon>
+  
+          </button>
+  
+          <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addid(mobile._id)">
+            <mat-icon>favorite_border </mat-icon>
+  
+          </button>
+          <button mat-raised-button color="warn" (click)="onSelect(mobile)">
+            הוספה לסל
+          </button>
+  
+  
+        </mat-card-actions>
+      </mat-card>
+  
+    </mat-grid-tile>
+  </mat-grid-list>
+</cdk-virtual-scroll-viewport> -->
+
+
+
+<div class="scroll-container" (scroll)="onScroll()">
+  <div class="grid-container">
+    <div class="grid-item" *ngFor="let mobile of listmobileMock">
+      <mat-card>
+
+        <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="232" height="202">
+        <p> {{ mobile.price }} שח {{mobile.name}}
+        </p>
+        <mat-card-actions>
+          <button mat-icon-button *ngIf="mobile.love === true" (click)="mobile.love =false; deletelove(mobile._id)">
+            <mat-icon>favorite </mat-icon>
+  
+          </button>
+  
+          <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addid(mobile._id)">
+            <mat-icon>favorite_border </mat-icon>
+  
+          </button>
+          <button mat-raised-button color="warn" (click)="onSelect(mobile)">
+            הוספה לסל
+          </button>
+  
+  
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { ApiService } from '../serviccs/api.service';
 
 @Component({
@@ -10,12 +10,12 @@ import { ApiService } from '../serviccs/api.service';
   styleUrls: ['./material.component.css']
 })
 export class MaterialComponent {
-  constructor(public api: ApiService){}
+  constructor(public api: ApiService) { }
 
-  Connected = true;  
+  Connected = true;
 
-  LogOut(){
+  LogOut() {
     this.api.Connected = ''
- this.api.navigateToLogin()
- }
+    this.api.navigateToLogin()
+  }
 }

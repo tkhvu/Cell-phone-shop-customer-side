@@ -68,9 +68,7 @@ export class ApiService {
 
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/category" + this.t;
     return this.http.get<USER>(url)
-    //  .subscribe((data) => {
-    //   this.dataSource = data;
-    // })
+  
   }
 
    addid() {
@@ -86,9 +84,7 @@ export class ApiService {
 
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getUsers";
     return this.http.get<USER[]>(url)
-    //  .subscribe((data) => {
-    //   this.dataSource = data;
-    // })
+  
   }
 
   public deletelove() {

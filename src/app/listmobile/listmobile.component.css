@@ -1,0 +1,19 @@
+
+
+  .viewport {
+    overflow: auto;
+    height: 10000px; /* Set a fixed height or adjust according to your needs */
+  }
+ 
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    margin: 20px;
+  }
+  
+  .scroll-container {
+    height: 600px;
+    overflow-y: scroll;
+  }
+  

@@ -1,11 +1,12 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { USER, events } from '../interfaces';
 import { ApiService } from '../serviccs/api.service';
 
 @Component({
   selector: 'app-listmobile',
   templateUrl: './listmobile.component.html',
-  styleUrls: ['./listmobile.component.css']
+  styleUrls: ['./listmobile.component.css'],
+  
 })
 export class ListmobileComponent implements OnInit {
 
@@ -13,11 +14,6 @@ export class ListmobileComponent implements OnInit {
 
   love: USER[] = [];
   listmobileMock: events[] = [];
-  dataSource: any = [];
-
-  a = "";
-  id = 0;
-  Like = 0
 
   ngOnInit() {
     this.api.getmobile()
@@ -44,12 +40,8 @@ export class ListmobileComponent implements OnInit {
     this.api.deletelove()
   }
 
-
-
   onSelect(mobile: any) {
     this.api.Cartmobile(mobile)
-    this.dataSource.push(mobile);
-    console.log(this.dataSource);
   }
 
   addid(_id: string) {
@@ -57,7 +49,18 @@ export class ListmobileComponent implements OnInit {
     console.log(this.api.id)
     this.api.addid()
   }
+  
 
-  @Input() listmobileview?: boolean;
+
+  onScroll() {
+    const scrollContainer = document.querySelector('.scroll-container');
+    if (scrollContainer) {
+      const isNearBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 200;
+      if (isNearBottom) {
+        // Load more items or perform any desired action
+        console.log('Reached near bottom. Loading more items...');
+      }
+    }
+  }
 
 }
