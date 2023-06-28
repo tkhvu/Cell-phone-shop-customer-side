@@ -96,16 +96,16 @@
         <p> {{ mobile.price }} שח {{mobile.name}}
         </p>
         <mat-card-actions>
-          <button mat-icon-button *ngIf="mobile.love === true" (click)="mobile.love =false; deletelove(mobile._id)">
+          <button mat-icon-button *ngIf="mobile.love === true" (click)="mobile.love =false; deletefavorites(mobile._id)">
             <mat-icon>favorite </mat-icon>
   
           </button>
   
-          <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addid(mobile._id)">
+          <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addfavorites(mobile._id)">
             <mat-icon>favorite_border </mat-icon>
   
           </button>
-          <button mat-raised-button color="warn" (click)="onSelect(mobile)">
+          <button mat-raised-button color="warn" (click)="onSelect(mobile, api.username)">
             הוספה לסל
           </button>
   

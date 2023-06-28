@@ -21,10 +21,10 @@ export class CreateaccountComponent {
 
 
   bioSection = new FormGroup({
-    first: new FormControl(''),
-    Family: new FormControl(''),
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
     email: new FormControl(null, [Validators.required, Validators.email,]),
-    Username: new FormControl(null, [
+    username: new FormControl(null, [
       Validators.pattern("^[A-Za-z][A-Za-z0-9_]{7,29}$"),
       Validators.required
     ]),
@@ -48,7 +48,7 @@ export class CreateaccountComponent {
   callingFunction() {
     console.log(this.bioSection.value);
     this.onSelect(this.bioSection.value)
-    this.api.Connected = this.bioSection.value.first
+    this.api.Connected = this.bioSection.value.firstname
     this.navigateToAbout()
   }
 
@@ -59,8 +59,8 @@ export class CreateaccountComponent {
   }
 
   getErrorMessageUsername() {
-    return this.bioSection.controls['Username'].hasError('required') ? 'עליך להזין ערך' :
-      this.bioSection.controls['Username'].hasError('pattern') ? 'Not a valid Username' :
+    return this.bioSection.controls['username'].hasError('required') ? 'עליך להזין ערך' :
+      this.bioSection.controls['username'].hasError('pattern') ? 'Not a valid Username' :
         '';
   }
 

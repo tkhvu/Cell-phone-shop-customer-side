@@ -21,7 +21,7 @@ export class ListmobileComponent implements OnInit {
         this.listmobileMock = data;
         if (this.api.a = 2) {
           this.listmobileMock = this.listmobileMock.map(moobile => {
-            const mobileIds: string[] = this.api.User[0].love
+            const mobileIds: string[] = this.api.User[0].favorites
             return {
               ...moobile,
               love: mobileIds.join().includes(moobile._id)
@@ -34,20 +34,27 @@ export class ListmobileComponent implements OnInit {
   }
 
 
-  deletelove(_id: string) {
+  deletefavorites(_id: string) {
     
-    this.api.id = "/?Username=" + this.api.Username + "&id=" + _id;
-    this.api.deletelove()
+    this.api.id = "/?username=" + this.api.username + "&id=" + _id;
+    this.api.deletefavorites()
   }
 
-  onSelect(mobile: any) {
-    this.api.Cartmobile(mobile)
-  }
+  // onSelect(mobile: any,  username: string) {
 
-  addid(_id: string) {
-    this.api.id = "/?Username=" + this.api.Username + "&id=" + _id;
+  //   const mobiled{"username": username, "id": mobile.id}
+  //   this.api.Cartmobile(mobiled)
+
+    onSelect(mobile: any, username: string) {
+      const mobileob = {"username": username, "id": mobile.id};
+      this.api.Cartmobile(mobileob);
+    }
+ 
+
+  addfavorites(_id: string) {
+    this.api.id = "/?username=" + this.api.username + "&id=" + _id;
     console.log(this.api.id)
-    this.api.addid()
+    this.api.addfavorites()
   }
   
 
@@ -56,10 +63,7 @@ export class ListmobileComponent implements OnInit {
     const scrollContainer = document.querySelector('.scroll-container');
     if (scrollContainer) {
       const isNearBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 200;
-      if (isNearBottom) {
-        // Load more items or perform any desired action
-        console.log('Reached near bottom. Loading more items...');
-      }
+
     }
   }
 

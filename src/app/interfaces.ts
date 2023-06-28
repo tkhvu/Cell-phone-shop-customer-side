@@ -8,7 +8,7 @@ export interface events {
 }
 
 export interface USER {
-  first?: string;
+  firstname?: string;
   Family?: string;
   email?: string;
   Username?: string;

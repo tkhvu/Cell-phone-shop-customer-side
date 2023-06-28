@@ -6,13 +6,12 @@
 
   <p>שם פרטי</p>
 <mat-form-field>
-  <input matInput formControlName="first" required [(ngModel)]="model.first" ngModel>
+  <input matInput formControlName="firstname" required [(ngModel)]="model.firstname" ngModel>
 </mat-form-field>
-
 
 <p>שם משפחה</p>
 <mat-form-field>
-    <input matInput formControlName="Family" [(ngModel)]="model.Family" ngModel>
+    <input matInput formControlName="lastname" [(ngModel)]="model.lastname" ngModel>
 </mat-form-field>
 <p> כתובת אימייל</p> 
 <mat-form-field>
@@ -23,9 +22,9 @@
 
 <p>שם משתמש</p>
 <mat-form-field>
-  <input matInput  formControlName="Username" required [(ngModel)]="model.Username" ngModel>
+  <input matInput  formControlName="username" required [(ngModel)]="model.username" ngModel>
 </mat-form-field>
-<div *ngIf="bioSection.controls['Username'].touched">{{getErrorMessageUsername()}}</div>
+<div *ngIf="bioSection.controls['username'].touched">{{getErrorMessageUsername()}}</div>
 
 <p>סיסמה</p> 
 <mat-form-field>

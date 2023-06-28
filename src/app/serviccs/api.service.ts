@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Albums, Albums1 } from '../albums';
 import { events, USER } from '../interfaces';
 import { Router } from '@angular/router';
 
@@ -13,7 +12,7 @@ export class ApiService {
 
   constructor(private http: HttpClient, private router: Router) { }
   Connected: any = "";
-  Username: string = "";
+  username: string = "";
   User: any = [];
   t: string = "";
   a: number = 0;
@@ -25,20 +24,10 @@ export class ApiService {
   }
 
 
-  // public getmobile(): Observable<Albums1[]>  {
-  //   // const url: string = "https://jsonplaceholder.typicode.com/albums";
-
-  // // const httpOptions = {
-  // //   headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
-  // // };
-  //  const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getmobile";
-  //   return this.http.post<Albums1[]>(url, ac)
-  //   // .subscribe((res)=>{ console.log(res) });
-  // }
   public getmobile() {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getmobile";
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getMobile";
     return this.http.get<events[]>(url)
     //  .subscribe((data) => {
     //   this.dataSource = data;
@@ -46,19 +35,20 @@ export class ApiService {
   }
 
 
-  public Cartmobile(mobile: events[]) {
+  public Cartmobile(mobile: any) {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/Cartmobile";
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/cartMobile";
+  
     return this.http.post<events[]>(url, mobile)
       .subscribe();
   }
 
-  public user(name: USER[]) {
+  public user(user: USER[]) {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/user";
-    return this.http.post<USER[]>(url, name)
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/CreatingUser";
+    return this.http.post<USER[]>(url, user)
       .subscribe();
   }
 
@@ -66,15 +56,15 @@ export class ApiService {
   public userMatch() {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/category" + this.t;
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/userMatch" + this.t;
     return this.http.get<USER>(url)
   
   }
 
-   addid() {
+   addfavorites() {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/love" + this.id;
+    const url: string = " https://us-central1-fine-command-384813.cloudfunctions.net/favorites" + this.id;
    this.http.get(url)
      .subscribe()
   }
@@ -87,10 +77,10 @@ export class ApiService {
   
   }
 
-  public deletelove() {
+  public deletefavorites() {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/deleteOne" + this.id;
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/deleteFavorites" + this.id;
 
     return this.http.get<USER[]>(url)
     .subscribe()
