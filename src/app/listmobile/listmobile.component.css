@@ -2,7 +2,7 @@
 
   .viewport {
     overflow: auto;
-    height: 10000px; /* Set a fixed height or adjust according to your needs */
+    height: 10000px; 
   }
  
   .grid-container {

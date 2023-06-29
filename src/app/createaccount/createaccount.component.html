@@ -43,3 +43,5 @@ barLabel="חוזק סיסמה:"
 <button mat-raised-button color="warn"  type="submit" [disabled]="!bioSection.valid">הרשמה</button>
 </form>
 </div>
+
+<mat-spinner *ngIf="api.isLoading"></mat-spinner>

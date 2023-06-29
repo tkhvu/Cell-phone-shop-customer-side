@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, NgForm, Validators, AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
 import { USER1 } from '../hero';
 
@@ -10,11 +10,10 @@ import { USER1 } from '../hero';
 })
 export class CreateaccountComponent {
 
-  constructor(private api: ApiService, private fb: FormBuilder) { }
+  constructor(public api: ApiService, private fb: FormBuilder) { }
 
   hide = true;
   passwordIsValid = false;
-
   passwordValid(event: any) {
     this.passwordIsValid = event;
   }
@@ -35,10 +34,10 @@ export class CreateaccountComponent {
     ),
   });
 
-  async onSelect(name: any) {
-
-    await this.api.user(name)
-
+  onSelect(name: any) {
+    this.api.isLoading = true;
+    this.api.user(name);
+    this.api.isLoading = false;
   }
 
 
@@ -48,7 +47,8 @@ export class CreateaccountComponent {
   callingFunction() {
     console.log(this.bioSection.value);
     this.onSelect(this.bioSection.value)
-    this.api.Connected = this.bioSection.value.firstname
+    this.api.Connected = this.bioSection.value.firstname;
+    this.api.User = this.bioSection.value;
     this.navigateToAbout()
   }
 
@@ -65,7 +65,7 @@ export class CreateaccountComponent {
   }
 
   getErrorMessagepassword() {
-    
+
     return this.bioSection.controls['password'].hasError('required') ? 'עליך להזין ערך' :
       this.bioSection.controls['password'].hasError('pattern') ? 'מינימום 8 תווים וחובה אותיות גדולות וקטנות באנגלית ומספרים' :
         '';

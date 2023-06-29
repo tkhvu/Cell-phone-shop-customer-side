@@ -3,7 +3,7 @@
 
 
 
-  <form #heroForm="ngForm" (ngSubmit)="onSubmit(heroForm)">
+  <form #connection="ngForm" (ngSubmit)="onSubmit(connection)">
 
     <p>שם משתמש</p>
     <mat-form-field>
@@ -17,17 +17,11 @@
 
     <div>
       <button mat-raised-button class="margin" routerLink="/Createaccount">הרשמה </button>
-      <button mat-raised-button color="warn" type="submit" [disabled]="!heroForm.form.valid">התחברות</button>
+      <button mat-raised-button color="warn" type="submit" [disabled]="!connection.form.valid">התחברות</button>
     </div>
 
 
   </form>
 
-
-
-
-  <div *ngIf="!c">
-    <div *ngIf="api.a <1">
-      <mat-spinner></mat-spinner>
-    </div>
-  </div>
+  
+    <mat-spinner *ngIf="api.isLoading"></mat-spinner>

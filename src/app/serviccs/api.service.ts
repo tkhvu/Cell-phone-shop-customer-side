@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { events, USER } from '../interfaces';
@@ -14,9 +14,8 @@ export class ApiService {
   Connected: any = "";
   username: string = "";
   User: any = [];
-  t: string = "";
-  a: number = 0;
-  id: any = "";
+  isLoading: boolean = false;
+
 
   public getshps(): Observable<events[]> {
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getshps";
@@ -53,18 +52,18 @@ export class ApiService {
   }
 
 
-  public userMatch() {
+  public userMatch(t: string) {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/userMatch" + this.t;
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/userMatch" + t;
     return this.http.get<USER>(url)
   
   }
 
-   addfavorites() {
+  addFavorites(addid: string) {
 
 
-    const url: string = " https://us-central1-fine-command-384813.cloudfunctions.net/favorites" + this.id;
+    const url: string = " https://us-central1-fine-command-384813.cloudfunctions.net/favorites" + addid;
    this.http.get(url)
      .subscribe()
   }
@@ -77,10 +76,10 @@ export class ApiService {
   
   }
 
-  public deletefavorites() {
+  public deleteFavorites(addid: string) {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/deleteFavorites" + this.id;
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/deleteFavorites" + addid;
 
     return this.http.get<USER[]>(url)
     .subscribe()
