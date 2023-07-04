@@ -29,9 +29,7 @@ export class ApiService {
 
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getMobile";
     return this.http.get<events[]>(url)
-    //  .subscribe((data) => {
-    //   this.dataSource = data;
-    // })
+ 
   }
 
 
