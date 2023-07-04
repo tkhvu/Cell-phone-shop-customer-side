@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from './serviccs/api.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(public apiService: ApiService) { }
 
-  listmobileview: boolean = true;
+  LogOut() {
+    this.apiService.LogOut();
+  }
 
-  wagon: boolean = true;
-  value: number | undefined;
 }

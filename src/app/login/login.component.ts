@@ -27,14 +27,7 @@ export class LoginComponent {
     this.api.isLoading = true;
     const t = `/?username=${this.username}&password=${this.password}`;
     this.api.userMatch(t)
-      .subscribe((data: any) => {
-        this.api.isLoading = false;
-        this.api.Connected = `${data[0].firstname} ${data[0].lastname}`;
-        this.api.username = data[0].username;
-        this.api.User = data;
-        if(data[0].firstname.length>1)
-        this.api.navigateToshop()
-      })
+ 
   }
 
 }

@@ -1,6 +1,6 @@
 <div class="scroll-container" (scroll)="onScroll()">
   <div class="grid-container">
-    <div class="grid-item" *ngFor="let mobile of listmobileMock">
+    <div *ngFor="let mobile of listmobileMock">
       <mat-card>
 
         <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="232" height="202">
@@ -16,7 +16,7 @@
             <mat-icon>favorite_border </mat-icon>
   
           </button>
-          <button mat-raised-button color="warn" (click)="onSelect(mobile, api.username)">
+          <button mat-raised-button color="warn" (click)="onSelect(mobile._id)">
             הוספה לסל
           </button>
   

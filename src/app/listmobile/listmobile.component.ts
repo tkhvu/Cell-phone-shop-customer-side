@@ -14,40 +14,35 @@ export class ListmobileComponent implements OnInit {
 
   listmobileMock: events[] = [];
   ngOnInit() {
-    this.api.getmobile()
-      .subscribe((data) => {
-        this.listmobileMock = data;
-        if (this.listmobileMock.length>0){
-          this.listmobileMock = this.listmobileMock.map(moobile => {
-            const mobileIds: string[] = this.api.User[0].favorites
-            return {
-              ...moobile,
-              love: mobileIds.join().includes(moobile._id)
-
-            }
-          })
-        }
-
-      })
+    this.api.getmobile().subscribe((data) => {
+      this.listmobileMock = data;
+      if (this.listmobileMock.length > 0) {
+        const mobileIds: string[] = this.api.User[0].favorites;
+        this.listmobileMock = this.listmobileMock.map((mobile) => ({
+          ...mobile,
+          love: mobileIds.includes(mobile._id)
+        }));
+      }
+    });
   }
 
 
   deleteFavorites(_id: string) {
     
-    const addid = `/?username=${this.api.username}&id=${_id}`;
-    this.api.deleteFavorites(addid);
+    const id = `/?_id=${this.api.userid}&id=${_id}`;
+    this.api.deleteFavorites(id);
   }
 
 
-    onSelect(mobile: any, username: string) {
-      const mobileob = {"username": username, "id": mobile.id};
-      this.api.Cartmobile(mobileob);
+    onSelect(_id: string) {
+      const id = `/?_id=${this.api.userid}&id=${_id}`;
+      this.api.Cartmobile(id);
     }
  
   
   addFavorites(_id: string) {
-    const addid = `/?username=${this.api.username}&id=${_id}`;
-    this.api.addFavorites(addid);
+    const id = `/?_id=${this.api.userid}&id=${_id}`;
+    this.api.addFavorites(id);
   }
 
   onScroll() {

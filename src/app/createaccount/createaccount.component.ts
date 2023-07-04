@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import {  Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
 import { USER1 } from '../hero';
 
@@ -10,69 +10,55 @@ import { USER1 } from '../hero';
 })
 export class CreateaccountComponent {
 
-  constructor(public api: ApiService, private fb: FormBuilder) { }
-
   hide = true;
   passwordIsValid = false;
+  bioSection: FormGroup;
+  model: USER1 = new USER1('', '', '', '', '');
+
+  constructor(public api: ApiService, private fb: FormBuilder) {
+    this.bioSection = this.fb.group({
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.pattern("^[A-Za-z][A-Za-z0-9_]{7,29}$"), Validators.required]],
+      password: ['', [Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}'), Validators.required]]
+    });
+  }
+
   passwordValid(event: any) {
     this.passwordIsValid = event;
   }
 
-
-  bioSection = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    email: new FormControl(null, [Validators.required, Validators.email,]),
-    username: new FormControl(null, [
-      Validators.pattern("^[A-Za-z][A-Za-z0-9_]{7,29}$"),
-      Validators.required
-    ]),
-    password: new FormControl(null, [
-      Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}'),
-      Validators.required
-    ]
-    ),
-  });
-
-  onSelect(name: any) {
+  onSelect (name: any) {
     this.api.isLoading = true;
     this.api.user(name);
     this.api.isLoading = false;
   }
 
-
-
-  model = new USER1('', '', '', '', '',);
-
   callingFunction() {
-    console.log(this.bioSection.value);
-    this.onSelect(this.bioSection.value)
-    this.api.Connected = this.bioSection.value.firstname;
-    this.api.User = this.bioSection.value;
-    this.navigateToAbout()
+    if (this.bioSection.valid) {
+      this.onSelect(this.bioSection.value);
+      this.api.Connected = this.bioSection.value.firstname;
+      this.api.User = this.bioSection.value;
+      this.navigateToAbout();
+    }
   }
 
-  getErrorMessage() {
-    return this.bioSection.controls['email'].hasError('required') ? 'עליך להזין ערך' :
-      this.bioSection.controls['email'].hasError('email') ? 'אימייל לא חוקי' :
-        '';
-  }
-
-  getErrorMessageUsername() {
-    return this.bioSection.controls['username'].hasError('required') ? 'עליך להזין ערך' :
-      this.bioSection.controls['username'].hasError('pattern') ? 'Not a valid Username' :
-        '';
-  }
-
-  getErrorMessagepassword() {
-
-    return this.bioSection.controls['password'].hasError('required') ? 'עליך להזין ערך' :
-      this.bioSection.controls['password'].hasError('pattern') ? 'מינימום 8 תווים וחובה אותיות גדולות וקטנות באנגלית ומספרים' :
-        '';
+  getErrorMessage(controlName: string) {
+    const control = this.bioSection.get(controlName);
+    if (control?.hasError('required')) {
+      return 'עליך להזין ערך';
+    }
+    if (control?.hasError('email')) {
+      return 'אימייל לא חוקי';
+    }
+    if (control?.hasError('pattern')) {
+      return controlName === 'password' ? 'מינימום 8 תווים וחובה אותיות גדולות וקטנות באנגלית ומספרים' : 'שם משתמש לא תקין';
+    }
+    return '';
   }
 
   navigateToAbout() {
-    this.api.navigateToshop()
+    this.api.navigateToshop();
   }
-
 }
