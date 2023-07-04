@@ -4,6 +4,7 @@
   </button>
 
   <span *ngIf="apiService.Connected.length <1">
+    <!-- לשנות לבוליאני -->
     <button mat-button routerLink="/Login">התחברות/הרשמה</button>
   </span>
   <span *ngIf="apiService.Connected.length >1">
