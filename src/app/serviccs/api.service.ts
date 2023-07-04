@@ -47,7 +47,7 @@ export class ApiService {
 
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/CreatingUser";
     return this.http.post<USER[]>(url, user)
-      .subscribe();
+      .subscribe();//isLoading false
   }
 
 
@@ -58,6 +58,15 @@ export class ApiService {
     return this.http.get<USER>(url)
       .subscribe((data: any) => {
         this.isLoading = false;
+        // if(data.length === 0) {
+        //   this.Connected = false;
+        //   return;
+        // }
+        // this.Connected = true
+        // this.userid = data[0]._id;
+        // this.User = data;
+        // this.cartLength = this.User[0].cart.length;
+        // this.navigateToshop()
         this.Connected = `${data[0].firstname} ${data[0].lastname}`;
         this.userid = data[0]._id;
         this.User = data;
