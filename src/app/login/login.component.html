@@ -4,23 +4,24 @@
 
     <p>שם משתמש</p>
     <mat-form-field>
-      <input matInput name="username" required ngModel>
-      <!--ngModel לתקן -->
+      <input matInput name="username" required [(ngModel)]="username">
     </mat-form-field>
 
     <p>סיסמה</p>
     <mat-form-field>
-      <input matInput required name="password" ngModel [type]="hide ? 'password' : 'text'">
-        <!-- והצגת סיסמה ngModel לתקן -->
+      <input matInput required name="password" [(ngModel)]="password" type="password">
     </mat-form-field>
 
+    <div *ngIf="api.loginerror" class="error-message">{{ api.error }}</div>
+
+
     <div>
-      <button mat-raised-button class="margin" routerLink="/Createaccount">הרשמה </button>
+      <button mat-raised-button class="margin" routerLink="/Createaccount">הרשמה</button>
       <button mat-raised-button color="warn" type="submit" [disabled]="!connection.form.valid">התחברות</button>
     </div>
-<!-- להציג שגיאה שהשם משתמש ןהסיסמה לא נכונים -->
 
   </form>
 
-  
-    <mat-spinner *ngIf="api.isLoading"></mat-spinner>
+  <mat-spinner *ngIf="api.isLoading"></mat-spinner>
+</div>
+

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {  Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
-import { USER1 } from '../hero';
+import { USER } from '../modeluser';
 
 @Component({
   selector: 'app-createaccount',
@@ -13,7 +13,7 @@ export class CreateaccountComponent {
   hide = true;
   passwordIsValid = false;
   bioSection: FormGroup;
-  model: USER1 = new USER1('', '', '', '', '');
+  model: USER = new USER('', '', '', '', '');
 
   constructor(public api: ApiService, private fb: FormBuilder) {
     this.bioSection = this.fb.group({
@@ -29,7 +29,7 @@ export class CreateaccountComponent {
     this.passwordIsValid = event;
   }
 
-  onSelect (name: any) {
+  onSelect(name: any) {
     this.api.isLoading = true;
     this.api.user(name);
     this.api.isLoading = false;
@@ -40,7 +40,7 @@ export class CreateaccountComponent {
       this.onSelect(this.bioSection.value);
       this.api.Connected = this.bioSection.value.firstname;
       this.api.User = this.bioSection.value;
-      this.navigateToAbout();
+      this.navigateToshop();
     }
   }
 
@@ -53,12 +53,18 @@ export class CreateaccountComponent {
       return 'אימייל לא חוקי';
     }
     if (control?.hasError('pattern')) {
-      return controlName === 'password' ? 'מינימום 8 תווים וחובה אותיות גדולות וקטנות באנגלית ומספרים' : 'שם משתמש לא תקין';
+
+      if (controlName === 'password') {
+        return 'מינימום 8 תווים וחובה אותיות גדולות וקטנות באנגלית ומספרים';
+      } else {
+
+        return "שם משתמש לא תקין"
+      }
     }
     return '';
   }
 
-  navigateToAbout() {
+  navigateToshop() {
     this.api.navigateToshop();
   }
 }

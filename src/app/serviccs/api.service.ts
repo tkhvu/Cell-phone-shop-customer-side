@@ -11,11 +11,13 @@ import { Router } from '@angular/router';
 export class ApiService {
 
   constructor(private http: HttpClient, private router: Router) { }
-  Connected: any = "";
+  Connected: boolean = false;
   userid: string = "";
   User: any = [];
   isLoading: boolean = false;
   cartLength: number = 0;
+  error = "";
+  loginerror: boolean = false;
 
 
   public getshps(): Observable<events[]> {
@@ -51,28 +53,24 @@ export class ApiService {
   }
 
 
-  public userMatch(t: string) {
+  public userMatch(query: string) {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/userMatch" + t;
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/userMatch" + query;
     return this.http.get<USER>(url)
       .subscribe((data: any) => {
         this.isLoading = false;
-        // if(data.length === 0) {
-        //   this.Connected = false;
-        //   return;
-        // }
-        // this.Connected = true
-        // this.userid = data[0]._id;
-        // this.User = data;
-        // this.cartLength = this.User[0].cart.length;
-        // this.navigateToshop()
-        this.Connected = `${data[0].firstname} ${data[0].lastname}`;
+        if(data.length === 0) {
+          this.loginerror = true;
+          this.error = 'שם המשתמש או הסיסמה אינם נכונים.';
+          return;
+        }
+        this.loginerror = false;
         this.userid = data[0]._id;
         this.User = data;
         this.cartLength = this.User[0].cart.length;
-        if (data[0].firstname.length > 1)
           this.navigateToshop()
+          this.Connected = true;
       })
 
   }
@@ -108,7 +106,7 @@ export class ApiService {
 
 
   LogOut() {
-    this.Connected = ''
+    this.Connected = false
     this.router.navigate(['/Login']);
   }
 

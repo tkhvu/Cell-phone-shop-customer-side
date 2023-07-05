@@ -16,3 +16,7 @@
 .margin {
   margin-right: 15px;
 }
+
+.error-message {
+  color: red;
+}

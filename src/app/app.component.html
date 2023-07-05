@@ -3,12 +3,11 @@
     <span class="material-icons">shopping_cart</span>
   </button>
 
-  <span *ngIf="apiService.Connected.length <1">
-    <!-- לשנות לבוליאני -->
+  <span *ngIf="!apiService.Connected">
     <button mat-button routerLink="/Login">התחברות/הרשמה</button>
   </span>
-  <span *ngIf="apiService.Connected.length >1">
-    <button mat-button (click)="LogOut()">התנתקות</button> {{apiService.Connected}} שלום
+  <span *ngIf="apiService.Connected">
+    <button mat-button (click)="LogOut()">התנתקות</button> {{ apiService.User[0].firstname }} {{ apiService.User[0].lastname }} שלום
   </span>
   <span class="example-spacer"></span>
 
