@@ -13,7 +13,7 @@ export class ApiService {
   constructor(private http: HttpClient, private router: Router) { }
   Connected: boolean = false;
   userid: string = "";
-  User: any = [];
+  user: any = [];
   isLoading: boolean = false;
   cartLength: number = 0;
   error = "";
@@ -28,28 +28,35 @@ export class ApiService {
 
   public getmobile() {
 
-
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getMobile";
     return this.http.get<events[]>(url)
- 
+   
   }
+
+
+  public localStorage (id: string) {
+
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/localStorage"+ id;
+    return this.http.get<USER>(url)
+  }
+  
 
 
   public Cartmobile(addid: string) {
 
 
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/cartMobile" + addid;
-    console.log(url)
+    this.cartLength++;
     return this.http.get<events[]>(url)
       .subscribe();
   }
 
-  public user(user: USER[]) {
+  public addUser(user: USER[]) {
 
 
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/CreatingUser";
     return this.http.post<USER[]>(url, user)
-      .subscribe();//isLoading false
+      .subscribe();
   }
 
 
@@ -60,17 +67,18 @@ export class ApiService {
     return this.http.get<USER>(url)
       .subscribe((data: any) => {
         this.isLoading = false;
-        if(data.length === 0) {
+        if (data.length === 0) {
           this.loginerror = true;
           this.error = 'שם המשתמש או הסיסמה אינם נכונים.';
           return;
         }
         this.loginerror = false;
         this.userid = data[0]._id;
-        this.User = data;
-        this.cartLength = this.User[0].cart.length;
-          this.navigateToshop()
-          this.Connected = true;
+        this.user = data;
+        localStorage.setItem('_id', this.user[0]._id);
+        this.cartLength = this.user[0].cart.length;
+        this.navigateToshop()
+        this.Connected = true;
       })
 
   }
@@ -108,6 +116,8 @@ export class ApiService {
   LogOut() {
     this.Connected = false
     this.router.navigate(['/Login']);
+    localStorage.removeItem('_id');
+    this.user = [];
   }
 
 }

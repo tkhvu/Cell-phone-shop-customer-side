@@ -31,7 +31,7 @@ export class CreateaccountComponent {
 
   onSelect(name: any) {
     this.api.isLoading = true;
-    this.api.user(name);
+    this.api.addUser(name);
     this.api.isLoading = false;
   }
 
@@ -39,7 +39,7 @@ export class CreateaccountComponent {
     if (this.bioSection.valid) {
       this.onSelect(this.bioSection.value);
       this.api.Connected = this.bioSection.value.firstname;
-      this.api.User = this.bioSection.value;
+      this.api.user = this.bioSection.value;
       this.navigateToshop();
     }
   }
