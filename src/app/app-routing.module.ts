@@ -5,6 +5,7 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
 import { ListmobileComponent } from './listmobile/listmobile.component';
 
 const routes: Routes = [
+  { path: '', component: ListmobileComponent }, 
   { path: 'Login', component: LoginComponent },
   { path: 'Createaccount', component: CreateaccountComponent },
   { path: 'Listmobile', component: ListmobileComponent },

@@ -15,27 +15,32 @@ export class ListmobileComponent implements OnInit {
   listmobileMock: events[] = [];
 
 
-   ngOnInit() {
- 
+  ngOnInit() {
+
     const id = localStorage.getItem('_id');
     if (id) {
-       this.localStorage(id) 
+      this.localStorage(id)
     }
     this.api.getmobile().subscribe((data) => {
-     
-        this.listmobileMock = data;
-        if (this.listmobileMock.length > 0) {
+      this.listmobileMock = data;
+      if (this.listmobileMock.length > 0) {
+        if (this.api.user.length > 0) {
           const mobileIds: string[] = this.api.user[0].favorites;
           this.listmobileMock = this.listmobileMock.map((mobile) => ({
             ...mobile,
             love: mobileIds.includes(mobile._id)
           }));
+        } else {
+          this.listmobileMock = this.listmobileMock.map((mobile) => ({
+            ...mobile,
+            love: false
+          }));
         }
       }
-    );
+    });
   }
-  
-  localStorage(_id: string){
+
+  localStorage(_id: string) {
     const id = `/?_id=${_id}`;
     this.api.localStorage(id).subscribe((data: any) => {
       this.api.isLoading = false;
@@ -53,10 +58,9 @@ export class ListmobileComponent implements OnInit {
           }));
         }
       }
-    );
+      );
     })
   }
-
 
 
 
@@ -67,14 +71,12 @@ export class ListmobileComponent implements OnInit {
 
 
   Addcart(_id: any) {
-    this.api.userid = localStorage.getItem('_id') || '';
     const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
     this.api.Cartmobile(id);
   }
 
 
   addFavorites(_id: string) {
-
     const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
     this.api.addFavorites(id);
   }

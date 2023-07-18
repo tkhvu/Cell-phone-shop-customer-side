@@ -10,7 +10,6 @@ import { USER } from '../modeluser';
 })
 export class CreateaccountComponent {
 
-  hide = true;
   passwordIsValid = false;
   bioSection: FormGroup;
   model: USER = new USER('', '', '', '', '');
@@ -30,17 +29,13 @@ export class CreateaccountComponent {
   }
 
   onSelect(name: any) {
-    this.api.isLoading = true;
-    this.api.addUser(name);
-    this.api.isLoading = false;
-  }
+    this.api.addUser(name) }
 
   callingFunction() {
     if (this.bioSection.valid) {
       this.onSelect(this.bioSection.value);
-      this.api.Connected = this.bioSection.value.firstname;
-      this.api.user = this.bioSection.value;
-      this.navigateToshop();
+      const query = `/?username=${this.bioSection.value.username}&password=${this.bioSection.value.password}`;
+      this.api.userMatch(query)
     }
   }
 

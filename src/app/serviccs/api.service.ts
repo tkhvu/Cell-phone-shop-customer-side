@@ -12,7 +12,6 @@ export class ApiService {
 
   constructor(private http: HttpClient, private router: Router) { }
   Connected: boolean = false;
-  userid: string = "";
   user: any = [];
   isLoading: boolean = false;
   cartLength: number = 0;
@@ -30,16 +29,24 @@ export class ApiService {
 
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getMobile";
     return this.http.get<events[]>(url)
-   
+
   }
 
 
-  public localStorage (id: string) {
+  public localStorage(id: string) {
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/localStorage"+ id;
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/localStorage" + id;
     return this.http.get<USER>(url)
   }
-  
+
+  public getCart(id: string) {
+
+    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getCart" + id;
+    console.log(url)
+    return this.http.get<USER>(url)
+  }
+
+
 
 
   public Cartmobile(addid: string) {
@@ -52,11 +59,9 @@ export class ApiService {
   }
 
   public addUser(user: USER[]) {
-
-
+    this.isLoading = true;
     const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/CreatingUser";
-    return this.http.post<USER[]>(url, user)
-      .subscribe();
+    return this.http.post<USER[]>(url, user).subscribe(() => { this.isLoading = false });;
   }
 
 
@@ -73,7 +78,6 @@ export class ApiService {
           return;
         }
         this.loginerror = false;
-        this.userid = data[0]._id;
         this.user = data;
         localStorage.setItem('_id', this.user[0]._id);
         this.cartLength = this.user[0].cart.length;
@@ -118,6 +122,8 @@ export class ApiService {
     this.router.navigate(['/Login']);
     localStorage.removeItem('_id');
     this.user = [];
+    this.cartLength = 0;
+
   }
 
 }

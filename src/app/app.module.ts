@@ -12,7 +12,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatBadgeModule } from '@angular/material/badge';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -21,7 +21,10 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { StrengthCheckerComponent } from './createaccount/strength-checker.component';
 import { MatCardModule } from '@angular/material/card';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
 
 
 
@@ -32,6 +35,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     LoginComponent,
     CreateaccountComponent,
     StrengthCheckerComponent,
+    CartDialogComponent,
 
   ],
   imports: [
@@ -54,7 +58,10 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatProgressSpinnerModule,
     MatCardModule,
     ScrollingModule,
-     
+    MatMenuModule,
+    MatDialogModule,
+
+
 
   ],
 

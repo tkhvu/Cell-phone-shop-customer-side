@@ -1,30 +1,23 @@
 <mat-toolbar>
-  <button mat-raised-button [matBadge]="apiService.Connected ? apiService.cartLength : '0'" matBadgePosition="before" matBadgeColor="accent">
+  <button mat-raised-button aria-label="סל הקניות" (click)="openDialog()"
+    [matBadge]="apiService.Connected ? apiService.cartLength : '0'" matBadgePosition="before" matBadgeColor="accent">
     <span class="material-icons">shopping_cart</span>
   </button>
-  
 
   <span *ngIf="!apiService.Connected">
     <button mat-button routerLink="/Login">התחברות/הרשמה</button>
   </span>
   <span *ngIf="apiService.Connected">
-    <button mat-button (click)="LogOut()">התנתקות</button> {{ apiService.user[0].firstname }} {{ apiService.user[0].lastname }} שלום
+    <button mat-button (click)="apiService.LogOut()">התנתקות</button>
+    {{ apiService.user[0].firstname }} {{ apiService.user[0].lastname }} שלום
   </span>
   <span class="example-spacer"></span>
 
 
-  <span class="pw"> <img class="p" src="https://www.ivory.co.il/files/catalog/org/1642002455v55WG.jpg" title="צלצולים" alt="Lamp" width="68" height="68">
-</span>
+  <span class="pw"> <img class="p" src="https://www.ivory.co.il/files/catalog/org/1642002455v55WG.jpg" title="צלצולים"
+      alt="Lamp" width="68" height="68">
+  </span>
 
 </mat-toolbar>
 
 <router-outlet></router-outlet>
-
-
-
-
-
-
-
-
-

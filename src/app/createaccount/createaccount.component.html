@@ -26,7 +26,7 @@
 
     <p>סיסמה</p>
     <mat-form-field>
-      <input matInput #input [type]="hide ? 'password' : 'text'" required formControlName="password">
+      <input matInput #input [type]="'password'" required formControlName="password">
     </mat-form-field>
     <div *ngIf="bioSection.controls['password'].touched">{{getErrorMessage('password')}}</div>
 
