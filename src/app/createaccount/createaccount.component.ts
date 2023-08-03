@@ -33,9 +33,8 @@ export class CreateaccountComponent {
 
   callingFunction() {
     if (this.bioSection.valid) {
+      this.api.query = `/?username=${this.bioSection.value.username}&password=${this.bioSection.value.password}`;
       this.onSelect(this.bioSection.value);
-      const query = `/?username=${this.bioSection.value.username}&password=${this.bioSection.value.password}`;
-      this.api.userMatch(query)
     }
   }
 

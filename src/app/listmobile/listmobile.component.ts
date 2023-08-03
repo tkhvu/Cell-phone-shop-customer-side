@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { events } from '../interfaces';
 import { ApiService } from '../serviccs/api.service';
+import { from, Observable } from 'rxjs';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-listmobile',
@@ -13,13 +15,12 @@ export class ListmobileComponent implements OnInit {
   constructor(public api: ApiService) { }
 
   listmobileMock: events[] = [];
+  secondsCounter = interval(1000);
 
-
-  ngOnInit() {
-
+   ngOnInit() {
     const id = localStorage.getItem('_id');
     if (id) {
-      this.localStorage(id)
+      this.localStorage(id);
     }
     this.api.getmobile().subscribe((data) => {
       this.listmobileMock = data;
@@ -40,13 +41,14 @@ export class ListmobileComponent implements OnInit {
     });
   }
 
+
   localStorage(_id: string) {
     const id = `/?_id=${_id}`;
     this.api.localStorage(id).subscribe((data: any) => {
       this.api.isLoading = false;
       this.api.loginerror = false;
       this.api.user = [data];
-      this.api.cartLength = this.api.user[0].cart.length;
+      this.getCart();
       this.api.Connected = true;
       this.api.getmobile().subscribe((data) => {
         this.listmobileMock = data;
@@ -64,15 +66,27 @@ export class ListmobileComponent implements OnInit {
 
 
 
+  getCart() {
+    const id1 = `/?_id=${this.api.user[0].cart[0]}`
+    this.api.getCart(id1).subscribe((data: any) => {
+      let totalCount = 0;
+      for (const item of data.cart) {
+        totalCount += item.count;
+      }
+      this.api.cartLength = totalCount;
+    }
+    );
+  }
+
   deleteFavorites(_id: string) {
     const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
     this.api.deleteFavorites(id);
   }
 
 
-  Addcart(_id: any) {
-    const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
-    this.api.Cartmobile(id);
+  addCart(_id: any) {
+    const id = `/?_id=${this.api.user[0].cart[0]}&id=${_id}`;
+    this.api.addCart(id);
   }
 
 

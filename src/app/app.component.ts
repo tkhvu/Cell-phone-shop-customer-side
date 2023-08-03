@@ -30,23 +30,22 @@ export class AppComponent implements OnInit {
   cart = false;
 
   ngOnInit() {
-
     const _id = localStorage.getItem('_id');
     if (_id === null) {
       this.apiService.LogOut();
     }
   }
 
-  getCart() {
-    const _id = localStorage.getItem('_id');
-    const id = `/?_id=${_id}&type=favorites` ;
-    if (_id != null) {
-      this.apiService.getCart(id)
-        .subscribe((data: any) => {
-          this.cartItems = data
-          this.cart = true;
-        }
-        );
-    }
-  }
+  // getCart() {
+  //   const _id = localStorage.getItem('_id');
+  //   const id = `/?_id=${_id}` ;
+  //   if (_id != null) {
+  //     this.apiService.getCart(id)
+  //       .subscribe((data: any) => {
+  //         this.cartItems = data
+  //         this.cart = true;
+  //       }
+  //       );
+  //   }
+  // }
 }

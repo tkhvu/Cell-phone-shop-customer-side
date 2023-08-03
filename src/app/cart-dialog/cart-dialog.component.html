@@ -13,8 +13,8 @@
         <!-- כפתור ההסרה של המוצר -->
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let index = index">
-            <button mat-icon-button color="warn" (click)="deleteItem(index)">
+          <td mat-cell *matCellDef="let index = index; let element">
+            <button mat-icon-button color="warn" (click)="deleteItem(index, element._id)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>

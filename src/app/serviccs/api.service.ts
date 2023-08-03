@@ -17,58 +17,67 @@ export class ApiService {
   cartLength: number = 0;
   error = "";
   loginerror: boolean = false;
-
-
-  public getshps(): Observable<events[]> {
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getshps";
-    return this.http.get<events[]>(url,);
-  }
+  query = ""
 
 
   public getmobile() {
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getMobile";
+    const url: string = "http://localhost:3000/getMobile";
     return this.http.get<events[]>(url)
 
   }
 
-
-  public localStorage(id: string) {
-
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/localStorage" + id;
+  public localStorage(id: string): Observable<USER> {
+   
+    const url: string = "http://localhost:3000/localStorage" + id;
     return this.http.get<USER>(url)
   }
 
-  public getCart(id: string) {
+  public MobileDetails(id: string) {
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getCart" + id;
+    const url: string = "http://localhost:3000/MobileDetails" + id;
+    return this.http.get<USER>(url)
+  }
+
+
+  public getCart(id: string)  {
+
+    const url: string = "http://localhost:3000/getCart" + id;
+    return this.http.get<USER>(url)
+  }
+  
+
+
+
+
+  public addCart(addid: string) {
+
+
+    const url: string = "http://localhost:3000/addCart" + addid;
     console.log(url)
-    return this.http.get<USER>(url)
-  }
-
-
-
-
-  public Cartmobile(addid: string) {
-
-
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/cartMobile" + addid;
     this.cartLength++;
     return this.http.get<events[]>(url)
       .subscribe();
   }
 
-  public addUser(user: USER[]) {
+  public async addUser(user: USER[]) {
     this.isLoading = true;
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/CreatingUser";
-    return this.http.post<USER[]>(url, user).subscribe(() => { this.isLoading = false });;
+    const url: string = "http://localhost:3000/CreatingUser";
+    return this.http.post<USER[]>(url, user).subscribe((data) => {
+      this.isLoading = false;
+      const dataString = JSON.stringify(data);
+      const parsedData = JSON.parse(dataString);
+      const insertedId = parsedData.insertedId;
+      localStorage.setItem('_id', insertedId);
+      this.userMatch(this.query)
+    });;
   }
 
 
   public userMatch(query: string) {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/userMatch" + query;
+    const url: string = "http://localhost:3000/userMatch" + query;
     return this.http.get<USER>(url)
       .subscribe((data: any) => {
         this.isLoading = false;
@@ -90,7 +99,7 @@ export class ApiService {
   addFavorites(addid: string) {
 
 
-    const url: string = " https://us-central1-fine-command-384813.cloudfunctions.net/favorites" + addid;
+    const url: string = " http://localhost:3000/addFavorites" + addid;
     this.http.get(url)
       .subscribe()
   }
@@ -98,7 +107,7 @@ export class ApiService {
   public getUsers() {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/getUsers";
+    const url: string = "http://localhost:3000/getUsers";
     return this.http.get<USER[]>(url)
 
   }
@@ -106,7 +115,7 @@ export class ApiService {
   public deleteFavorites(addid: string) {
 
 
-    const url: string = "https://us-central1-fine-command-384813.cloudfunctions.net/deleteFavorites" + addid;
+    const url: string = "http://localhost:3000/deleteFavorites" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
   }
@@ -123,6 +132,15 @@ export class ApiService {
     localStorage.removeItem('_id');
     this.user = [];
     this.cartLength = 0;
+
+  }
+
+  deleteFromcart(addid: string) {
+
+    const url: string = "http://localhost:3000/deleteFromcart" + addid;
+    console.log(url)
+    return this.http.get<USER[]>(url)
+      .subscribe()
 
   }
 

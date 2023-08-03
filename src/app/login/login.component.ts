@@ -21,8 +21,8 @@ export class LoginComponent {
 
   userMatch() {
     this.api.isLoading = true;
-    const query = `/?username=${this.username}&password=${this.password}`;
-    this.api.userMatch(query)
+   this.api.query = `/?username=${this.username}&password=${this.password}`;
+    this.api.userMatch(this.api.query)
   }
 
 }

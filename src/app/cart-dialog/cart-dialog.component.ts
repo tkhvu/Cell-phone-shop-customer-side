@@ -8,28 +8,32 @@ import { ApiService } from '../serviccs/api.service';
 })
 export class CartDialogComponent {
 
-  constructor(public apiService: ApiService, ) { }
+  constructor(public apiService: ApiService,) { }
 
   cartItems: { cart: string }[] = [];
   ngOnInit() {
     const _id = localStorage.getItem('_id');
-    const id = `/?_id=${_id}&type=favorites`;
+    const id = `/?_id=${this.apiService.user[0].cart[0]}`;
     if (_id != null) {
-      this.apiService.getCart(id)
+      this.apiService.MobileDetails(id)
         .subscribe((data: any) => {
-          this.cartItems = data[0].favorites;
+          this.cartItems = data[0].cart;
           console.log(this.cartItems)
         }
         );
+    
     }
   }
-  
 
-  deleteItem(index: number){
+
+  deleteItem(index: number, _id: string) {
     let data = this.cartItems;
     if (index >= 0 && index < data.length) {
       data.splice(index, 1);
-    this.cartItems = [...data];
+      this.cartItems = [...data];
+      let id = `/?_id=${this.apiService.user[0].cart.toString()}&id=${_id}`
+      this.apiService.deleteFromcart(id);
+    }
   }
 }
-}
+
