@@ -9,7 +9,6 @@
         <mat-card-actions>
           <button mat-icon-button *ngIf="mobile.love === true" (click)="mobile.love =false; deleteFavorites(mobile._id)">
             <mat-icon>favorite </mat-icon>
-  
           </button>
   
           <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addFavorites(mobile._id)">

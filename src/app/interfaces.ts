@@ -26,3 +26,9 @@ export interface USER1 {
   power: string,
   alterEgo?: string
 }
+
+export interface CartItem {
+  _id: string;
+  count: number;
+  // Add other properties if there are any
+}

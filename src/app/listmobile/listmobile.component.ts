@@ -15,9 +15,8 @@ export class ListmobileComponent implements OnInit {
   constructor(public api: ApiService) { }
 
   listmobileMock: events[] = [];
-  secondsCounter = interval(1000);
 
-   ngOnInit() {
+  ngOnInit() {
     const id = localStorage.getItem('_id');
     if (id) {
       this.localStorage(id);
@@ -67,13 +66,14 @@ export class ListmobileComponent implements OnInit {
 
 
   getCart() {
-    const id1 = `/?_id=${this.api.user[0].cart[0]}`
-    this.api.getCart(id1).subscribe((data: any) => {
+    const id = `/?_id=${this.api.user[0].cart[0]}`
+    this.api.getCart(id).subscribe((data: any) => {
       let totalCount = 0;
       for (const item of data.cart) {
-        totalCount += item.count;
+        totalCount += parseInt(item.count, 10);
       }
       this.api.cartLength = totalCount;
+      this.api.cart = data;
     }
     );
   }

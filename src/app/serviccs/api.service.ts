@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { events, USER } from '../interfaces';
+import { CartItem, events, USER } from '../interfaces';
 import { Router } from '@angular/router';
 
 
@@ -13,6 +13,7 @@ export class ApiService {
   constructor(private http: HttpClient, private router: Router) { }
   Connected: boolean = false;
   user: any = [];
+  cart: CartItem[] = [];
   isLoading: boolean = false;
   cartLength: number = 0;
   error = "";
@@ -135,10 +136,9 @@ export class ApiService {
 
   }
 
-  deleteFromcart(addid: string) {
+  updateAddCart(addid: string) {
 
-    const url: string = "http://localhost:3000/deleteFromcart" + addid;
-    console.log(url)
+    const url: string = "http://localhost:3000/cartUpdate" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
 
