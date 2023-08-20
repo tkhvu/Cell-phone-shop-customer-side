@@ -1,0 +1,14 @@
+.right {
+    text-align: right;
+    margin-right: 50px;
+}
+
+.center {
+    text-align: right;
+    margin-right: 190px;
+
+}
+
+mat-form-field {
+    margin-right: 12px;
+}

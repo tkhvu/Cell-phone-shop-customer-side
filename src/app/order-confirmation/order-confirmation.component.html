@@ -1,0 +1,38 @@
+<div class="right">
+    <h1>הרשמה</h1>
+
+    <form [formGroup]="bioSection" (ngSubmit)="OrderConfirmation()" class="form-grid">
+
+
+        <mat-form-field>
+            <mat-label>טלפון </mat-label>
+            <input matInput formControlName="phone" required>
+        </mat-form-field>
+
+        <br>
+        <mat-form-field>
+            <mat-label>עיר </mat-label>
+
+            <input matInput formControlName="City">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>רחוב</mat-label>
+            <input matInput formControlName="Street">
+        </mat-form-field>
+
+        <br>
+        <mat-form-field>
+            <mat-label>מספר בניין </mat-label>
+            <input matInput formControlName="Housenumber">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>מספר דירה </mat-label>
+            <input matInput formControlName="Apartmentnumber">
+        </mat-form-field>
+        <div class="center ">
+            <button mat-raised-button color="warn" type="submit" [disabled]="!bioSection.valid">הרשמה</button>
+        </div>
+    </form>
+</div>

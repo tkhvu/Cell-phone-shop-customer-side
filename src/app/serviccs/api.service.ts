@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CartItem, events, USER } from '../interfaces';
+import { CartItem, events, USER, combinedData } from '../interfaces';
 import { Router } from '@angular/router';
 
 
@@ -12,50 +12,48 @@ export class ApiService {
 
   constructor(private http: HttpClient, private router: Router) { }
   Connected: boolean = false;
-  user: any = [];
+  user: USER[] = [];
   cart: CartItem[] = [];
   isLoading: boolean = false;
   cartLength: number = 0;
   error = "";
   loginerror: boolean = false;
   query = ""
-
+  combinedData = {} as combinedData;
+  cartItems: CartItem[] = [];
 
   public getmobile() {
-
-    const url: string = "http://localhost:3000/getMobile";
+    const url: string = "https://server-side-58yz.onrender.com/getMobile";
     return this.http.get<events[]>(url)
 
   }
 
   public localStorage(id: string): Observable<USER> {
-   
-    const url: string = "http://localhost:3000/localStorage" + id;
+
+    const url: string = "https://server-side-58yz.onrender.com/localStorage" + id;
     return this.http.get<USER>(url)
   }
 
   public MobileDetails(id: string) {
 
-    const url: string = "http://localhost:3000/MobileDetails" + id;
+    const url: string = "https://server-side-58yz.onrender.com/MobileDetails" + id;
     return this.http.get<USER>(url)
   }
 
 
-  public getCart(id: string)  {
+  public getCart(id: string) {
 
-    const url: string = "http://localhost:3000/getCart" + id;
+    const url: string = "https://server-side-58yz.onrender.com/getCart" + id;
     return this.http.get<USER>(url)
   }
-  
+
 
 
 
 
   public addCart(addid: string) {
 
-
-    const url: string = "http://localhost:3000/addCart" + addid;
-    console.log(url)
+    const url: string = "https://server-side-58yz.onrender.com/addCart" + addid;
     this.cartLength++;
     return this.http.get<events[]>(url)
       .subscribe();
@@ -63,7 +61,7 @@ export class ApiService {
 
   public async addUser(user: USER[]) {
     this.isLoading = true;
-    const url: string = "http://localhost:3000/CreatingUser";
+    const url: string = "https://server-side-58yz.onrender.com/CreatingUser";
     return this.http.post<USER[]>(url, user).subscribe((data) => {
       this.isLoading = false;
       const dataString = JSON.stringify(data);
@@ -78,7 +76,7 @@ export class ApiService {
   public userMatch(query: string) {
 
 
-    const url: string = "http://localhost:3000/userMatch" + query;
+    const url: string = "https://server-side-58yz.onrender.com/userMatch" + query;
     return this.http.get<USER>(url)
       .subscribe((data: any) => {
         this.isLoading = false;
@@ -100,7 +98,7 @@ export class ApiService {
   addFavorites(addid: string) {
 
 
-    const url: string = " http://localhost:3000/addFavorites" + addid;
+    const url: string = " https://server-side-58yz.onrender.com/addFavorites" + addid;
     this.http.get(url)
       .subscribe()
   }
@@ -108,7 +106,7 @@ export class ApiService {
   public getUsers() {
 
 
-    const url: string = "http://localhost:3000/getUsers";
+    const url: string = "https://server-side-58yz.onrender.com/getUsers";
     return this.http.get<USER[]>(url)
 
   }
@@ -116,7 +114,7 @@ export class ApiService {
   public deleteFavorites(addid: string) {
 
 
-    const url: string = "http://localhost:3000/deleteFavorites" + addid;
+    const url: string = "https://server-side-58yz.onrender.com/deleteFavorites" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
   }
@@ -138,10 +136,18 @@ export class ApiService {
 
   updateAddCart(addid: string) {
 
-    const url: string = "http://localhost:3000/cartUpdate" + addid;
+    const url: string = "https://server-side-58yz.onrender.com/cartUpdate" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
 
+  }
+
+
+  public async addUser1(combinedData: combinedData) {
+    console.log(combinedData)
+    const url: string = "http://localhost:3000/MobileDet";
+    return this.http.post<combinedData>(url, combinedData).subscribe((data) => {
+    });;
   }
 
 }

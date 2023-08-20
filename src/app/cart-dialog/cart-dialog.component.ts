@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
 import { CartItem } from '../interfaces';
+import { Router } from '@angular/router';
 
 
 
@@ -11,7 +12,8 @@ import { CartItem } from '../interfaces';
 })
 export class CartDialogComponent {
 
-  constructor(public apiService: ApiService,) { }
+  constructor(public apiService: ApiService,  private router: Router) { }
+
 
   cartItems: CartItem[] = [];
   ngOnInit() {
@@ -30,8 +32,16 @@ export class CartDialogComponent {
             }
             return item;
           });
+          this.apiService.cartItems = combinedArray
 
-          this.cartItems = combinedArray
+        //   this.apiService.combinedData = {
+        //     user: this.apiService.user,
+        //     orders: this.apiService.cartItems
+        // };
+          // console.log(this.apiService.combinedData);
+          // this.apiService.addUser1(this.apiService.combinedData)
+          console.log(this.apiService.cartItems);
+
         }
         );
     }
@@ -63,12 +73,20 @@ export class CartDialogComponent {
   updateAddCart(item: any, action: string) {
     if (action === "remove") {
       item.count--;
+      this.apiService.cartLength --;
     } else {
       item.count++;
+      this.apiService.cartLength ++;
+
     }
     let id = `/?_id=${this.apiService.user[0].cart.toString()}&id=${item._id}&count=${item.count}`
     this.apiService.updateAddCart(id);
     console.log("cartItems===", this.cartItems)
+  }
+
+
+  public navigateToorderconfirmation() {
+    this.router.navigate(['/orderconfirmation']);
   }
 }
 

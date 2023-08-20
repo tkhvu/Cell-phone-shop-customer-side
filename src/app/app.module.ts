@@ -25,7 +25,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
-
+import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import {NgIf} from '@angular/common';
+import {TextFieldModule} from '@angular/cdk/text-field';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
     CreateaccountComponent,
     StrengthCheckerComponent,
     CartDialogComponent,
+    OrderConfirmationComponent,
 
   ],
   imports: [
@@ -60,6 +63,9 @@ import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
     ScrollingModule,
     MatMenuModule,
     MatDialogModule,
+    TextFieldModule,
+    NgIf,
+
 
 
 
