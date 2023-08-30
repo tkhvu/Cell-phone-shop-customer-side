@@ -1,0 +1,91 @@
+<br>
+    
+<div class="right">
+
+
+    <form [formGroup]="bioSection" (ngSubmit)="OrderConfirmation()">
+
+        <mat-form-field>
+            <mat-label>מחיר</mat-label>
+            <input matInput formControlName="price">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>שם המוצר </mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>בחירת קטגוריה</mat-label>
+            <mat-select formControlName="category">
+              <mat-option matInput value="accessories">אוזניות</mat-option>
+              <mat-option matInput value="batteries">בטריות</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <div class="center">
+            <input type="file" (change)="onFileChanged($event)" formControlName="src"/>
+        </div>
+        <div class="center">
+            <button mat-raised-button color="warn" type="submit" [disabled]="!bioSection.valid">לשליחת הזמנה</button>
+        </div>
+    </form>
+
+</div>
+
+<!-- <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title class="right">
+                קטגוריה
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+        <mat-chip-listbox class="right">
+            <mat-chip-option (click)="category = 'accessories'">אוזניות</mat-chip-option>
+            <mat-chip-option (click)="category = 'batteries'">בטריות</mat-chip-option>
+            <mat-chip-option (click)="category = 'phones'">פלאפונים</mat-chip-option>
+        </mat-chip-listbox>
+
+        <mat-action-row>
+            <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                פרטי מוצר
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <form [formGroup]="bioSection" (ngSubmit)="OrderConfirmation()">
+
+            <mat-form-field>
+                <mat-label>שם המוצר </mat-label>
+
+                <input matInput formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>מחיר</mat-label>
+                <input matInput formControlName="price">
+            </mat-form-field>
+            <div>
+                <input type="file" (change)="onFileChanged($event)" formControlName="src" />
+            </div>
+            <br>
+            <div>
+                <button mat-raised-button color="warn" type="submit" [disabled]="!bioSection.valid">לשליחת
+                    הזמנה</button>
+            </div>
+        </form>
+
+        <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">Previous</button>
+            <button mat-button color="primary" (click)="nextStep()">End</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+
+</mat-accordion> -->

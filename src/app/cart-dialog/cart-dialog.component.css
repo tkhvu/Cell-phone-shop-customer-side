@@ -1,6 +1,18 @@
 /* YourComponent.component.css */
 
+  .count-input-container {
+  display: flex;
+  align-items: center;
+}
+
 .count-input {
-    width: 30px; /* Adjust the width as needed */
-  }
-  
+  width: 30px; /* גודל האינפוט */
+  text-align: center;
+  margin: 0 10px; /* מרווח בין הכפתורים והאינפוט */
+}
+
+.mat-icon-button {
+  width: 24px; /* גודל הכפתור */
+  height: 24px; /* גובה הכפתור */
+  padding: 0; /* הסרת הרווחים הפנימיים בכפתור */
+}

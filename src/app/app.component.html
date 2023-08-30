@@ -1,11 +1,11 @@
-<mat-toolbar>
+<mat-toolbar *ngIf="!apiService.login">
   <button mat-raised-button aria-label="סל הקניות" (click)="openDialog()"
-    [matBadge]="apiService.Connected ? apiService.cartLength : '0'" matBadgePosition="before" matBadgeColor="accent">
+    [matBadge]="apiService.Connected ? apiService.cartLength : '0'" matBadgePosition="before" matBadgeColor="warn">
     <span class="material-icons">shopping_cart</span>
   </button>
 
   <span *ngIf="!apiService.Connected">
-    <button mat-button routerLink="/Login">התחברות/הרשמה</button>
+    <button mat-button (click)="Login()">התחברות/הרשמה</button>
   </span>
   <span *ngIf="apiService.Connected">
     <button mat-button (click)="apiService.LogOut()">התנתקות</button>
@@ -14,11 +14,16 @@
   <span class="example-spacer"></span>
 
 
-  <span class="pw"> <img class="p" src="https://www.ivory.co.il/files/catalog/org/1642002455v55WG.jpg" title="צלצולים"
+  <span class="pw"> <img class="p" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA4gCG7Bjb_0E0X3z1qKXi6hcDsmeYSr9EjA&usqp=CAU" title="צלצולים"
       alt="Lamp" width="68" height="68">
   </span>
 
 </mat-toolbar>
 
 <router-outlet></router-outlet>
+
+
+<button class="fixed-bottom-button" (click)="Login1()"> לעבור לעמוד מנהל</button>
+
+
 

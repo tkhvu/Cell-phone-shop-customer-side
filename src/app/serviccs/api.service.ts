@@ -12,6 +12,7 @@ export class ApiService {
 
   constructor(private http: HttpClient, private router: Router) { }
   Connected: boolean = false;
+  login: boolean = false;
   user: USER[] = [];
   cart: CartItem[] = [];
   isLoading: boolean = false;
@@ -145,7 +146,7 @@ export class ApiService {
 
   public async addUser1(combinedData: combinedData) {
     console.log(combinedData)
-    const url: string = "http://localhost:3000/MobileDet";
+    const url: string = "https://server-side-58yz.onrender.com/Emailorderconfirmation";
     return this.http.post<combinedData>(url, combinedData).subscribe((data) => {
     });;
   }

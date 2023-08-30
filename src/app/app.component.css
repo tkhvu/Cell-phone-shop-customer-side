@@ -32,6 +32,18 @@ margin-bottom: 0px;
   padding: 16px;
 }
 
+mat-toolbar {
+  background-color: #EDE7F6;}
+
+  .fixed-bottom-button {
+    position: fixed;
+    bottom: 20px; /* Adjust the value as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
+  
+
 
 
 

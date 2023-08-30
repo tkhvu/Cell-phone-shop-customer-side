@@ -28,7 +28,12 @@ import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import {NgIf} from '@angular/common';
 import {TextFieldModule} from '@angular/cdk/text-field';
-
+import { MatSelectModule } from '@angular/material/select';
+import { DirectorComponent } from './director/director.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -39,6 +44,7 @@ import {TextFieldModule} from '@angular/cdk/text-field';
     StrengthCheckerComponent,
     CartDialogComponent,
     OrderConfirmationComponent,
+    DirectorComponent,
 
   ],
   imports: [
@@ -65,7 +71,12 @@ import {TextFieldModule} from '@angular/cdk/text-field';
     MatDialogModule,
     TextFieldModule,
     NgIf,
-
+    MatSelectModule,
+    MatChipsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatExpansionModule
+ 
 
 
 

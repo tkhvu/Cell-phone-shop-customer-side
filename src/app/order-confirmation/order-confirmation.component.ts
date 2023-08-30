@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
 
+
+
 @Component({
   selector: 'app-order-confirmation',
   templateUrl: './order-confirmation.component.html',
@@ -12,7 +14,6 @@ export class OrderConfirmationComponent {
   lastNameAutofilled: boolean | undefined;
   
   bioSection: FormGroup;
-
   constructor(private fb: FormBuilder, public api: ApiService) {
     this.bioSection = this.fb.group({
       // firstname: ['', Validators.required],
@@ -40,11 +41,10 @@ export class OrderConfirmationComponent {
     this.api.addUser1( this.api.combinedData)
 
   }
+  displayedColumns: string[] = ['name', 'price', "src"];
 
 
-// callingFunction(event: Event){
-
-//   console.log(event);
-//   this.api.addUser1(event)
-// }
+  getTotalCost() {
+    return this.api.cartItems.reduce((total, item) => total + (item.price! * item.count), 0);
+  }
 }

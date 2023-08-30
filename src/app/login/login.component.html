@@ -1,14 +1,16 @@
+<div></div>
+
+
 <div class="center">
-  <h1>התחברות</h1>
   <form #connection="ngForm" (ngSubmit)="onSubmit(connection)">
 
-    <p>שם משתמש</p>
     <mat-form-field>
+      <mat-label>שם משתמש </mat-label>
       <input matInput name="username" required [(ngModel)]="username">
     </mat-form-field>
-
-    <p>סיסמה</p>
+    <br>
     <mat-form-field>
+      <mat-label>סיסמה</mat-label>
       <input matInput required name="password" [(ngModel)]="password" type="password">
     </mat-form-field>
 
@@ -16,13 +18,12 @@
 
 
     <div>
-      <button mat-raised-button class="margin" routerLink="/Createaccount">הרשמה</button>
+      <button mat-raised-button class="margin" color="warn" routerLink="/Createaccount">הרשמה</button>
       <button mat-raised-button color="warn" type="submit" [disabled]="!connection.form.valid">התחברות</button>
     </div>
 
   </form>
 
-  <mat-spinner *ngIf="api.isLoading"></mat-spinner>
 </div>
-
-
+<div class="spinner-container"><mat-spinner *ngIf="api.isLoading"></mat-spinner>
+</div>

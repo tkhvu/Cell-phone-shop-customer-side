@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from './serviccs/api.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
@@ -9,7 +12,7 @@ import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(public apiService: ApiService, public dialog: MatDialog) { }
+  constructor(public apiService: ApiService, public dialog: MatDialog, private router: Router, private http: HttpClient) { }
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
@@ -36,16 +39,11 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // getCart() {
-  //   const _id = localStorage.getItem('_id');
-  //   const id = `/?_id=${_id}` ;
-  //   if (_id != null) {
-  //     this.apiService.getCart(id)
-  //       .subscribe((data: any) => {
-  //         this.cartItems = data
-  //         this.cart = true;
-  //       }
-  //       );
-  //   }
-  // }
+  Login(){
+    this.router.navigate(['/Login']);
+    this.apiService.login = !this.apiService.login;  }
+
+    Login1(){
+      this.router.navigate(['/Director']);
+      }
 }

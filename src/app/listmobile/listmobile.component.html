@@ -4,22 +4,23 @@
       <mat-card>
 
         <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="232" height="202">
-        <p> {{ mobile.price }} שח {{mobile.name}}
+        <p> {{"₪" + mobile.price }} {{mobile.name}}
         </p>
         <mat-card-actions>
-          <button mat-icon-button *ngIf="mobile.love === true" (click)="mobile.love =false; deleteFavorites(mobile._id)">
+          <button mat-icon-button *ngIf="mobile.love === true"
+            (click)="mobile.love =false; deleteFavorites(mobile._id)">
             <mat-icon>favorite </mat-icon>
           </button>
-  
+
           <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addFavorites(mobile._id)">
             <mat-icon>favorite_border </mat-icon>
-  
+
           </button>
           <button mat-raised-button color="warn" (click)="addCart(mobile._id)">
             הוספה לסל
           </button>
-  
-  
+
+
         </mat-card-actions>
       </mat-card>
     </div>
@@ -28,4 +29,9 @@
 
 
 
+
+<div>
+  <input class="count-input" type="text" [(ngModel)]="filter">
+  <button (click)="filter1(filter)"> filter</button>
+</div>
 

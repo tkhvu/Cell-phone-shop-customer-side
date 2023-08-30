@@ -101,5 +101,9 @@ export class ListmobileComponent implements OnInit {
       scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 200;
     }
   }
-
+  filter1(filter: string) {
+    const filteredProducts = this.listmobileMock.filter(product => product.name === filter);
+    console.log(filteredProducts);
+  }
+  filter = ""
 }

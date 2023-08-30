@@ -1,0 +1,19 @@
+.right {
+    text-align: right;
+    margin-right: 50px;
+    float: right;
+  }
+
+  mat-form-field {
+    margin-right: 12px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px; /* Adjust this value as needed */
+  }
+
+
+  

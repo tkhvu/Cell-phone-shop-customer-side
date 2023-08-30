@@ -20,3 +20,11 @@
 .error-message {
   color: red;
 }
+
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}

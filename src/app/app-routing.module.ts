@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { ListmobileComponent } from './listmobile/listmobile.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import { DirectorComponent } from './director/director.component';
 
 const routes: Routes = [
   { path: '', component: ListmobileComponent }, 
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'Createaccount', component: CreateaccountComponent },
   { path: 'Listmobile', component: ListmobileComponent },
   { path: 'orderconfirmation', component: OrderConfirmationComponent },
+  { path: 'Director', component: DirectorComponent },
 
 
   
