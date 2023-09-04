@@ -22,10 +22,19 @@ export class ApiService {
   query = ""
   combinedData = {} as combinedData;
   cartItems: CartItem[] = [];
+  listmobileMock: events[] = [];
+  Category: any = [];
+  sourceData: events[] = [];
 
   public getmobile() {
-    const url: string = "https://server-side-58yz.onrender.com/getMobile";
+    const url: string = "http://localhost:3000/getMobile";
     return this.http.get<events[]>(url)
+
+  }
+
+  public getCategory() {
+    const url: string = "http://localhost:3000/getCategory";
+    return this.http.get<any[]>(url)
 
   }
 

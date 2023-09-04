@@ -1,14 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
 import { HttpClient } from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-director',
   templateUrl: './director.component.html',
   styleUrls: ['./director.component.css']
 })
-export class DirectorComponent {
+export class DirectorComponent implements OnInit{
+
+  ngOnInit() {
+    this.api.getCategory().subscribe((data) => {
+      this.categories = data
+    })
+  }
+  ManagerChange = 0;
+  categories: any = [];
+  isEditable = false;
+
 
   step = 0;
 
@@ -25,17 +36,26 @@ export class DirectorComponent {
   }
 
   bioSection: FormGroup;
-  constructor(private fb: FormBuilder, public api: ApiService, private http: HttpClient) {
+  bioSection1: FormGroup;
+
+  constructor(private fb: FormBuilder, public api: ApiService, private http: HttpClient,private _snackBar: MatSnackBar) {
     this.bioSection = this.fb.group({
       price: ['', [Validators.pattern('^[0-9]+$'), Validators.required]],
       name: ['', Validators.required],
       src: ['', Validators.required],
       category: ['', Validators.required],
     });
+
+    this.bioSection1 = this.fb.group({
+      category: ['', Validators.required],
+    });
   }
 
   OrderConfirmation() {
     this.uploadProduct()
+    const action = "סגור";
+    const message = "העלאה הסתיימה בהצלחה"
+    this.openSnackBar(action, message)
   }
 
 
@@ -50,13 +70,25 @@ export class DirectorComponent {
 
       formData.append('image', this.selectedFile);
 
-      this.http.post('http://localhost:3000/upload', formData).subscribe(response => {
-        console.log(response);
-      });
+      this.http.post('http://localhost:3000/upload', formData).subscribe();
     }
   }
 
   onFileChanged(event: any) {
     this.selectedFile = event.target.files[0];
+  }
+
+  addCategory(){
+    console.log(this.bioSection1.value)
+    this.http.post('http://localhost:3000/addCategory', this.bioSection1.value).subscribe(response => {
+      console.log(response);
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(action, message, {
+      duration: 10000, // משך הצגת ההודעה במילי-שניות
+      panelClass: ['custom-class'], // עיצוב נוסף
+    });
   }
 }

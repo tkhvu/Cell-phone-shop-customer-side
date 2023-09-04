@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { events } from '../interfaces';
+import { Component } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
-import { from, Observable } from 'rxjs';
-import { interval } from 'rxjs';
+
 
 @Component({
   selector: 'app-listmobile',
@@ -10,73 +8,11 @@ import { interval } from 'rxjs';
   styleUrls: ['./listmobile.component.css'],
 
 })
-export class ListmobileComponent implements OnInit {
+export class ListmobileComponent {
 
   constructor(public api: ApiService) { }
 
-  listmobileMock: events[] = [];
-
-  ngOnInit() {
-    const id = localStorage.getItem('_id');
-    if (id) {
-      this.localStorage(id);
-    }
-    this.api.getmobile().subscribe((data) => {
-      this.listmobileMock = data;
-      if (this.listmobileMock.length > 0) {
-        if (this.api.user.length > 0) {
-          const mobileIds: string[] = this.api.user[0].favorites;
-          this.listmobileMock = this.listmobileMock.map((mobile) => ({
-            ...mobile,
-            love: mobileIds.includes(mobile._id)
-          }));
-        } else {
-          this.listmobileMock = this.listmobileMock.map((mobile) => ({
-            ...mobile,
-            love: false
-          }));
-        }
-      }
-    });
-  }
-
-
-  localStorage(_id: string) {
-    const id = `/?_id=${_id}`;
-    this.api.localStorage(id).subscribe((data: any) => {
-      this.api.isLoading = false;
-      this.api.loginerror = false;
-      this.api.user = [data];
-      this.getCart();
-      this.api.Connected = true;
-      this.api.getmobile().subscribe((data) => {
-        this.listmobileMock = data;
-        if (this.listmobileMock.length > 0) {
-          const mobileIds: string[] = this.api.user[0].favorites;
-          this.listmobileMock = this.listmobileMock.map((mobile) => ({
-            ...mobile,
-            love: mobileIds.includes(mobile._id)
-          }));
-        }
-      }
-      );
-    })
-  }
-
-
-
-  getCart() {
-    const id = `/?_id=${this.api.user[0].cart[0]}`
-    this.api.getCart(id).subscribe((data: any) => {
-      let totalCount = 0;
-      for (const item of data.cart) {
-        totalCount += parseInt(item.count, 10);
-      }
-      this.api.cartLength = totalCount;
-      this.api.cart = data;
-    }
-    );
-  }
+  
 
   deleteFavorites(_id: string) {
     const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
@@ -101,9 +37,12 @@ export class ListmobileComponent implements OnInit {
       scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 200;
     }
   }
-  filter1(filter: string) {
-    const filteredProducts = this.listmobileMock.filter(product => product.name === filter);
-    console.log(filteredProducts);
+  filter(mobile: any) {
+    const filteredProducts = this.api.sourceData.filter(product => product.category === mobile._id);
+    this.api.listmobileMock = filteredProducts;
   }
-  filter = ""
+  showall(){
+
+    this.api.listmobileMock = this.api.sourceData;
+  }
 }

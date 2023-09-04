@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(public apiService: ApiService, public dialog: MatDialog, private router: Router, private http: HttpClient) { }
+  constructor(public api: ApiService, public dialog: MatDialog, private router: Router, private http: HttpClient) { }
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
@@ -32,18 +32,84 @@ export class AppComponent implements OnInit {
   cartItems: { cart: string }[] = [];
   cart = false;
 
+  // ngOnInit() {
+  //   const _id = localStorage.getItem('_id');
+  //   if (_id === null) {
+  //     this.apiService.LogOut();
+  //   }
+  // }
+
   ngOnInit() {
-    const _id = localStorage.getItem('_id');
-    if (_id === null) {
-      this.apiService.LogOut();
+    const id = localStorage.getItem('_id');
+    if (id) {
+      this.localStorage(id);
     }
+    this.api.getmobile().subscribe((data) => {
+      this.api.listmobileMock = data;
+      if (this.api.listmobileMock.length > 0) {
+        if (this.api.user.length > 0) {
+          const mobileIds: string[] = this.api.user[0].favorites;
+          this.api.listmobileMock = this.api.listmobileMock.map((mobile) => ({
+            ...mobile,
+            love: mobileIds.includes(mobile._id)
+          }));
+        } else {
+          this.api.listmobileMock = this.api.listmobileMock.map((mobile) => ({
+            ...mobile,
+            love: false
+          }));
+        }
+      }
+    });
+  }
+
+
+  localStorage(_id: string) {
+    const id = `/?_id=${_id}`;
+    this.api.localStorage(id).subscribe((data: any) => {
+      this.api.isLoading = false;
+      this.api.loginerror = false;
+      this.api.user = [data];
+      this.api.getCategory().subscribe((data) => {
+        this.api.Category = data
+      })
+      this.getCart();
+      this.api.Connected = true;
+      this.api.getmobile().subscribe((data) => {
+        this.api.listmobileMock = data;
+        this.api.sourceData = data;
+        if (this.api.listmobileMock.length > 0) {
+          const mobileIds: string[] = this.api.user[0].favorites;
+          this.api.listmobileMock = this.api.listmobileMock.map((mobile) => ({
+            ...mobile,
+            love: mobileIds.includes(mobile._id)
+          }));
+        }
+      }
+      );
+    })
+  }
+
+
+
+  getCart() {
+    const id = `/?_id=${this.api.user[0].cart[0]}`
+    this.api.getCart(id).subscribe((data: any) => {
+      let totalCount = 0;
+      for (const item of data.cart) {
+        totalCount += parseInt(item.count, 10);
+      }
+      this.api.cartLength = totalCount;
+      this.api.cart = data;
+    }
+    );
   }
 
   Login(){
     this.router.navigate(['/Login']);
-    this.apiService.login = !this.apiService.login;  }
+    this.api.login = !this.api.login;  }
 
-    Login1(){
+    Definitions(){
       this.router.navigate(['/Director']);
       }
 }

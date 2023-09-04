@@ -1,19 +1,21 @@
-<mat-toolbar *ngIf="!apiService.login">
+<mat-toolbar *ngIf="!api.login">
   <button mat-raised-button aria-label="סל הקניות" (click)="openDialog()"
-    [matBadge]="apiService.Connected ? apiService.cartLength : '0'" matBadgePosition="before" matBadgeColor="warn">
+    [matBadge]="api.Connected ? api.cartLength : '0'" matBadgePosition="before" matBadgeColor="warn">
     <span class="material-icons">shopping_cart</span>
   </button>
-
-  <span *ngIf="!apiService.Connected">
+  <span *ngIf="!api.Connected">
     <button mat-button (click)="Login()">התחברות/הרשמה</button>
   </span>
-  <span *ngIf="apiService.Connected">
-    <button mat-button (click)="apiService.LogOut()">התנתקות</button>
-    {{ apiService.user[0].firstname }} {{ apiService.user[0].lastname }} שלום
+  <span *ngIf="api.Connected">
+    <button mat-button (click)="api.LogOut()">התנתקות</button> שלום
+    {{ api.user[0].firstname }} {{ api.user[0].lastname }} 
   </span>
-  <span class="example-spacer"></span>
+  <span class="example-spacer">
+ 
+  <button  mat-button (click)="Definitions()"><span class="material-icons">settings</span>
+  </button>
 
-
+</span>
   <span class="pw"> <img class="p" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA4gCG7Bjb_0E0X3z1qKXi6hcDsmeYSr9EjA&usqp=CAU" title="צלצולים"
       alt="Lamp" width="68" height="68">
   </span>
@@ -22,8 +24,6 @@
 
 <router-outlet></router-outlet>
 
-
-<button class="fixed-bottom-button" (click)="Login1()"> לעבור לעמוד מנהל</button>
 
 
 

@@ -5,6 +5,7 @@ export interface events {
   src?: string;
   love?: any;
   _id?: any;
+  category: any;
 }
 
 export interface USER {

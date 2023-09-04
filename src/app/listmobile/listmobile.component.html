@@ -1,6 +1,13 @@
+<mat-toolbar >
+  <button mat-button (click)="showall()"> הצג הכול</button>
+  <button mat-button *ngFor="let mobile of this.api.Category" (click)="filter(mobile)"> {{mobile.category}}</button>
+</mat-toolbar>
+
+
+
 <div class="scroll-container" (scroll)="onScroll()">
   <div class="grid-container">
-    <div *ngFor="let mobile of listmobileMock">
+    <div *ngFor="let mobile of this.api.listmobileMock">
       <mat-card>
 
         <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="232" height="202">
@@ -30,8 +37,8 @@
 
 
 
-<div>
+<!-- <div>
   <input class="count-input" type="text" [(ngModel)]="filter">
-  <button (click)="filter1(filter)"> filter</button>
-</div>
+  <button (click)="filter(filter1)"> filter</button>
+</div> -->
 
