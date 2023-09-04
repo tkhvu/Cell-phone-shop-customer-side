@@ -27,13 +27,13 @@ export class ApiService {
   sourceData: events[] = [];
 
   public getmobile() {
-    const url: string = "http://localhost:3000/getMobile";
+    const url: string = "https://server-side-58yz.onrender.com/getMobile";
     return this.http.get<events[]>(url)
 
   }
 
   public getCategory() {
-    const url: string = "http://localhost:3000/getCategory";
+    const url: string = "https://server-side-58yz.onrender.com/getCategory";
     return this.http.get<any[]>(url)
 
   }

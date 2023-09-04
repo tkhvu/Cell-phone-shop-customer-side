@@ -70,7 +70,7 @@ export class DirectorComponent implements OnInit{
 
       formData.append('image', this.selectedFile);
 
-      this.http.post('http://localhost:3000/upload', formData).subscribe();
+      this.http.post('https://server-side-58yz.onrender.com/upload', formData).subscribe();
     }
   }
 
@@ -80,7 +80,7 @@ export class DirectorComponent implements OnInit{
 
   addCategory(){
     console.log(this.bioSection1.value)
-    this.http.post('http://localhost:3000/addCategory', this.bioSection1.value).subscribe(response => {
+    this.http.post('https://server-side-58yz.onrender.com/addCategory', this.bioSection1.value).subscribe(response => {
       console.log(response);
     });
   }
