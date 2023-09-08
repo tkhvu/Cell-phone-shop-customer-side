@@ -1,0 +1,63 @@
+<h1>הוספת מוצר חדש</h1>
+  <mat-stepper #stepper dir="rtl">
+    <mat-step [stepControl]="bioSection"  (ngSubmit)="OrderConfirmation()" >
+      <form [formGroup]="bioSection">
+        <ng-template matStepLabel>בחירת קטגוריה</ng-template>
+        <mat-form-field>
+          <mat-label>בחירת קטגוריה</mat-label>
+          <mat-select formControlName="category">
+            <mat-option matInput *ngFor="let category of categories" [value]="category._id">
+              {{ category.category }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <div>
+          <button mat-button matStepperNext>המשך</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="bioSection">
+      <form [formGroup]="bioSection">
+        <ng-template matStepLabel>שם המוצר</ng-template>
+        <mat-form-field>
+            <mat-label>שם המוצר </mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>חזור</button>
+          <button mat-button matStepperNext>המשך</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="bioSection">
+        <form [formGroup]="bioSection">
+          <ng-template matStepLabel>מחיר</ng-template>
+          <mat-form-field>
+            <mat-label>מחיר</mat-label>
+            <input matInput formControlName="price">
+        </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>חזור</button>
+            <button mat-button matStepperNext>המשך</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="bioSection">
+        <form [formGroup]="bioSection">
+          <ng-template matStepLabel>העלאת קובץ</ng-template>
+          <input type="file" (change)="onFileChanged($event)" formControlName="src"/>
+          <div>
+            <button mat-button matStepperPrevious>חזור</button>
+            <button mat-button matStepperNext>המשך</button>
+          </div>
+        </form>
+      </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>סיום</ng-template>
+      <div>
+        <button mat-raised-button color="primary" matStepperPrevious>חזור</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!bioSection.valid" (click)="OrderConfirmation(); stepper.reset()">העלאת מוצר</button>      
+    </div>
+    </mat-step>
+  </mat-stepper>

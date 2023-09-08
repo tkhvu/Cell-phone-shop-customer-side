@@ -36,7 +36,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { AddingProductDialogComponent } from './adding-product-dialog/adding-product-dialog.component';
+import { AddingCategoryComponent } from './adding-category/adding-category.component';
+import { CategorieDeleteComponent } from './categorie-delete/categorie-delete.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,9 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
     CartDialogComponent,
     OrderConfirmationComponent,
     DirectorComponent,
+    AddingProductDialogComponent,
+    AddingCategoryComponent,
+    CategorieDeleteComponent,
 
   ],
   imports: [
@@ -80,7 +85,8 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
     MatDatepickerModule,
     MatExpansionModule,
     MatButtonToggleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    
  
 
 

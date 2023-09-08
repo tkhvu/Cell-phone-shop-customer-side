@@ -160,6 +160,17 @@ export class ApiService {
     });;
   }
 
+  public async uploadProduct(formData: {}){
+
+
+    this.http.post('https://server-side-58yz.onrender.com/upload', formData).subscribe();
+  }
+
+  public async addCategory(category: {}){
+
+
+    this.http.post('https://server-side-58yz.onrender.com/addCategory', category).subscribe();
+  }
 }
 
 

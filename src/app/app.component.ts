@@ -1,11 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from './serviccs/api.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { events } from './interfaces';
 
-
+export const UserColumns = [
+  {
+    key: 'name',
+    type: 'text',
+    label: 'name',
+  },
+  {
+    key: 'price',
+    type: 'text',
+    label: 'price',
+  },
+  // {
+  //   key: 'src',
+  //   type: 'text',
+  //   label: 'src',
+  // },
+  {
+    key: 'isEdit',
+    type: 'isEdit',
+    label: '',
+  },
+ 
+];
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -28,6 +52,10 @@ export class AppComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
+  displayedColumns: string[] = UserColumns.map((col) => col.key);
+  columnsSchema: any = UserColumns;
+  dataSource = new MatTableDataSource<events>();
+
 
   cartItems: { cart: string }[] = [];
   cart = false;
@@ -40,6 +68,11 @@ export class AppComponent implements OnInit {
   // }
 
   ngOnInit() {
+
+    // this.userService.getUsers().subscribe((res: any) => {
+    //   this.dataSource.data = res;
+    // });
+
     const id = localStorage.getItem('_id');
     if (id) {
       this.localStorage(id);
@@ -77,7 +110,8 @@ export class AppComponent implements OnInit {
       this.api.Connected = true;
       this.api.getmobile().subscribe((data) => {
         this.api.listmobileMock = data;
-        this.api.sourceData = data;
+        this.api.sourceData = [...data];
+        this.dataSource.data = [...data];
         if (this.api.listmobileMock.length > 0) {
           const mobileIds: string[] = this.api.user[0].favorites;
           this.api.listmobileMock = this.api.listmobileMock.map((mobile) => ({
@@ -111,5 +145,32 @@ export class AppComponent implements OnInit {
 
     Definitions(){
       this.router.navigate(['/Director']);
+      }
+
+      element1(col: any){
+
+        console.log(col)
+      }
+      
+      addRow() {
+        const newRow: events = {
+          id: 0,
+          name: '',
+          price: 0,
+          category: '',
+          isEdit: true,
+        };
+        this.dataSource.data = [newRow, ...this.dataSource.data];
+      }
+      editRow(row:events ) {
+        console.log(row)
+
+      }
+
+      removeRow(_id: number) {
+      
+        this.dataSource.data = this.dataSource.data.filter(
+          (u: events) => u._id !== _id,
+        )
       }
 }

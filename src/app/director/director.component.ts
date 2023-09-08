@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
-import { HttpClient } from '@angular/common/http';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatTableDataSource } from '@angular/material/table';
+import { events } from '../interfaces';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AddingProductDialogComponent } from '../adding-product-dialog/adding-product-dialog.component';
+import { AddingCategoryComponent } from '../adding-category/adding-category.component';
+import { CategorieDeleteComponent } from '../categorie-delete/categorie-delete.component';
+
+
 
 @Component({
   selector: 'app-director',
@@ -11,34 +17,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class DirectorComponent implements OnInit{
 
-  ngOnInit() {
-    this.api.getCategory().subscribe((data) => {
-      this.categories = data
-    })
-  }
-  ManagerChange = 0;
-  categories: any = [];
-  isEditable = false;
-
-
-  step = 0;
-
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
-  }
-
-  bioSection: FormGroup;
-  bioSection1: FormGroup;
-
-  constructor(private fb: FormBuilder, public api: ApiService, private http: HttpClient,private _snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder, public api: ApiService, public dialog: MatDialog) {
     this.bioSection = this.fb.group({
       price: ['', [Validators.pattern('^[0-9]+$'), Validators.required]],
       name: ['', Validators.required],
@@ -51,15 +30,69 @@ export class DirectorComponent implements OnInit{
     });
   }
 
-  OrderConfirmation() {
-    this.uploadProduct()
-    const action = "סגור";
-    const message = "העלאה הסתיימה בהצלחה"
-    this.openSnackBar(action, message)
+  displayedColumns: string[] = [ 'name', 'price', 'Image', 'actions' ];
+  dataSource = new MatTableDataSource<events>();
+  categories: any = [];
+  bioSection: FormGroup;
+  bioSection1: FormGroup;
+  selectedFile: File | undefined;
+
+
+  ngOnInit() {
+    this.api.getCategory().subscribe((data) => {
+      this.categories = data
+    });
+
+    this.api.getmobile().subscribe((data) => {
+      this.dataSource.data = data
+    });
+  }
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.restoreFocus = false;
+    dialogConfig.position = {
+      top: '65px',
+    };
+
+    const dialogRef = this.dialog.open(AddingProductDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe();
+  }
+
+  openDialog1() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.restoreFocus = false;
+    dialogConfig.position = {
+      top: '65px',
+    };
+
+    const dialogRef = this.dialog.open(AddingCategoryComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe();
+  }
+
+  openDialog2() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.restoreFocus = false;
+    dialogConfig.position = {
+      top: '65px',
+    };
+
+    const dialogRef = this.dialog.open(CategorieDeleteComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe();
   }
 
 
-  selectedFile: File | undefined;
+  OrderConfirmation() {
+    this.uploadProduct()
+  }
+
+
 
   uploadProduct() {
     if (this.selectedFile) {
@@ -70,7 +103,7 @@ export class DirectorComponent implements OnInit{
 
       formData.append('image', this.selectedFile);
 
-      this.http.post('https://server-side-58yz.onrender.com/upload', formData).subscribe();
+      this.api.uploadProduct( formData);
     }
   }
 
@@ -79,16 +112,16 @@ export class DirectorComponent implements OnInit{
   }
 
   addCategory(){
-    console.log(this.bioSection1.value)
-    this.http.post('https://server-side-58yz.onrender.com/addCategory', this.bioSection1.value).subscribe(response => {
-      console.log(response);
-    });
+    this.api.addCategory(this.bioSection1.value)
   }
+ 
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(action, message, {
-      duration: 10000, // משך הצגת ההודעה במילי-שניות
-      panelClass: ['custom-class'], // עיצוב נוסף
-    });
+  removeRow(_id: number) {
+  
+    this.dataSource.data = this.dataSource.data.filter(
+      (u: events) => u._id !== _id,
+    )
+    console.log(this.dataSource)
+
   }
 }

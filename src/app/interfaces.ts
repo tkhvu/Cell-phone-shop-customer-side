@@ -1,4 +1,5 @@
 export interface events {
+  isEdit: boolean;
   id?: number;
   price?: number;
   name?: string;
@@ -21,13 +22,6 @@ export interface USER {
 }
 
 
-
-// export interface USER1 {
-//   id: number,
-//   name: string,
-//   power: string,
-//   alterEgo?: string
-// }
 
 export interface CartItem {
   _id: string;
@@ -53,3 +47,4 @@ export interface combinedData {
   orders: CartItem[],
   DeliveryDetails: any
 }
+
