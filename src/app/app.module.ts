@@ -26,19 +26,23 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
-import {NgIf} from '@angular/common';
-import {TextFieldModule} from '@angular/cdk/text-field';
+import { NgIf } from '@angular/common';
+import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatSelectModule } from '@angular/material/select';
 import { DirectorComponent } from './director/director.component';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddingProductDialogComponent } from './adding-product-dialog/adding-product-dialog.component';
 import { AddingCategoryComponent } from './adding-category/adding-category.component';
 import { CategorieDeleteComponent } from './categorie-delete/categorie-delete.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DisplayusersComponent } from './displayusers/displayusers.component';
+import { ProductsComponent } from './products/products.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,9 @@ import { CategorieDeleteComponent } from './categorie-delete/categorie-delete.co
     AddingProductDialogComponent,
     AddingCategoryComponent,
     CategorieDeleteComponent,
+    DisplayusersComponent,
+    ProductsComponent,
+    CategoriesComponent,
 
   ],
   imports: [
@@ -86,8 +93,9 @@ import { CategorieDeleteComponent } from './categorie-delete/categorie-delete.co
     MatExpansionModule,
     MatButtonToggleModule,
     MatSnackBarModule,
-    
- 
+    MatTabsModule
+
+
 
 
 

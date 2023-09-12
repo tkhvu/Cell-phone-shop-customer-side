@@ -1,18 +1,22 @@
-<mat-toolbar >
-  <button mat-button (click)="showall()"> הצג הכול</button>
-  <button mat-button *ngFor="let mobile of this.api.Category" (click)="filter(mobile)"> {{mobile.category}}</button>
+<mat-toolbar class="toolbar">
+  <button mat-button color="primary" (click)="showall()"> הצג הכול</button>
+ 
+  <button mat-button color="primary" *ngFor="let mobile of this.api.Category" (click)="filter(mobile)"> {{mobile.category}}</button>
+  <button mat-button color="primary" (click)="Favorites()"> מועדפים </button>
+
 </mat-toolbar>
 
 
 
-<div class="scroll-container" (scroll)="onScroll()">
+<div class="scroll-container" (scroll)="onScroll()"  *ngIf="!displayFavorites">
+  
   <div class="grid-container">
     <div *ngFor="let mobile of this.api.listmobileMock">
       <mat-card>
-
         <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="232" height="202">
-        <p> {{"₪" + mobile.price }} {{mobile.name}}
-        </p>
+        <p>דגם: {{mobile.name}}</p>
+        <p> מחיר: {{"₪" + mobile.price }} </p>
+
         <mat-card-actions>
           <button mat-icon-button *ngIf="mobile.love === true"
             (click)="mobile.love =false; deleteFavorites(mobile._id)">
@@ -21,12 +25,10 @@
 
           <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addFavorites(mobile._id)">
             <mat-icon>favorite_border </mat-icon>
-
           </button>
-          <button mat-raised-button color="warn" (click)="addCart(mobile._id)">
+          <button class="my-custom-button" (click)="addCart(mobile._id)">
             הוספה לסל
           </button>
-
 
         </mat-card-actions>
       </mat-card>
@@ -35,10 +37,41 @@
 </div>
 
 
+<div *ngIf="displayFavorites">
+  <div class="centered-text">
+    <h1>רשימת מועדפים</h1>
+  </div>
+  
+<table mat-table [dataSource]="this.dataSource.data" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button (click)="removeRow(element._id)"> הסרה ממועדפים</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Image">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element">
+      <img [src]="element.src" alt="Lamp" width="50" height="50">
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> שם המוצר </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> מחיר </th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+  </ng-container>
 
 
-<!-- <div>
-  <input class="count-input" type="text" [(ngModel)]="filter">
-  <button (click)="filter(filter1)"> filter</button>
-</div> -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>
+
 

@@ -1,0 +1,25 @@
+<table mat-table [dataSource]=" usersData.data" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef> שם משפחה</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.lastname}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef>שם פרטי</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.firstname}}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsusers"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsusers;"></tr>
+  </table>

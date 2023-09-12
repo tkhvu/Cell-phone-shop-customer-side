@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
+import { events } from '../interfaces';
 
 
 @Component({
@@ -12,7 +13,11 @@ export class ListmobileComponent {
 
   constructor(public api: ApiService) { }
 
-  
+  dataSource: any = [];
+
+  displayedColumns: string[] = [ 'name', 'price',  'Image', 'actions'  ];
+
+  displayFavorites: boolean = false;
 
   deleteFavorites(_id: string) {
     const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
@@ -42,7 +47,19 @@ export class ListmobileComponent {
     this.api.listmobileMock = filteredProducts;
   }
   showall(){
-
     this.api.listmobileMock = this.api.sourceData;
+  }
+
+  Favorites() {
+    this.dataSource.data = this.api.listmobileMock.filter((mobile) => mobile.love === true);
+      console.log(this.dataSource);
+      this.displayFavorites = !this.displayFavorites;
+    }
+
+  removeRow(_id: string) {
+    this.deleteFavorites(_id)
+    this.dataSource.data = this.dataSource.data.filter(
+      (u: events) => u._id !== _id,
+    )
   }
 }

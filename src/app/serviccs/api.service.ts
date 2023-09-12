@@ -38,6 +38,18 @@ export class ApiService {
 
   }
 
+  public deleteCategory(id: string) {
+    const url: string = "https://server-side-58yz.onrender.com/deleteCategory" + id;
+    return this.http.get<string>(url).subscribe();
+
+  }
+
+  public deleteProduct(id: string) {
+    const url: string = "https://server-side-58yz.onrender.com/deleteProduct" + id;
+    return this.http.get<string>(url).subscribe();
+
+  }
+
   public localStorage(id: string): Observable<USER> {
 
     const url: string = "https://server-side-58yz.onrender.com/localStorage" + id;
@@ -116,7 +128,7 @@ export class ApiService {
   public getUsers() {
 
 
-    const url: string = "https://server-side-58yz.onrender.com/getUsers";
+    const url: string = "http://localhost:3000/getUsers";
     return this.http.get<USER[]>(url)
 
   }
@@ -171,6 +183,7 @@ export class ApiService {
 
     this.http.post('https://server-side-58yz.onrender.com/addCategory', category).subscribe();
   }
+  
 }
 
 

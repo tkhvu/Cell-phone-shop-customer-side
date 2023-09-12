@@ -60,18 +60,7 @@ export class AppComponent implements OnInit {
   cartItems: { cart: string }[] = [];
   cart = false;
 
-  // ngOnInit() {
-  //   const _id = localStorage.getItem('_id');
-  //   if (_id === null) {
-  //     this.apiService.LogOut();
-  //   }
-  // }
-
   ngOnInit() {
-
-    // this.userService.getUsers().subscribe((res: any) => {
-    //   this.dataSource.data = res;
-    // });
 
     const id = localStorage.getItem('_id');
     if (id) {
@@ -90,7 +79,8 @@ export class AppComponent implements OnInit {
           this.api.listmobileMock = this.api.listmobileMock.map((mobile) => ({
             ...mobile,
             love: false
-          }));
+          }
+          ));
         }
       }
     });
@@ -173,4 +163,8 @@ export class AppComponent implements OnInit {
           (u: events) => u._id !== _id,
         )
       }
+
+      // f(){    console.log(this.api.listmobileMock)
+      // }
+
 }

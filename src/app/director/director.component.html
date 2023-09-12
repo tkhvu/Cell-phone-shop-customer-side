@@ -1,53 +1,79 @@
 
 
-   <!-- <form [formGroup]="bioSection1" >
-    <mat-form-field>
-        <mat-label>שם קטגוריה </mat-label>
-      <input matInput formControlName="category" required>
-    </mat-form-field>
-</form>
-<button mat-raised-button type="submit" [disabled]="!bioSection1.valid"  (click)="addCategory()">
-   הוספת קטגוריה</button>  -->
+<mat-tab-group>
+  <mat-tab label="משתמשים"><app-displayusers></app-displayusers></mat-tab>
+  <mat-tab label="קטגוריות">  <app-categories></app-categories> </mat-tab>
+  <mat-tab label="מוצרים">  <app-products></app-products> </mat-tab>
+</mat-tab-group>
+
+<!-- 
+<mat-toolbar class="toolbar">
+  <button mat-raised-button color="primary" (click)="AddingProductDialog()">הוספת מוצר</button>
+  <button mat-raised-button color="primary" (click)="AddingCategoryDialog()"> הוספת קטגוריה</button>
+  <button mat-raised-button color="primary" (click)="CategorieDeleteDialog()"> מחיקת קטגוריה</button>
+  <button mat-raised-button color="primary" (click)="displayuser = !displayuser"> רשימת נרשמים לאתר</button>
+
+</mat-toolbar>
 
 
- <!-- <mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-</mat-form-field> -->
+<div *ngIf="!displayuser">
 
- <mat-toolbar >
-  <button mat-raised-button color="primary" (click)="openDialog()">הוספת מוצר</button> 
-  <button mat-raised-button color="primary" (click)="openDialog1()"> הוספת קטגוריה</button>
-    <button mat-raised-button color="primary" (click)="openDialog2()"> מחיקת קטגוריה</button>
-  </mat-toolbar>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button (click)="removeRow(element._id)">מחיקת מוצר</button>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-button  (click)="removeRow(element._id)">Delete</button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="Image">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let element">
+        <img [src]="element.src" alt="Lamp" width="50" height="50">
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="Image">
-    <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let element">
-      <img [src]="element.src" alt="Lamp" width="50" height="50">
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> שם המוצר </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> price </th>
-    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-  </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> מחיר </th>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
 
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<div *ngIf="displayuser">
+  <table mat-table [dataSource]=" usersData.data" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef> שם משפחה</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.lastname}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef>שם פרטי</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.firstname}}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsusers"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsusers;"></tr>
+  </table>
+</div> -->

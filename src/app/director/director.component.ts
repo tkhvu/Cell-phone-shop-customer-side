@@ -30,12 +30,16 @@ export class DirectorComponent implements OnInit{
     });
   }
 
-  displayedColumns: string[] = [ 'name', 'price', 'Image', 'actions' ];
+  displayedColumns: string[] = [ 'name', 'price',  'Image', 'actions'  ];
+  displayedColumnsusers: string[] = [ 'email',  'lastname', 'firstname' ];
+
   dataSource = new MatTableDataSource<events>();
+  usersData: any = [];
   categories: any = [];
   bioSection: FormGroup;
   bioSection1: FormGroup;
   selectedFile: File | undefined;
+  displayuser: boolean = false
 
 
   ngOnInit() {
@@ -48,7 +52,7 @@ export class DirectorComponent implements OnInit{
     });
   }
 
-  openDialog() {
+  AddingProductDialog() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.restoreFocus = false;
@@ -61,7 +65,7 @@ export class DirectorComponent implements OnInit{
     dialogRef.afterClosed().subscribe();
   }
 
-  openDialog1() {
+  AddingCategoryDialog() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.restoreFocus = false;
@@ -74,7 +78,7 @@ export class DirectorComponent implements OnInit{
     dialogRef.afterClosed().subscribe();
   }
 
-  openDialog2() {
+  CategorieDeleteDialog() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.restoreFocus = false;
@@ -116,12 +120,19 @@ export class DirectorComponent implements OnInit{
   }
  
 
-  removeRow(_id: number) {
-  
+  removeRow(_id: string) {
+    this.deleteProduct(_id)
     this.dataSource.data = this.dataSource.data.filter(
       (u: events) => u._id !== _id,
     )
-    console.log(this.dataSource)
+  }
 
+  deleteProduct(_id: string){
+    const id = `/?_id=${_id}`;
+    this.api.deleteProduct(id)
+  }
+
+  getUsers(){
+   ;
   }
 }
