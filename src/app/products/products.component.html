@@ -1,3 +1,7 @@
+<button mat-raised-button color="primary" (click)="AddingProductDialog()">הוספת מוצר</button>
+
+
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="actions">
@@ -8,7 +12,7 @@
                 <button mat-button (click)="removeRow(element._id)"> <span class="material-icons">delete</span></button>
             </div>
             <div *ngIf="element.isEdit">
-                <button mat-button (click)="element.isEdit = !element.isEdit; CategoryUpdate(element)">בוצע</button>
+                <button mat-button (click)="element.isEdit = !element.isEdit; ProductUpdate(element)">בוצע</button>
             </div>
         </td>
     </ng-container>

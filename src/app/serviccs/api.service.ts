@@ -25,7 +25,7 @@ export class ApiService {
   listmobileMock: events[] = [];
   Category: any = [];
   sourceData: events[] = [];
-
+  // https://server-side-58yz.onrender.com
   public getmobile() {
     const url: string = "https://server-side-58yz.onrender.com/getMobile";
     return this.http.get<events[]>(url)
@@ -74,7 +74,6 @@ export class ApiService {
 
 
   public addCart(addid: string) {
-
     const url: string = "https://server-side-58yz.onrender.com/addCart" + addid;
     this.cartLength++;
     return this.http.get<events[]>(url)
@@ -128,7 +127,7 @@ export class ApiService {
   public getUsers() {
 
 
-    const url: string = "http://localhost:3000/getUsers";
+    const url: string = "https://server-side-58yz.onrender.com/getUsers";
     return this.http.get<USER[]>(url)
 
   }
@@ -165,7 +164,7 @@ export class ApiService {
   }
 
 
-  public async addUser1(combinedData: combinedData) {
+  public async Emailorderconfirmation(combinedData: combinedData) {
     console.log(combinedData)
     const url: string = "https://server-side-58yz.onrender.com/Emailorderconfirmation";
     return this.http.post<combinedData>(url, combinedData).subscribe((data) => {
@@ -182,6 +181,28 @@ export class ApiService {
 
 
     this.http.post('https://server-side-58yz.onrender.com/addCategory', category).subscribe();
+  }
+
+  categoryUpdate(addid: string) {
+
+    const url: string = "https://server-side-58yz.onrender.com/categoryUpdate" + addid;
+        console.log(url)
+    return this.http.get<USER[]>(url)
+      .subscribe()
+
+  }
+
+  ProductUpdate(addid: string) {
+
+    const url: string = "https://server-side-58yz.onrender.com/ProductUpdate" + addid;
+    return this.http.get<USER[]>(url).subscribe()
+  }
+
+  ademptyCart(addid: string) {
+
+    const url: string = "https://server-side-58yz.onrender.com/emptyCart" + addid;
+    console.log(url)
+    return this.http.get<USER[]>(url).subscribe()
   }
   
 }

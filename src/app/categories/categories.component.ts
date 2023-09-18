@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { Category } from '../interfaces';
 
 @Component({
   selector: 'app-categories',
@@ -30,10 +31,21 @@ export class CategoriesComponent {
     this.dataSource.data = this.dataSource.data.filter(
       (u: any) => u._id !== _id,
     )}
-    condition = "A"
 
-    CategoryUpdate(element: {}){
+    CategoryUpdate(element: Category){
 
-      console.log(element)
+      let id = `/?_id=${element._id}&category=${element.category}`
+
+      this.api.categoryUpdate(id)
+      console.log(id)
     }
+
+    addRow() {
+      const newRow: Category = {
+        category: '',
+        isEdit: true,
+      }
+      this.dataSource.data = [newRow, ...this.dataSource.data]
+    }
+    
 }

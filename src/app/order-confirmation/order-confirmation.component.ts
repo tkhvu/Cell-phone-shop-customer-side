@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 
@@ -14,7 +16,7 @@ export class OrderConfirmationComponent {
   lastNameAutofilled: boolean | undefined;
   
   bioSection: FormGroup;
-  constructor(private fb: FormBuilder, public api: ApiService) {
+  constructor(private fb: FormBuilder, public api: ApiService, private _snackBar: MatSnackBar, private router: Router ) {
     this.bioSection = this.fb.group({
       // firstname: ['', Validators.required],
       // lastname: ['', Validators.required],
@@ -36,9 +38,9 @@ export class OrderConfirmationComponent {
       orders: this.api.cartItems,
       DeliveryDetails: this.bioSection.value
   };
-  console.log(this.api.combinedData);
+  this.openSnackBar()
 
-    this.api.addUser1( this.api.combinedData)
+    this.api.Emailorderconfirmation( this.api.combinedData)
 
   }
   displayedColumns: string[] = ['name', 'price', "src"];
@@ -46,5 +48,13 @@ export class OrderConfirmationComponent {
 
   getTotalCost() {
     return this.api.cartItems.reduce((total, item) => total + (item.price! * item.count), 0);
+  }
+
+  openSnackBar() {
+    this._snackBar.open("ההזמנה הסתימה בהצלחה");
+    console.log(this.api.user[0].cart[0])
+    const _id = `/?_id=${this.api.user[0].cart[0]}`;
+    this.api.ademptyCart(_id)
+    this.router.navigate(['/Listmobile']);
   }
 }

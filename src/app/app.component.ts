@@ -18,11 +18,7 @@ export const UserColumns = [
     type: 'text',
     label: 'price',
   },
-  // {
-  //   key: 'src',
-  //   type: 'text',
-  //   label: 'src',
-  // },
+
   {
     key: 'isEdit',
     type: 'isEdit',

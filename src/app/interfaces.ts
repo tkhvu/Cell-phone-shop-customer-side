@@ -1,12 +1,12 @@
 export interface events {
-  isEdit: boolean;
+  isEdit?: boolean;
   id?: number;
   price?: number;
   name?: string;
   src?: string;
   love?: any;
   _id?: any;
-  category: any;
+  category?: any;
 }
 
 export interface USER {
@@ -48,3 +48,8 @@ export interface combinedData {
   DeliveryDetails: any
 }
 
+export interface Category {
+  _id?: string;
+  category: string,
+  isEdit?: boolean
+}

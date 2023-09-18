@@ -32,8 +32,10 @@ export class CartDialogComponent {
             }
             return item;
           });
+          console.log(this.apiService.cart)
 
           this.apiService.cartItems = combinedArray
+
         }
         );
     }
@@ -47,6 +49,8 @@ export class CartDialogComponent {
         totalCount += parseInt(item.count, 10);
       }
       this.apiService.cartLength = totalCount;
+      this.apiService.cart = data;
+
     }
     );
   }
@@ -73,16 +77,14 @@ export class CartDialogComponent {
     }
     let id = `/?_id=${this.apiService.user[0].cart.toString()}&id=${item._id}&count=${item.count}`
     this.apiService.updateAddCart(id);
+    console.log(this.apiService.cart)
+
   }
 
 
-  public navigateToorderconfirmation() {
+ navigateToorderconfirmation() {
     this.router.navigate(['/orderconfirmation']);
   }
 
-  quantities: number[] = [1, 2, 3, 4, 5];
-
-  
- 
 }
 

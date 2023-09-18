@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { events } from '../interfaces';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AddingProductDialogComponent } from '../adding-product-dialog/adding-product-dialog.component';
 
 @Component({
   selector: 'app-products',
@@ -9,8 +11,9 @@ import { events } from '../interfaces';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, public dialog: MatDialog) {}
   displayedColumns: string[] = [ 'name', 'price',  'Image', 'actions' ];
+  dataSource = new MatTableDataSource<events>();
 
   ngOnInit() {
     this.api.getmobile().subscribe((data) => {
@@ -23,7 +26,29 @@ export class ProductsComponent {
     });
   }
 
-  dataSource = new MatTableDataSource<events>();
+
+  AddingProductDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.restoreFocus = false;
+    dialogConfig.position = {
+      top: '65px',
+    };
+
+    const dialogRef = this.dialog.open(AddingProductDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe();
+  }
+
+  addRow() {
+    const newRow: events = {
+      name: '',
+      price: 0,
+      isEdit: true,
+    }
+    this.dataSource.data = [newRow, ...this.dataSource.data]
+  }
+
   removeRow(_id: string) {
     this.deleteProduct(_id)
     this.dataSource.data = this.dataSource.data.filter(
@@ -36,14 +61,13 @@ export class ProductsComponent {
     this.api.deleteProduct(id)
   }
 
-  CategoryUpdate(element: {}){
-
-    console.log(element)
+  ProductUpdate(element: events){
+    let id = `/?_id=${element._id}&name=${element.name}&price=${element.price}`
+    this.api.ProductUpdate(id)
   }
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
   selectedFile: File | undefined;
-
 }
