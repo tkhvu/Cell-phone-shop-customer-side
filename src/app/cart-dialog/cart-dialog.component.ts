@@ -32,10 +32,7 @@ export class CartDialogComponent {
             }
             return item;
           });
-          console.log(this.apiService.cart)
-
           this.apiService.cartItems = combinedArray
-
         }
         );
     }

@@ -27,16 +27,7 @@
   
 
 
-  .my-custom-button {
-    width: 1000%;
-    background-color: orange;
-    color: white; 
-    border: none; 
-    padding: 10px; 
-    cursor: pointer; 
-    border-radius: 5px;
-  }
-  
+
 
   .my-custom-button:hover {
     background-color: red; 

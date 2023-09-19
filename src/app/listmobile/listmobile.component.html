@@ -26,7 +26,7 @@
           <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addFavorites(mobile._id)">
             <mat-icon>favorite_border </mat-icon>
           </button>
-          <button class="my-custom-button" (click)="addCart(mobile._id)">
+          <button mat-raised-button color="warn" (click)="addCart(mobile._id)">
             הוספה לסל
           </button>
 

@@ -45,7 +45,7 @@ export interface DeliveryDetails {
 export interface combinedData {
   user: USER[] ;
   orders: CartItem[],
-  DeliveryDetails: any
+  DeliveryDetails: any,
 }
 
 export interface Category {

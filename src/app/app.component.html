@@ -10,11 +10,12 @@
     <button mat-button (click)="api.LogOut()">התנתקות</button> שלום
     {{ api.user[0].firstname }} {{ api.user[0].lastname }}
   </span>
+  
   <span class="example-spacer">
-
-    <button mat-button color="warn"  (click)="Definitions()"><span class="material-icons">settings</span>
-    </button>
-
+    <div *ngIf="api.Connected">
+      <button mat-button color="warn" (click)="Definitions()" *ngIf="api.user[0]._id == '65097057894b9106ef2d9ed0'"><span class="material-icons">settings</span>
+      </button>
+  </div>
   </span>
   <span class="pw"> <img class="p"
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA4gCG7Bjb_0E0X3z1qKXi6hcDsmeYSr9EjA&usqp=CAU"
@@ -59,5 +60,3 @@
 <!-- 
 <button mat-button color="warn"  (click)="f()">ggggg
 </button> -->
-
-

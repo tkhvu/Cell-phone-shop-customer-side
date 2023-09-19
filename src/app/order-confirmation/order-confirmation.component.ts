@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 
@@ -14,14 +13,14 @@ import { Router } from '@angular/router';
 export class OrderConfirmationComponent {
   firstNameAutofilled: boolean | undefined;
   lastNameAutofilled: boolean | undefined;
-  
+
   bioSection: FormGroup;
-  constructor(private fb: FormBuilder, public api: ApiService, private _snackBar: MatSnackBar, private router: Router ) {
+  constructor(private fb: FormBuilder, public api: ApiService,  private router: Router) {
     this.bioSection = this.fb.group({
       // firstname: ['', Validators.required],
       // lastname: ['', Validators.required],
       // email: ['', [Validators.required, Validators.email]],
-      phone: ['',[Validators.pattern('^[0-9]+$'), Validators.required]],
+      phone: ['', [Validators.pattern('^[0-9]+$'), Validators.required]],
       City: ['', Validators.required],
       Street: ['', Validators.required],
       Housenumber: ['', Validators.required],
@@ -30,18 +29,16 @@ export class OrderConfirmationComponent {
   }
 
 
-  OrderConfirmation(){
-
-
+  OrderConfirmation() {
     this.api.combinedData = {
       user: this.api.user,
       orders: this.api.cartItems,
       DeliveryDetails: this.bioSection.value
-  };
-  this.openSnackBar()
-
-    this.api.Emailorderconfirmation( this.api.combinedData)
-
+    };
+    this.api.Emailorderconfirmation(this.api.combinedData)
+    if(this.api.email = "Email sent successfully"){
+      this.openSnackBar()
+    }
   }
   displayedColumns: string[] = ['name', 'price', "src"];
 
@@ -51,7 +48,7 @@ export class OrderConfirmationComponent {
   }
 
   openSnackBar() {
-    this._snackBar.open("ההזמנה הסתימה בהצלחה");
+    window.alert("הזמנה הסתימה בהצלחה");
     console.log(this.api.user[0].cart[0])
     const _id = `/?_id=${this.api.user[0].cart[0]}`;
     this.api.ademptyCart(_id)

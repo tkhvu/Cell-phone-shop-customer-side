@@ -19,7 +19,7 @@ export class CreateaccountComponent {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.pattern("^[A-Za-z][A-Za-z0-9_]{7,29}$"), Validators.required]],
+      username: ['', [Validators.pattern("^[0-9a-zA-Z]{5,29}$"), Validators.required]],
       password: ['', [Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}'), Validators.required]]
     });
   }

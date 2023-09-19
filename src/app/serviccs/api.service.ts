@@ -25,47 +25,49 @@ export class ApiService {
   listmobileMock: events[] = [];
   Category: any = [];
   sourceData: events[] = [];
-  // https://server-side-58yz.onrender.com
+  email: any
+  // http://localhost:3000
+  // http://localhost:3000
+
   public getmobile() {
-    const url: string = "https://server-side-58yz.onrender.com/getMobile";
+    const url: string = "http://localhost:3000/getMobile";
     return this.http.get<events[]>(url)
 
   }
 
   public getCategory() {
-    const url: string = "https://server-side-58yz.onrender.com/getCategory";
+    const url: string = "http://localhost:3000/getCategory";
     return this.http.get<any[]>(url)
 
   }
 
   public deleteCategory(id: string) {
-    const url: string = "https://server-side-58yz.onrender.com/deleteCategory" + id;
+    const url: string = "http://localhost:3000/deleteCategory" + id;
     return this.http.get<string>(url).subscribe();
 
   }
 
   public deleteProduct(id: string) {
-    const url: string = "https://server-side-58yz.onrender.com/deleteProduct" + id;
+    const url: string = "http://localhost:3000/deleteProduct" + id;
     return this.http.get<string>(url).subscribe();
 
   }
 
   public localStorage(id: string): Observable<USER> {
 
-    const url: string = "https://server-side-58yz.onrender.com/localStorage" + id;
+    const url: string = "http://localhost:3000/localStorage" + id;
     return this.http.get<USER>(url)
   }
 
   public MobileDetails(id: string) {
 
-    const url: string = "https://server-side-58yz.onrender.com/MobileDetails" + id;
+    const url: string = "http://localhost:3000/MobileDetails" + id;
     return this.http.get<USER>(url)
   }
 
 
   public getCart(id: string) {
-
-    const url: string = "https://server-side-58yz.onrender.com/getCart" + id;
+    const url: string = "http://localhost:3000/getCart" + id;
     return this.http.get<USER>(url)
   }
 
@@ -74,7 +76,7 @@ export class ApiService {
 
 
   public addCart(addid: string) {
-    const url: string = "https://server-side-58yz.onrender.com/addCart" + addid;
+    const url: string = "http://localhost:3000/addCart" + addid;
     this.cartLength++;
     return this.http.get<events[]>(url)
       .subscribe();
@@ -82,7 +84,7 @@ export class ApiService {
 
   public async addUser(user: USER[]) {
     this.isLoading = true;
-    const url: string = "https://server-side-58yz.onrender.com/CreatingUser";
+    const url: string = "http://localhost:3000/CreatingUser";
     return this.http.post<USER[]>(url, user).subscribe((data) => {
       this.isLoading = false;
       const dataString = JSON.stringify(data);
@@ -97,7 +99,7 @@ export class ApiService {
   public userMatch(query: string) {
 
 
-    const url: string = "https://server-side-58yz.onrender.com/userMatch" + query;
+    const url: string = "http://localhost:3000/userMatch" + query;
     return this.http.get<USER>(url)
       .subscribe((data: any) => {
         this.isLoading = false;
@@ -109,17 +111,26 @@ export class ApiService {
         this.loginerror = false;
         this.user = data;
         localStorage.setItem('_id', this.user[0]._id);
-        this.cartLength = this.user[0].cart.length;
+        const id = `/?_id=${this.user[0].cart[0]}`
+
+        this.getCart(id).subscribe((data: any) => {
+          let totalCount = 0;
+          for (const item of data.cart) {
+            totalCount += parseInt(item.count, 10);
+          }
+          this.cartLength = totalCount;
+          this.cart = data;
+        }
+        );
         this.navigateToshop()
         this.Connected = true;
       })
-
   }
 
   addFavorites(addid: string) {
 
 
-    const url: string = " https://server-side-58yz.onrender.com/addFavorites" + addid;
+    const url: string = " http://localhost:3000/addFavorites" + addid;
     this.http.get(url)
       .subscribe()
   }
@@ -127,7 +138,7 @@ export class ApiService {
   public getUsers() {
 
 
-    const url: string = "https://server-side-58yz.onrender.com/getUsers";
+    const url: string = "http://localhost:3000/getUsers";
     return this.http.get<USER[]>(url)
 
   }
@@ -135,7 +146,7 @@ export class ApiService {
   public deleteFavorites(addid: string) {
 
 
-    const url: string = "https://server-side-58yz.onrender.com/deleteFavorites" + addid;
+    const url: string = "http://localhost:3000/deleteFavorites" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
   }
@@ -157,7 +168,7 @@ export class ApiService {
 
   updateAddCart(addid: string) {
 
-    const url: string = "https://server-side-58yz.onrender.com/cartUpdate" + addid;
+    const url: string = "http://localhost:3000/cartUpdate" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
 
@@ -165,27 +176,28 @@ export class ApiService {
 
 
   public async Emailorderconfirmation(combinedData: combinedData) {
-    console.log(combinedData)
-    const url: string = "https://server-side-58yz.onrender.com/Emailorderconfirmation";
+    const url: string = "http://localhost:3000/Emailorderconfirmation";
     return this.http.post<combinedData>(url, combinedData).subscribe((data) => {
+      this.email = data
+      console.log(this.email)
     });;
   }
 
   public async uploadProduct(formData: {}){
 
 
-    this.http.post('https://server-side-58yz.onrender.com/upload', formData).subscribe();
+    this.http.post('http://localhost:3000/upload', formData).subscribe();
   }
 
   public async addCategory(category: {}){
 
 
-    this.http.post('https://server-side-58yz.onrender.com/addCategory', category).subscribe();
+    this.http.post('http://localhost:3000/addCategory', category).subscribe();
   }
 
   categoryUpdate(addid: string) {
 
-    const url: string = "https://server-side-58yz.onrender.com/categoryUpdate" + addid;
+    const url: string = "http://localhost:3000/categoryUpdate" + addid;
         console.log(url)
     return this.http.get<USER[]>(url)
       .subscribe()
@@ -194,13 +206,13 @@ export class ApiService {
 
   ProductUpdate(addid: string) {
 
-    const url: string = "https://server-side-58yz.onrender.com/ProductUpdate" + addid;
+    const url: string = "http://localhost:3000/ProductUpdate" + addid;
     return this.http.get<USER[]>(url).subscribe()
   }
 
   ademptyCart(addid: string) {
 
-    const url: string = "https://server-side-58yz.onrender.com/emptyCart" + addid;
+    const url: string = "http://localhost:3000/emptyCart" + addid;
     console.log(url)
     return this.http.get<USER[]>(url).subscribe()
   }
