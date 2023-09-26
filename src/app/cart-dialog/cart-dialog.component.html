@@ -30,7 +30,7 @@
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let index = index; let element">
-            <button mat-icon-button (click)="deleteItem(index, element._id)">
+            <button mat-icon-button (click)="deleteItem(index, element)">
               <mat-icon>delete</mat-icon>  
             </button>
           </td>
@@ -43,7 +43,7 @@
  
   <mat-dialog-actions>
     <button mat-button mat-dialog-close>סגור</button>
-    <button mat-button mat-dialog-close (click)="navigateToorderconfirmation()">אישור הזמנה</button>
+    <button mat-button (click)="navigateToorderconfirmation()" [disabled]="apiService.cartLength < 1" mat-dialog-close>ביצוע הזמנה</button>
   </mat-dialog-actions>
 
   

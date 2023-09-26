@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class CartDialogComponent {
 
   constructor(public apiService: ApiService, private router: Router) { }
-
+  cartLength = 8
 
 
   ngOnInit() {
@@ -52,13 +52,15 @@ export class CartDialogComponent {
     );
   }
 
-  deleteItem(index: number, _id: string) {
+  deleteItem(index: number, element: any) {
     let data = this.apiService.cartItems;
     if (index >= 0 && index < data.length) {
       data.splice(index, 1);
       this.apiService.cartItems = [...data];
-      let id = `/?_id=${this.apiService.user[0].cart.toString()}&id=${_id}`
+      let id = `/?_id=${this.apiService.user[0].cart.toString()}&id=${element._id}`
       this.apiService.updateAddCart(id);
+      this.apiService.cartLength -= element.count;
+      console.log(this.apiService.cartLength)
     }
   }
 
@@ -70,7 +72,6 @@ export class CartDialogComponent {
     } else {
       item.count++;
       this.apiService.cartLength++;
-
     }
     let id = `/?_id=${this.apiService.user[0].cart.toString()}&id=${item._id}&count=${item.count}`
     this.apiService.updateAddCart(id);

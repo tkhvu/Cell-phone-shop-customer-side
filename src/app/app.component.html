@@ -10,13 +10,26 @@
     <button mat-button (click)="api.LogOut()">התנתקות</button> שלום
     {{ api.user[0].firstname }} {{ api.user[0].lastname }}
   </span>
-  
+  <button mat-icon-button (click)="api.Favorites()">
+    <mat-icon>favorite_border </mat-icon>
+  </button>
   <span class="example-spacer">
-    <div *ngIf="api.Connected">
-      <button mat-button color="warn" (click)="Definitions()" *ngIf="api.user[0]._id == '65097057894b9106ef2d9ed0'"><span class="material-icons">settings</span>
+    <div *ngIf="api.user[0]._id == '65097057894b9106ef2d9ed0'">
+      <button mat-button color="warn" (click)="Definitions(); director = !director" *ngIf="!director">
+        <span class="material-icons">settings</span>
       </button>
-  </div>
+      <button mat-button color="warn" (click)="BackMain(); director = !director" *ngIf="director">
+        <span class="material-icons"> home</span>
+      </button>
+    </div>
+
+
   </span>
+
+
+
+
+
   <span class="pw"> <img class="p"
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA4gCG7Bjb_0E0X3z1qKXi6hcDsmeYSr9EjA&usqp=CAU"
       title="צלצולים" alt="Lamp" width="68" height="68">

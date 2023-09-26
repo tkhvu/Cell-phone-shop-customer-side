@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 
 
 
@@ -15,11 +17,8 @@ export class OrderConfirmationComponent {
   lastNameAutofilled: boolean | undefined;
 
   bioSection: FormGroup;
-  constructor(private fb: FormBuilder, public api: ApiService,  private router: Router) {
+  constructor(private fb: FormBuilder, public api: ApiService, public dialog: MatDialog, private router: Router) {
     this.bioSection = this.fb.group({
-      // firstname: ['', Validators.required],
-      // lastname: ['', Validators.required],
-      // email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.pattern('^[0-9]+$'), Validators.required]],
       City: ['', Validators.required],
       Street: ['', Validators.required],
@@ -35,10 +34,7 @@ export class OrderConfirmationComponent {
       orders: this.api.cartItems,
       DeliveryDetails: this.bioSection.value
     };
-    this.api.Emailorderconfirmation(this.api.combinedData)
-    if(this.api.email = "Email sent successfully"){
-      this.openSnackBar()
-    }
+    this.DeletionConfirmation()
   }
   displayedColumns: string[] = ['name', 'price', "src"];
 
@@ -47,11 +43,33 @@ export class OrderConfirmationComponent {
     return this.api.cartItems.reduce((total, item) => total + (item.price! * item.count), 0);
   }
 
-  openSnackBar() {
-    window.alert("הזמנה הסתימה בהצלחה");
-    console.log(this.api.user[0].cart[0])
-    const _id = `/?_id=${this.api.user[0].cart[0]}`;
-    this.api.ademptyCart(_id)
-    this.router.navigate(['/Listmobile']);
+
+  ActionConfirmationMessage() {
+    const data = "ההזמנה בוצעה";
+    const dialogRef = this.dialog.open(MessageDialogComponent, {
+      data: data,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      
+        this.router.navigate(['/Listmobile']);
+      
+    })
+  }
+
+  DeletionConfirmation() {
+    const data = "לבצע את ההזמנה";
+    const dialogRef = this.dialog.open(MessageDialogComponent, {
+      data: data,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.api.Emailorderconfirmation(this.api.combinedData)
+        if (this.api.email = "Email sent successfully") {
+          const _id = `/?_id=${this.api.user[0].cart[0]}`;
+          this.api.ademptyCart(_id);
+          this.ActionConfirmationMessage()
+        }
+      }
+    })
   }
 }

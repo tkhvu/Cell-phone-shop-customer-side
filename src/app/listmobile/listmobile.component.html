@@ -1,15 +1,16 @@
+<h2 class="filter-container">סינון לפי קטגוריה</h2>
 <mat-toolbar class="toolbar">
-  <button mat-button color="primary" (click)="showall()"> הצג הכול</button>
- 
-  <button mat-button color="primary" *ngFor="let mobile of this.api.Category" (click)="filter(mobile)"> {{mobile.category}}</button>
-  <button mat-button color="primary" (click)="Favorites()"> מועדפים </button>
-
+  
+  <button mat-button color="primary" *ngFor="let mobile of this.api.Category" 
+    (click)="filter(mobile); api.displayFavorites = false; activeButton = mobile.category"
+    [class.active-button]="activeButton === mobile.category">{{ mobile.category }}</button>
+    <button mat-raised-button color="primary" (click)="showall(); api.displayFavorites = false;activeButton = 'showAll' "
+    [class.active-button]="activeButton === 'showAll'"> הצג הכול</button>
 </mat-toolbar>
 
 
 
-<div class="scroll-container" (scroll)="onScroll()"  *ngIf="!displayFavorites">
-  
+<div class="scroll-container" (scroll)="onScroll()"  *ngIf="!api.displayFavorites">
   <div class="grid-container">
     <div *ngFor="let mobile of this.api.listmobileMock">
       <mat-card>
@@ -37,12 +38,12 @@
 </div>
 
 
-<div *ngIf="displayFavorites">
+<div *ngIf="api.displayFavorites">
   <div class="centered-text">
     <h1>רשימת מועדפים</h1>
   </div>
   
-<table mat-table [dataSource]="this.dataSource.data" class="mat-elevation-z8">
+<table mat-table [dataSource]="api.dataFavorites.data" class="mat-elevation-z8">
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>

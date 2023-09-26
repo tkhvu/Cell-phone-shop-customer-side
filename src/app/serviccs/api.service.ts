@@ -23,9 +23,11 @@ export class ApiService {
   combinedData = {} as combinedData;
   cartItems: CartItem[] = [];
   listmobileMock: events[] = [];
+  dataFavorites: any = [];
   Category: any = [];
   sourceData: events[] = [];
   email: any
+  displayFavorites: boolean = false;
   // http://localhost:3000
   // http://localhost:3000
 
@@ -216,6 +218,11 @@ export class ApiService {
     console.log(url)
     return this.http.get<USER[]>(url).subscribe()
   }
+
+  Favorites() {
+    this.dataFavorites.data = this.listmobileMock.filter((mobile) => mobile.love === true);
+      this.displayFavorites = !this.displayFavorites;
+    }
   
 }
 

@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { events } from '../interfaces';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddingProductDialogComponent } from '../adding-product-dialog/adding-product-dialog.component';
+import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 
 @Component({
   selector: 'app-products',
@@ -11,10 +12,9 @@ import { AddingProductDialogComponent } from '../adding-product-dialog/adding-pr
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
-  constructor(private api: ApiService, public dialog: MatDialog) {}
-  displayedColumns: string[] = [ 'name', 'price',  'Image', 'actions' ];
+  constructor(private api: ApiService, public dialog: MatDialog) { }
+  displayedColumns: string[] = ['name', 'price', 'Image', 'actions'];
   dataSource = new MatTableDataSource<events>();
-
   ngOnInit() {
     this.api.getmobile().subscribe((data) => {
       this.dataSource.data = data;
@@ -50,18 +50,16 @@ export class ProductsComponent {
   }
 
   removeRow(_id: string) {
-    this.deleteProduct(_id)
-    this.dataSource.data = this.dataSource.data.filter(
-      (u: events) => u._id !== _id,
-    )
+    this.openDialog(_id);
+
   }
 
-  deleteProduct(_id: string){
+  deleteProduct(_id: string) {
     const id = `/?_id=${_id}`;
     this.api.deleteProduct(id)
   }
 
-  ProductUpdate(element: events){
+  ProductUpdate(element: events) {
     let id = `/?_id=${element._id}&name=${element.name}&price=${element.price}`
     this.api.ProductUpdate(id)
   }
@@ -70,4 +68,20 @@ export class ProductsComponent {
     this.selectedFile = event.target.files[0];
   }
   selectedFile: File | undefined;
+
+  openDialog(_id: string) {
+    const data = "מאשר להסיר מוצר";
+    const dialogRef = this.dialog.open(MessageDialogComponent, {
+      data: data,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteProduct(_id)
+        this.dataSource.data = this.dataSource.data.filter(
+          (u: events) => u._id !== _id,
+        )
+      }
+    })
+  }
 }
+

@@ -12,12 +12,10 @@ import { events } from '../interfaces';
 export class ListmobileComponent {
 
   constructor(public api: ApiService) { }
-
+  activeButton: any;
   dataSource: any = [];
 
   displayedColumns: string[] = [ 'name', 'price',  'Image', 'actions'  ];
-
-  displayFavorites: boolean = false;
 
   deleteFavorites(_id: string) {
     const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
@@ -52,8 +50,8 @@ export class ListmobileComponent {
 
   Favorites() {
     this.dataSource.data = this.api.listmobileMock.filter((mobile) => mobile.love === true);
-      console.log(this.dataSource);
-      this.displayFavorites = !this.displayFavorites;
+      // console.log(this.dataSource);
+      this.api.displayFavorites = !this.api.displayFavorites;
     }
 
   removeRow(_id: string) {

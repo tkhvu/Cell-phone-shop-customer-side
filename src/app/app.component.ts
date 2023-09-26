@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
 
   cartItems: { cart: string }[] = [];
   cart = false;
-
+  director = false;
   ngOnInit() {
 
     const id = localStorage.getItem('_id');
@@ -96,7 +96,6 @@ export class AppComponent implements OnInit {
       this.api.Connected = true;
       this.api.getmobile().subscribe((data) => {
         this.api.listmobileMock = data;
-        this.api.sourceData = [...data];
         this.dataSource.data = [...data];
         if (this.api.listmobileMock.length > 0) {
           const mobileIds: string[] = this.api.user[0].favorites;
@@ -105,12 +104,11 @@ export class AppComponent implements OnInit {
             love: mobileIds.includes(mobile._id)
           }));
         }
+        this.api.sourceData = [...this.api.listmobileMock];
       }
       );
     })
   }
-
-
 
   getCart() {
     const id = `/?_id=${this.api.user[0].cart[0]}`
@@ -160,7 +158,7 @@ export class AppComponent implements OnInit {
         )
       }
 
-      // f(){    console.log(this.api.listmobileMock)
-      // }
-
+      BackMain(){
+        this.router.navigate(['/Listmobile']);
+      }
 }

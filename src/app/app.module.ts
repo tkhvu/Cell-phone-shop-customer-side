@@ -43,6 +43,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { DisplayusersComponent } from './displayusers/displayusers.component';
 import { ProductsComponent } from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { CategoriesComponent } from './categories/categories.component';
     DisplayusersComponent,
     ProductsComponent,
     CategoriesComponent,
+    MessageDialogComponent,
 
   ],
   imports: [

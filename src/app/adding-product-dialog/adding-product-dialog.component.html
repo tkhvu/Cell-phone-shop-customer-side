@@ -57,7 +57,7 @@
       <ng-template matStepLabel>סיום</ng-template>
       <div>
         <button mat-raised-button color="primary" matStepperPrevious>חזור</button>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!bioSection.valid" (click)="OrderConfirmation(); stepper.reset()">העלאת מוצר</button>      
+        <button mat-raised-button color="primary" type="submit" [disabled]="!bioSection.valid" (click)="OrderConfirmation()" mat-dialog-close>העלאת מוצר</button>      
     </div>
     </mat-step>
   </mat-stepper>
