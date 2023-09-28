@@ -1,4 +1,4 @@
-<mat-toolbar *ngIf="!api.login">
+<mat-toolbar *ngIf="!api.login" >
   <button mat-raised-button aria-label="סל הקניות" (click)="openDialog()"
     [matBadge]="api.Connected ? api.cartLength : '0'" matBadgePosition="before" matBadgeColor="warn">
     <span class="material-icons">shopping_cart</span>
@@ -14,6 +14,7 @@
     <mat-icon>favorite_border </mat-icon>
   </button>
   <span class="example-spacer">
+    <span class="example-spacer" *ngIf="api.Connected">
     <div *ngIf="api.user[0]._id == '65097057894b9106ef2d9ed0'">
       <button mat-button color="warn" (click)="Definitions(); director = !director" *ngIf="!director">
         <span class="material-icons">settings</span>
@@ -22,12 +23,8 @@
         <span class="material-icons"> home</span>
       </button>
     </div>
-
-
   </span>
-
-
-
+  </span>
 
 
   <span class="pw"> <img class="p"
@@ -39,37 +36,3 @@
 
 <router-outlet></router-outlet>
 
-<!-- <app-test></app-test> -->
-
-<!-- <table mat-table [dataSource]="dataSource">
-  <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
-    <th mat-header-cell *matHeaderCellDef>
-      {{ col.label }}
-    </th>
-    <td mat-cell *matCellDef="let element">
-      <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
-        <div class="btn-edit" *ngSwitchCase="'isEdit'">
-          <button mat-button (click)="element.isEdit = !element.isEdit"> Edit </button>
-          <button mat-button class="button-remove" (click)="removeRow(element._id)">Delete</button>
-        </div>
-        <span *ngSwitchDefault>
-          {{ element[col.key] }}
-        </span>
-      </div>
-      <div [ngSwitch]="col.type" *ngIf="element.isEdit">
-        <div class="btn-edit" *ngSwitchCase="'isEdit'">
-          <button mat-button (click)="element.isEdit = !element.isEdit; editRow(element)">Done</button>
-        </div>
-        <mat-form-field *ngSwitchDefault>
-          <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
-        </mat-form-field>
-      </div>
-    </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table> -->
-
-<!-- 
-<button mat-button color="warn"  (click)="f()">ggggg
-</button> -->
