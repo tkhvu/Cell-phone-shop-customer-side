@@ -1,9 +1,9 @@
 
-
+/* 
   .viewport {
     overflow: auto;
     height: 10000px; 
-  }
+  } */
  
   .grid-container {
     display: grid;
@@ -52,4 +52,18 @@
     background-color: darkorange;
     color: white;
     /* Add any other styles to indicate it as active */
+  }
+
+
+  .example-viewport {
+    height:530px;
+    width: 1530px;
+  }
+  
+  .example-item {
+    /* height: 50px; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    margin: 20px;
   }

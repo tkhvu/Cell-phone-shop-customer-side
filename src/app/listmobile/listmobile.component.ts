@@ -10,6 +10,7 @@ import { events } from '../interfaces';
 
 })
 export class ListmobileComponent {
+  items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
 
   constructor(public api: ApiService) { }
   activeButton: any;
