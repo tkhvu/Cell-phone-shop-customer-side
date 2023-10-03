@@ -1,31 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from './serviccs/api.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
 import { Router } from '@angular/router';
-// import { HttpClient } from '@angular/common/http';
-// import { events } from './interfaces';
 
-// export const UserColumns = [
-//   {
-//     key: 'name',
-//     type: 'text',
-//     label: 'name',
-//   },
-//   {
-//     key: 'price',
-//     type: 'text',
-//     label: 'price',
-//   },
-
-//   {
-//     key: 'isEdit',
-//     type: 'isEdit',
-//     label: '',
-//   },
- 
-// ];
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -53,7 +31,7 @@ export class AppComponent implements OnInit {
   // dataSource = new MatTableDataSource<events>();
 
 
-  cartItems: { cart: string }[] = [];
+  // cartItems: { cart: string }[] = [];
   cart = false;
   director = false;
   ngOnInit() {

@@ -17,7 +17,7 @@
               <button mat-icon-button  (click)="updateAddCart(element, 'remove')">
                 <mat-icon class="small-icon">remove</mat-icon>
               </button>
-              <input class="count-input" type="text" [(ngModel)]="element.count">
+              <input class="count-input" type="text" [(ngModel)]="element.count"  [value]="element.count || '1'">
               <button mat-icon-button (click)="updateAddCart(element, 'add')">
                 <mat-icon class="small-icon">add</mat-icon>
               </button>
@@ -42,8 +42,8 @@
       </table>
  
   <mat-dialog-actions>
-    <button mat-button mat-dialog-close>סגור</button>
     <button mat-button (click)="navigateToorderconfirmation()" [disabled]="apiService.cartLength < 1" mat-dialog-close>ביצוע הזמנה</button>
+    <button mat-button mat-dialog-close>להמשך קניות</button>
   </mat-dialog-actions>
 
   

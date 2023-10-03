@@ -1,1 +1,8 @@
-{}
+{
+  "projects": {
+    "default": "online-shop-984cb",
+    "online-shop": "online-shop-8361b"
+  },
+  "targets": {},
+  "etags": {}
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
 import { CartItem } from '../interfaces';
 import { Router } from '@angular/router';
@@ -10,29 +10,20 @@ import { Router } from '@angular/router';
   templateUrl: './cart-dialog.component.html',
   styleUrls: ['./cart-dialog.component.css']
 })
-export class CartDialogComponent {
+export class CartDialogComponent implements OnInit {
 
   constructor(public apiService: ApiService, private router: Router) { }
   cartLength = 8
 
 
   ngOnInit() {
-    this.getCart()
     const _id = localStorage.getItem('_id');
     const id = `/?_id=${this.apiService.user[0].cart[0]}`;
     if (_id != null) {
       this.apiService.MobileDetails(id)
         .subscribe((data: any) => {
           this.apiService.cartItems = data[0].cart;
-          this.apiService.cart = Object.values(this.apiService.cart).flat();
-          const combinedArray = this.apiService.cartItems.map((item) => {
-            const matchingCountItem = this.apiService.cart.find((countItem) => countItem._id === item._id);
-            if (matchingCountItem) {
-              return { ...item, count: matchingCountItem.count };
-            }
-            return item;
-          });
-          this.apiService.cartItems = combinedArray
+          this.getCart()
         }
         );
     }
@@ -47,7 +38,16 @@ export class CartDialogComponent {
       }
       this.apiService.cartLength = totalCount;
       this.apiService.cart = data;
+      this.apiService.cart = Object.values(this.apiService.cart).flat();
 
+      const combinedArray = this.apiService.cartItems.map((item) => {
+        const matchingCountItem = this.apiService.cart.find((countItem) => countItem._id === item._id);
+        if (matchingCountItem) {
+          return { ...item, count: matchingCountItem.count };
+        }
+        return item;
+      });
+      this.apiService.cartItems = combinedArray
     }
     );
   }
@@ -75,14 +75,11 @@ export class CartDialogComponent {
     }
     let id = `/?_id=${this.apiService.user[0].cart.toString()}&id=${item._id}&count=${item.count}`
     this.apiService.updateAddCart(id);
-    console.log(this.apiService.cart)
-
   }
 
 
  navigateToorderconfirmation() {
     this.router.navigate(['/orderconfirmation']);
   }
-
 }
 
