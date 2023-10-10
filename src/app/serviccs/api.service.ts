@@ -32,44 +32,44 @@ export class ApiService {
   // http://localhost:3000
 
   public getmobile() {
-    const url: string = "https://server-side-58yz.onrender.com/getMobile";
+    const url: string = "https://lonely-kilt-tick.cyclic.app/getMobile";
     return this.http.get<events[]>(url)
 
   }
 
   public getCategory() {
-    const url: string = "https://server-side-58yz.onrender.com/getCategory";
+    const url: string = "https://lonely-kilt-tick.cyclic.app/getCategory";
     return this.http.get<any[]>(url)
 
   }
 
   public deleteCategory(id: string) {
-    const url: string = "https://server-side-58yz.onrender.com/deleteCategory" + id;
+    const url: string = "https://lonely-kilt-tick.cyclic.app/deleteCategory" + id;
     return this.http.get<string>(url).subscribe();
 
   }
 
   public deleteProduct(id: string) {
-    const url: string = "https://server-side-58yz.onrender.com/deleteProduct" + id;
+    const url: string = "https://lonely-kilt-tick.cyclic.app/deleteProduct" + id;
     return this.http.get<string>(url).subscribe();
 
   }
 
   public localStorage(id: string): Observable<USER> {
 
-    const url: string = "https://server-side-58yz.onrender.com/localStorage" + id;
+    const url: string = "https://lonely-kilt-tick.cyclic.app/localStorage" + id;
     return this.http.get<USER>(url)
   }
 
   public MobileDetails(id: string) {
 
-    const url: string = "https://server-side-58yz.onrender.com/MobileDetails" + id;
+    const url: string = "https://lonely-kilt-tick.cyclic.app/MobileDetails" + id;
     return this.http.get<USER>(url)
   }
 
 
   public getCart(id: string) {
-    const url: string = "https://server-side-58yz.onrender.com/getCart" + id;
+    const url: string = "https://lonely-kilt-tick.cyclic.app/getCart" + id;
     return this.http.get<USER>(url)
   }
 
@@ -78,7 +78,7 @@ export class ApiService {
 
 
   public addCart(addid: string) {
-    const url: string = "https://server-side-58yz.onrender.com/addCart" + addid;
+    const url: string = "https://lonely-kilt-tick.cyclic.app/addCart" + addid;
     this.cartLength++;
     return this.http.get<events[]>(url)
       .subscribe();
@@ -86,7 +86,7 @@ export class ApiService {
 
   public async addUser(user: USER[]) {
     this.isLoading = true;
-    const url: string = "https://server-side-58yz.onrender.com/CreatingUser";
+    const url: string = "https://lonely-kilt-tick.cyclic.app/CreatingUser";
     return this.http.post<USER[]>(url, user).subscribe((data) => {
       this.isLoading = false;
       const dataString = JSON.stringify(data);
@@ -101,7 +101,7 @@ export class ApiService {
   public userMatch(query: string) {
 
 
-    const url: string = "https://server-side-58yz.onrender.com/userMatch" + query;
+    const url: string = "https://lonely-kilt-tick.cyclic.app/userMatch" + query;
     return this.http.get<USER>(url)
       .subscribe((data: any) => {
         this.isLoading = false;
@@ -133,7 +133,7 @@ export class ApiService {
   addFavorites(addid: string) {
 
 
-    const url: string = " https://server-side-58yz.onrender.com/addFavorites" + addid;
+    const url: string = " https://lonely-kilt-tick.cyclic.app/addFavorites" + addid;
     this.http.get(url)
       .subscribe()
   }
@@ -141,7 +141,7 @@ export class ApiService {
   public getUsers() {
 
 
-    const url: string = "https://server-side-58yz.onrender.com/getUsers";
+    const url: string = "https://lonely-kilt-tick.cyclic.app/getUsers";
     return this.http.get<USER[]>(url)
 
   }
@@ -149,7 +149,7 @@ export class ApiService {
   public deleteFavorites(addid: string) {
 
 
-    const url: string = "https://server-side-58yz.onrender.com/deleteFavorites" + addid;
+    const url: string = "https://lonely-kilt-tick.cyclic.app/deleteFavorites" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
   }
@@ -171,7 +171,7 @@ export class ApiService {
 
   updateAddCart(addid: string) {
 
-    const url: string = "https://server-side-58yz.onrender.com/cartUpdate" + addid;
+    const url: string = "https://lonely-kilt-tick.cyclic.app/cartUpdate" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
 
@@ -179,29 +179,29 @@ export class ApiService {
 
 
   public async Emailorderconfirmation(combinedData: combinedData) {
-    const url: string = "https://server-side-58yz.onrender.com/Emailorderconfirmation";
+    const url: string = "https://lonely-kilt-tick.cyclic.app/Emailorderconfirmation";
     return this.http.post<combinedData>(url, combinedData).subscribe((data) => {
       this.email = data
       console.log(this.email)
     });;
   }
 
-  public async uploadProduct(formData: {}){
+  public async uploadProduct(formData: {}) {
 
 
-    this.http.post('https://server-side-58yz.onrender.com/upload', formData).subscribe();
+    this.http.post('https://lonely-kilt-tick.cyclic.app/upload', formData).subscribe();
   }
 
-  public async addCategory(category: {}){
+  public async addCategory(category: {}) {
 
 
-    this.http.post('https://server-side-58yz.onrender.com/addCategory', category).subscribe();
+    this.http.post('https://lonely-kilt-tick.cyclic.app/addCategory', category).subscribe();
   }
 
   categoryUpdate(addid: string) {
 
-    const url: string = "https://server-side-58yz.onrender.com/categoryUpdate" + addid;
-        console.log(url)
+    const url: string = "https://lonely-kilt-tick.cyclic.app/categoryUpdate" + addid;
+    console.log(url)
     return this.http.get<USER[]>(url)
       .subscribe()
 
@@ -209,22 +209,22 @@ export class ApiService {
 
   ProductUpdate(addid: string) {
 
-    const url: string = "https://server-side-58yz.onrender.com/ProductUpdate" + addid;
+    const url: string = "https://lonely-kilt-tick.cyclic.app/ProductUpdate" + addid;
     return this.http.get<USER[]>(url).subscribe()
   }
 
   ademptyCart(addid: string) {
 
-    const url: string = "https://server-side-58yz.onrender.com/emptyCart" + addid;
+    const url: string = "https://lonely-kilt-tick.cyclic.app/emptyCart" + addid;
     console.log(url)
     return this.http.get<USER[]>(url).subscribe()
   }
 
   Favorites() {
     this.dataFavorites.data = this.listmobileMock.filter((mobile) => mobile.love === true);
-      this.displayFavorites = !this.displayFavorites;
-    }
-  
+    this.displayFavorites = !this.displayFavorites;
+  }
+
 }
 
 

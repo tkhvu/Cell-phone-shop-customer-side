@@ -1,3 +1,5 @@
+<div *ngIf="!api.displayFavorites">
+
 <h2 class="filter-container">סינון לפי קטגוריה</h2>
 <mat-toolbar class="toolbar">
   
@@ -37,6 +39,7 @@
 
   </div>
 </cdk-virtual-scroll-viewport>
+</div>
 
 <!-- <div class="scroll-container" (scroll)="onScroll()"  *ngIf="!api.displayFavorites">
   <div class="grid-container">
