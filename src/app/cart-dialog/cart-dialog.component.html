@@ -12,13 +12,13 @@
 
         <ng-container matColumnDef="count">
           <th mat-header-cell *matHeaderCellDef>כמות </th>
-          <td mat-cell *matCellDef="let element">
+          <td mat-cell *matCellDef="let index = index; let element">
             <div class="count-input-container">
-              <button mat-icon-button  (click)="updateAddCart(element, 'remove')">
+              <button mat-icon-button  (click)="updateAddCart(index, element, 'remove')">
                 <mat-icon class="small-icon">remove</mat-icon>
               </button>
               <input class="count-input" type="text" [(ngModel)]="element.count"  [value]="element.count || '1'">
-              <button mat-icon-button (click)="updateAddCart(element, 'add')">
+              <button mat-icon-button (click)="updateAddCart(index, element, 'add')">
                 <mat-icon class="small-icon">add</mat-icon>
               </button>
             </div>

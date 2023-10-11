@@ -65,9 +65,13 @@ export class CartDialogComponent implements OnInit {
   }
 
 
-  updateAddCart(item: any, action: string) {
+  updateAddCart(index: number, item: any, action: string) {
     if (action === "remove") {
       item.count--;
+      if(item.count < 1){
+
+        this.deleteItem(index, item)
+      }
       this.apiService.cartLength--;
     } else {
       item.count++;

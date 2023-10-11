@@ -45,7 +45,7 @@ export class OrderConfirmationComponent {
 
 
   ActionConfirmationMessage() {
-    const data = "ההזמנה בוצעה";
+    const data = "ההזמנה בוצעה בהצלחה";
     const dialogRef = this.dialog.open(MessageDialogComponent, {
       data: data,
     });
@@ -57,17 +57,18 @@ export class OrderConfirmationComponent {
   }
 
   DeletionConfirmation() {
-    const data = "לבצע את ההזמנה";
+    const data = "?האם ברצונך לבצע את ההזמנה";
     const dialogRef = this.dialog.open(MessageDialogComponent, {
       data: data,
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.api.Emailorderconfirmation(this.api.combinedData)
-        if (this.api.email = "Email sent successfully") {
+        if (this.api.email === "Email sent successfully") {
           const _id = `/?_id=${this.api.user[0].cart[0]}`;
           this.api.ademptyCart(_id);
           this.ActionConfirmationMessage()
+          console.log(this.api.email, "ddd")
         }
       }
     })

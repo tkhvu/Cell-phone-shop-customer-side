@@ -75,7 +75,7 @@ export class ListmobileComponent {
 
   removeRow(_id: string) {
     this.deleteFavorites(_id)
-    this.dataSource.data = this.dataSource.data.filter(
+    this.api.dataFavorites.data = this.api.dataFavorites.data.filter(
       (u: events) => u._id !== _id,
     )
   }
