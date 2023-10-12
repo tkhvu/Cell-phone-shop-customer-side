@@ -38,12 +38,13 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddingProductDialogComponent } from './adding-product-dialog/adding-product-dialog.component';
 import { AddingCategoryComponent } from './adding-category/adding-category.component';
-import { CategorieDeleteComponent } from './categorie-delete/categorie-delete.component';
+// import { CategorieDeleteComponent } from './categorie-delete/categorie-delete.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DisplayusersComponent } from './displayusers/displayusers.component';
 import { ProductsComponent } from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
+import { FavouritesComponent } from './favourites/favourites.component';
 
 @NgModule({
   declarations: [
@@ -57,11 +58,12 @@ import { MessageDialogComponent } from './message-dialog/message-dialog.componen
     DirectorComponent,
     AddingProductDialogComponent,
     AddingCategoryComponent,
-    CategorieDeleteComponent,
+    // CategorieDeleteComponent,
     DisplayusersComponent,
     ProductsComponent,
     CategoriesComponent,
     MessageDialogComponent,
+    FavouritesComponent,
 
   ],
   imports: [

@@ -1,12 +1,11 @@
-<div *ngIf="!api.displayFavorites">
 
 <h2 class="filter-container">חנות פלאפונים</h2>
 <mat-toolbar class="toolbar">
   
   <button mat-button color="primary" *ngFor="let mobile of this.api.Category" 
-    (click)="filter(mobile); api.displayFavorites = false; activeButton = mobile.category"
+    (click)="filter(mobile); activeButton = mobile.category"
     [class.active-button]="activeButton === mobile.category">{{ mobile.category }}</button>
-    <button mat-raised-button color="primary" (click)="showall(); api.displayFavorites = false;activeButton = 'showAll' "
+    <button mat-raised-button color="primary" (click)="showall(); activeButton = 'showAll' "
     [class.active-button]="activeButton === 'showAll'"> הצג הכול</button>
 </mat-toolbar>
 
@@ -39,10 +38,9 @@
 
   </div>
 </cdk-virtual-scroll-viewport>
-</div>
 
 
-
+<!-- 
 
 <div *ngIf="api.displayFavorites">
   <div class="centered-text">
@@ -83,4 +81,4 @@
 
 
 
-
+ -->

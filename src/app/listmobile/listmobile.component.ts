@@ -52,8 +52,7 @@ export class ListmobileComponent {
   filter(mobile: any) {
     if(this.api.sourceData.length<1){
       this.api.sourceData = this.api.listmobileMock
-      console.log(this.api.listmobileMock, "hhh")
-
+      // console.log(this.api.listmobileMock, "hhh")
     }
     const filteredProducts = this.api.sourceData.filter(product => product.category === mobile._id);
     this.api.listmobileMock = filteredProducts;
@@ -62,10 +61,10 @@ export class ListmobileComponent {
     this.api.listmobileMock = this.api.sourceData;
   }
 
-  Favorites() {
-    this.dataSource.data = this.api.listmobileMock.filter((mobile) => mobile.love === true);
-      this.api.displayFavorites = !this.api.displayFavorites;
-    }
+  // Favorites() {
+  //   this.dataSource.data = this.api.listmobileMock.filter((mobile) => mobile.love === true);
+  //     this.api.displayFavorites = !this.api.displayFavorites;
+  //   }
 
   removeRow(_id: string) {
     this.deleteFavorites(_id)

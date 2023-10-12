@@ -27,7 +27,6 @@ export class ApiService {
   Category: any = [];
   sourceData: events[] = [];
   email: any
-  displayFavorites: boolean = false;
   // https://server-side-58yz.onrender.com
   // http://localhost:3000
 
@@ -222,7 +221,7 @@ export class ApiService {
 
   Favorites() {
     this.dataFavorites.data = this.listmobileMock.filter((mobile) => mobile.love === true);
-    this.displayFavorites = !this.displayFavorites;
+    this.router.navigate(['/Favourites']);
   }
 
 }

@@ -26,14 +26,7 @@ export class AppComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  // displayedColumns: string[] = UserColumns.map((col) => col.key);
-  // columnsSchema: any = UserColumns;
-  // dataSource = new MatTableDataSource<events>();
-
-
-  // cartItems: { cart: string }[] = [];
   cart = false;
-  director = false;
   ngOnInit() {
 
     const id = localStorage.getItem('_id');
@@ -77,7 +70,6 @@ export class AppComponent implements OnInit {
       this.api.Connected = true;
       this.api.getmobile().subscribe((data) => {
         this.api.listmobileMock = data;
-        // this.dataSource.data = [...data];
         if (this.api.listmobileMock.length > 0) {
           const mobileIds: string[] = this.api.user[0].favorites;
           this.api.listmobileMock = this.api.listmobileMock.map((mobile) => ({
@@ -115,28 +107,4 @@ export class AppComponent implements OnInit {
       BackMain(){
         this.router.navigate(['/Listmobile']);
       }
-      
-      // addRow() {
-      //   const newRow: events = {
-      //     id: 0,
-      //     name: '',
-      //     price: 0,
-      //     category: '',
-      //     isEdit: true,
-      //   };
-      //   this.dataSource.data = [newRow, ...this.dataSource.data];
-      // }
-      // editRow(row:events ) {
-      //   console.log(row)
-
-      // }
-
-      // removeRow(_id: number) {
-      
-      //   this.dataSource.data = this.dataSource.data.filter(
-      //     (u: events) => u._id !== _id,
-      //   )
-      // }
-
-    
 }

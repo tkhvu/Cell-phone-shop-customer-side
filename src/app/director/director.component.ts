@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
 import {MatTableDataSource } from '@angular/material/table';
 import { events } from '../interfaces';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { AddingProductDialogComponent } from '../adding-product-dialog/adding-product-dialog.component';
-import { AddingCategoryComponent } from '../adding-category/adding-category.component';
-import { CategorieDeleteComponent } from '../categorie-delete/categorie-delete.component';
+// import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+// import { AddingProductDialogComponent } from '../adding-product-dialog/adding-product-dialog.component';
+// import { AddingCategoryComponent } from '../adding-category/adding-category.component';
+// import { CategorieDeleteComponent } from '../categorie-delete/categorie-delete.component';
 import { Router } from '@angular/router';
 
 
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class DirectorComponent implements OnInit{
 
-  constructor(private fb: FormBuilder, public api: ApiService, public dialog: MatDialog, private router: Router) {
+  constructor(private fb: FormBuilder, public api: ApiService, private router: Router) {
     this.bioSection = this.fb.group({
       price: ['', [Validators.pattern('^[0-9]+$'), Validators.required]],
       name: ['', Validators.required],
@@ -52,45 +52,6 @@ export class DirectorComponent implements OnInit{
       this.dataSource.data = data
     });
   }
-
-  // AddingProductDialog() {
-  //   const dialogConfig = new MatDialogConfig();
-
-  //   dialogConfig.restoreFocus = false;
-  //   dialogConfig.position = {
-  //     top: '65px',
-  //   };
-
-  //   const dialogRef = this.dialog.open(AddingProductDialogComponent, dialogConfig);
-
-  //   dialogRef.afterClosed().subscribe();
-  // }
-
-  // AddingCategoryDialog() {
-  //   const dialogConfig = new MatDialogConfig();
-
-  //   dialogConfig.restoreFocus = false;
-  //   dialogConfig.position = {
-  //     top: '65px',
-  //   };
-
-  //   const dialogRef = this.dialog.open(AddingCategoryComponent, dialogConfig);
-
-  //   dialogRef.afterClosed().subscribe();
-  // }
-
-  // CategorieDeleteDialog() {
-  //   const dialogConfig = new MatDialogConfig();
-
-  //   dialogConfig.restoreFocus = false;
-  //   dialogConfig.position = {
-  //     top: '65px',
-  //   };
-
-  //   const dialogRef = this.dialog.open(CategorieDeleteComponent, dialogConfig);
-
-  //   dialogRef.afterClosed().subscribe();
-  // }
 
 
   OrderConfirmation() {
