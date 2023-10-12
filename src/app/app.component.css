@@ -33,18 +33,23 @@ margin-bottom: 0px;
 }
 
 mat-toolbar {
-  background-color: orange;}
+  background-color: black;}
 
   mat-toolbar-row, .mat-toolbar-single-row {
-    padding-right: 0; /* Set padding-right to 0 to remove the right padding */
+    padding-right: 0; 
 }
 
   .fixed-bottom-button {
     position: fixed;
-    bottom: 20px; /* Adjust the value as needed */
+    bottom: 20px; 
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
+  }
+
+
+  .Just-caption {
+    color: white
   }
   
 

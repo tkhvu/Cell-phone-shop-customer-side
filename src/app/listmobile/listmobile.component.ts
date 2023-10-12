@@ -12,18 +12,16 @@ import { CartDialogComponent } from '../cart-dialog/cart-dialog.component';
 
 })
 export class ListmobileComponent {
-  // items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
 
   constructor(public api: ApiService, public dialog: MatDialog) { }
   activeButton: any;
   dataSource: any = [];
 
-  displayedColumns: string[] = [ 'name', 'price',  'Image', 'actions'  ];
+  displayedColumns: string[] = ['Image', 'name', 'price', 'actions'  ];
 
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.restoreFocus = false;
     dialogConfig.position = {
       top: '65px',
@@ -31,7 +29,6 @@ export class ListmobileComponent {
     };
 
     const dialogRef = this.dialog.open(CartDialogComponent, dialogConfig);
-
     dialogRef.afterClosed().subscribe();
   }
 
@@ -44,7 +41,6 @@ export class ListmobileComponent {
   addCart(_id: any) {
     const id = `/?_id=${this.api.user[0].cart[0]}&id=${_id}`;
     this.api.addCart(id);
-    // this.openDialog()
   }
 
 
@@ -53,13 +49,12 @@ export class ListmobileComponent {
     this.api.addFavorites(id);
   }
 
-  // onScroll() {
-  //   const scrollContainer = document.querySelector('.scroll-container');
-  //   if (scrollContainer) {
-  //     scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 200;
-  //   }
-  // }
   filter(mobile: any) {
+    if(this.api.sourceData.length<1){
+      this.api.sourceData = this.api.listmobileMock
+      console.log(this.api.listmobileMock, "hhh")
+
+    }
     const filteredProducts = this.api.sourceData.filter(product => product.category === mobile._id);
     this.api.listmobileMock = filteredProducts;
   }
@@ -69,7 +64,6 @@ export class ListmobileComponent {
 
   Favorites() {
     this.dataSource.data = this.api.listmobileMock.filter((mobile) => mobile.love === true);
-      // console.log(this.dataSource);
       this.api.displayFavorites = !this.api.displayFavorites;
     }
 

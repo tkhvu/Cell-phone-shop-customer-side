@@ -63,8 +63,8 @@
   }
 
   .emphasized-label {
-    font-weight: bold; 
-    color: orange; 
+    font-weight: bold;
+    font-size: 16px;
   }
 
   .rtl-table {
@@ -72,6 +72,17 @@
 }
 
 
-.mat-column-name {
+.mat-column-Image {
   width: 50px;
+  padding-left: 16px;
+}
+
+.mat-column-name,
+.mat-column-price,
+.mat-column-Image {
+  max-width: 164px;
+}
+
+.mat-column-actions {
+  max-width: 124px;
 }
