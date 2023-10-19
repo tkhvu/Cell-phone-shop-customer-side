@@ -1,0 +1,13 @@
+.mat-column-Image {
+    width: 5px;
+    /* padding-left: 16px; */
+  }
+
+  .rtl-table {
+    direction: rtl;
+  }
+
+  .table-container {
+    max-height: 50vh; 
+  }
+  

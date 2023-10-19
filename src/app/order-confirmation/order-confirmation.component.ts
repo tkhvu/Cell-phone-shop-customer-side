@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 
 
@@ -52,24 +52,27 @@ export class OrderConfirmationComponent {
     dialogRef.afterClosed().subscribe(result => {
       
         this.router.navigate(['/Listmobile']);
-      
+        console.log(this.api.email, "11111")
+
     })
   }
 
-  DeletionConfirmation() {
+   DeletionConfirmation() {
     const data = "?האם ברצונך לבצע את ההזמנה";
     const dialogRef = this.dialog.open(MessageDialogComponent, {
       data: data,
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(async (result) => {
       if (result) {
-        this.api.Emailorderconfirmation(this.api.combinedData)
-        if (this.api.email === "Email sent successfully") {
-          const _id = `/?_id=${this.api.user[0].cart[0]}`;
-          this.api.ademptyCart(_id);
-          this.ActionConfirmationMessage()
-          console.log(this.api.email, "ddd")
-        }
+         (await this.api.Emailorderconfirmation(this.api.combinedData)).subscribe((data) => {
+          this.api.email = data
+          if (this.api.email === "Email sent successfully") {
+            const _id = `/?_id=${this.api.user[0].cart[0]}`;
+            this.api.ademptyCart(_id);
+            this.ActionConfirmationMessage()
+          }
+        });
+    
       }
     })
   }

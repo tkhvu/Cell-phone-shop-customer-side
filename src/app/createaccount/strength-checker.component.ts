@@ -100,16 +100,16 @@ import {
   
         switch (c.idx) {
           case 1:
-            this.msg = 'Poor';
+            this.msg = 'חלש';
             break;
           case 2:
-            this.msg = 'Not Good';
+            this.msg = 'לא חזק';
             break;
           case 3:
-            this.msg = 'Average';
+            this.msg = 'בסדר';
             break;
           case 4:
-            this.msg = 'Good';
+            this.msg = 'מצויין';
             break;
         }
       } else {

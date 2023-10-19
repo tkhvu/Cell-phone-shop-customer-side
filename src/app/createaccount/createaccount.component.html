@@ -20,13 +20,13 @@
 
     <p>שם משתמש</p>
     <mat-form-field>
-      <input matInput formControlName="username" required>
+      <input matInput #input1 formControlName="username" required>
     </mat-form-field>
     <div *ngIf="bioSection.controls['username'].touched">{{getErrorMessage('username')}}</div>
 
     <p>סיסמה</p>
     <mat-form-field>
-      <input matInput #input [type]="'password'" required formControlName="password">
+      <input matInput #input [type]="'password'"  required formControlName="password" >
     </mat-form-field>
     <div *ngIf="bioSection.controls['password'].touched">{{getErrorMessage('password')}}</div>
 
@@ -41,3 +41,5 @@
 </div>
 
 <mat-spinner *ngIf="api.isLoading"></mat-spinner>
+
+<button mat-raised-button color="warn" (click)="UsernameCheck()"  >בבבבבבב</button>

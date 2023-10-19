@@ -27,48 +27,48 @@ export class ApiService {
   Category: any = [];
   sourceData: events[] = [];
   email: any
-  // https://server-side-58yz.onrender.com
+  // https://lonely-kilt-tick.cyclic.app
   // http://localhost:3000
 
   public getmobile() {
-    const url: string = "https://lonely-kilt-tick.cyclic.app/getMobile";
+    const url: string = "http://localhost:3000/getMobile";
     return this.http.get<events[]>(url)
 
   }
 
   public getCategory() {
-    const url: string = "https://lonely-kilt-tick.cyclic.app/getCategory";
+    const url: string = "http://localhost:3000/getCategory";
     return this.http.get<any[]>(url)
 
   }
 
   public deleteCategory(id: string) {
-    const url: string = "https://lonely-kilt-tick.cyclic.app/deleteCategory" + id;
+    const url: string = "http://localhost:3000/deleteCategory" + id;
     return this.http.get<string>(url).subscribe();
 
   }
 
   public deleteProduct(id: string) {
-    const url: string = "https://lonely-kilt-tick.cyclic.app/deleteProduct" + id;
+    const url: string = "http://localhost:3000/deleteProduct" + id;
     return this.http.get<string>(url).subscribe();
 
   }
 
   public localStorage(id: string): Observable<USER> {
 
-    const url: string = "https://lonely-kilt-tick.cyclic.app/localStorage" + id;
+    const url: string = "http://localhost:3000/localStorage" + id;
     return this.http.get<USER>(url)
   }
 
   public MobileDetails(id: string) {
 
-    const url: string = "https://lonely-kilt-tick.cyclic.app/MobileDetails" + id;
+    const url: string = "http://localhost:3000/MobileDetails" + id;
     return this.http.get<USER>(url)
   }
 
 
   public getCart(id: string) {
-    const url: string = "https://lonely-kilt-tick.cyclic.app/getCart" + id;
+    const url: string = "http://localhost:3000/getCart" + id;
     return this.http.get<USER>(url)
   }
 
@@ -77,7 +77,7 @@ export class ApiService {
 
 
   public addCart(addid: string) {
-    const url: string = "https://lonely-kilt-tick.cyclic.app/addCart" + addid;
+    const url: string = "http://localhost:3000/addCart" + addid;
     this.cartLength++;
     return this.http.get<events[]>(url)
       .subscribe();
@@ -85,7 +85,7 @@ export class ApiService {
 
   public async addUser(user: USER[]) {
     this.isLoading = true;
-    const url: string = "https://lonely-kilt-tick.cyclic.app/CreatingUser";
+    const url: string = "http://localhost:3000/CreatingUser";
     return this.http.post<USER[]>(url, user).subscribe((data) => {
       this.isLoading = false;
       const dataString = JSON.stringify(data);
@@ -97,10 +97,14 @@ export class ApiService {
   }
 
 
+  public UsernameCheck(query: string) {
+    const url: string = "http://localhost:3000/UsernameCheck" + query;
+    return this.http.get<USER>(url)
+  }
+
   public userMatch(query: string) {
 
-
-    const url: string = "https://lonely-kilt-tick.cyclic.app/userMatch" + query;
+    const url: string = "http://localhost:3000/userMatch" + query;
     return this.http.get<USER>(url)
       .subscribe((data: any) => {
         this.isLoading = false;
@@ -132,7 +136,7 @@ export class ApiService {
   addFavorites(addid: string) {
 
 
-    const url: string = " https://lonely-kilt-tick.cyclic.app/addFavorites" + addid;
+    const url: string = " http://localhost:3000/addFavorites" + addid;
     this.http.get(url)
       .subscribe()
   }
@@ -140,7 +144,7 @@ export class ApiService {
   public getUsers() {
 
 
-    const url: string = "https://lonely-kilt-tick.cyclic.app/getUsers";
+    const url: string = "http://localhost:3000/getUsers";
     return this.http.get<USER[]>(url)
 
   }
@@ -148,7 +152,7 @@ export class ApiService {
   public deleteFavorites(addid: string) {
 
 
-    const url: string = "https://lonely-kilt-tick.cyclic.app/deleteFavorites" + addid;
+    const url: string = "http://localhost:3000/deleteFavorites" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
   }
@@ -170,7 +174,7 @@ export class ApiService {
 
   updateAddCart(addid: string) {
 
-    const url: string = "https://lonely-kilt-tick.cyclic.app/cartUpdate" + addid;
+    const url: string = "http://localhost:3000/cartUpdate" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
 
@@ -178,28 +182,25 @@ export class ApiService {
 
 
   public async Emailorderconfirmation(combinedData: combinedData) {
-    const url: string = "https://lonely-kilt-tick.cyclic.app/Emailorderconfirmation";
-    return this.http.post<combinedData>(url, combinedData).subscribe((data) => {
-      this.email = data
-      console.log(this.email)
-    });;
+    const url: string = "http://localhost:3000/Emailorderconfirmation";
+    return this.http.post<combinedData>(url, combinedData)
   }
 
   public async uploadProduct(formData: {}) {
 
 
-    this.http.post('https://lonely-kilt-tick.cyclic.app/upload', formData).subscribe();
+    this.http.post('http://localhost:3000/upload', formData).subscribe();
   }
 
   public async addCategory(category: {}) {
 
 
-    this.http.post('https://lonely-kilt-tick.cyclic.app/addCategory', category).subscribe();
+    this.http.post('http://localhost:3000/addCategory', category).subscribe();
   }
 
   categoryUpdate(addid: string) {
 
-    const url: string = "https://lonely-kilt-tick.cyclic.app/categoryUpdate" + addid;
+    const url: string = "http://localhost:3000/categoryUpdate" + addid;
     console.log(url)
     return this.http.get<USER[]>(url)
       .subscribe()
@@ -208,13 +209,13 @@ export class ApiService {
 
   ProductUpdate(addid: string) {
 
-    const url: string = "https://lonely-kilt-tick.cyclic.app/ProductUpdate" + addid;
+    const url: string = "http://localhost:3000/ProductUpdate" + addid;
     return this.http.get<USER[]>(url).subscribe()
   }
 
   ademptyCart(addid: string) {
 
-    const url: string = "https://lonely-kilt-tick.cyclic.app/emptyCart" + addid;
+    const url: string = "http://localhost:3000/emptyCart" + addid;
     console.log(url)
     return this.http.get<USER[]>(url).subscribe()
   }

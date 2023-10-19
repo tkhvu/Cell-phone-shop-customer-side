@@ -25,8 +25,6 @@ export class AppComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe();
   }
-
-  cart = false;
   ngOnInit() {
 
     const id = localStorage.getItem('_id');
