@@ -1,6 +1,4 @@
 
-
- 
   .grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -8,10 +6,6 @@
     margin: 20px;
   }
   
-  .scroll-container {
-    height: 600px;
-    overflow-y: scroll;
-  }
   
   
 
@@ -55,21 +49,13 @@
     width: 1530px;
   }
   
-  .example-item {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px;
-    margin: 20px;
-  }
+
 
   .emphasized-label {
     font-weight: bold;
     font-size: 16px;
   }
 
-  .rtl-table {
-  direction: rtl;
-}
 
 
 .mat-column-Image {
@@ -77,12 +63,9 @@
   padding-left: 16px;
 }
 
-.mat-column-name,
-.mat-column-price,
-.mat-column-Image {
-  max-width: 164px;
-}
 
 .mat-column-actions {
   max-width: 124px;
 }
+
+

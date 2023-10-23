@@ -79,7 +79,6 @@ export class CreateaccountComponent {
   UsernameCheck() {
     this.api.query = `/?username=${this.bioSection.value.username}`;
     this.api.UsernameCheck(this.api.query).subscribe((data: any) => {
-      // this.api.query = `/?username=${this.bioSection.value.username}&password=${this.bioSection.value.password}`;
      if(data.available){
     //   this.onSelect(this.bioSection.value);
     // } else {
@@ -91,8 +90,8 @@ export class CreateaccountComponent {
 
   showErrorMessage(message: string) {
     this.snackBar.open(message, 'Close', {
-      duration: 3000, // Adjust the duration as needed
-      panelClass: ['error-snackbar'], // Add your custom CSS class for styling
+      duration: 3000, 
+      panelClass: ['error-snackbar'], 
     });
   }
 

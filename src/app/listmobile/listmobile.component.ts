@@ -3,6 +3,7 @@ import { ApiService } from '../serviccs/api.service';
 import { events } from '../interfaces';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CartDialogComponent } from '../cart-dialog/cart-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -13,11 +14,11 @@ import { CartDialogComponent } from '../cart-dialog/cart-dialog.component';
 })
 export class ListmobileComponent {
 
-  constructor(public api: ApiService, public dialog: MatDialog) { }
+  constructor(public api: ApiService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
   activeButton: any;
   dataSource: any = [];
 
-  displayedColumns: string[] = ['Image', 'name', 'price', 'actions'  ];
+  displayedColumns: string[] = ['Image', 'name', 'price', 'actions'];
 
 
   openDialog() {
@@ -35,41 +36,54 @@ export class ListmobileComponent {
   deleteFavorites(_id: string) {
     const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
     this.api.deleteFavorites(id);
+
   }
 
 
   addCart(_id: any) {
-    const id = `/?_id=${this.api.user[0].cart[0]}&id=${_id}`;
-    this.api.addCart(id);
+    if (this.api.Connected) {
+      const id = `/?_id=${this.api.user[0].cart[0]}&id=${_id}`;
+      this.api.addCart(id);
+    } else {
+      this.showErrorMessage('על מנת לשמור את המוצר בסל שלך, יש להתחבר');
+    }
+
   }
 
 
   addFavorites(_id: string) {
-    const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
-    this.api.addFavorites(id);
+    if (this.api.Connected) {
+      const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
+      this.api.addFavorites(id);
+    } else {
+      this.showErrorMessage('על מנת לשמור את המוצר ברשימת המועדפים שלך, יש להתחבר');
+    }
   }
 
   filter(mobile: any) {
-    if(this.api.sourceData.length<1){
+    if (this.api.sourceData.length < 1) {
       this.api.sourceData = this.api.listmobileMock
-      // console.log(this.api.listmobileMock, "hhh")
     }
     const filteredProducts = this.api.sourceData.filter(product => product.category === mobile._id);
     this.api.listmobileMock = filteredProducts;
   }
-  showall(){
+  showall() {
     this.api.listmobileMock = this.api.sourceData;
   }
 
-  // Favorites() {
-  //   this.dataSource.data = this.api.listmobileMock.filter((mobile) => mobile.love === true);
-  //     this.api.displayFavorites = !this.api.displayFavorites;
-  //   }
+
 
   removeRow(_id: string) {
     this.deleteFavorites(_id)
     this.api.dataFavorites.data = this.api.dataFavorites.data.filter(
       (u: events) => u._id !== _id,
     )
+  }
+
+  showErrorMessage(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      panelClass: ['error-snackbar'],
+    });
   }
 }
