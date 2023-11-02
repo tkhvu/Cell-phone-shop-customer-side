@@ -28,8 +28,8 @@ export class ApiService {
   sourceData: events[] = [];
   email: any
   // https://lonely-kilt-tick.cyclic.app
+  // https://server-side-58yz.onrender.com
   // http://localhost:3000
-
   public getmobile() {
     const url: string = "http://localhost:3000/getMobile";
     return this.http.get<events[]>(url)
@@ -187,7 +187,6 @@ export class ApiService {
   }
 
   public async uploadProduct(formData: {}) {
-
 
     this.http.post('http://localhost:3000/upload', formData).subscribe();
   }

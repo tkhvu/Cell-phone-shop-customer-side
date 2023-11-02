@@ -15,7 +15,7 @@
   <div *cdkVirtualFor="let mobile of this.api.listmobileMock">
 
     <mat-card>
-      <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="190" height="222">
+      <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="auto" height="222">
       <p><em class="emphasized-label">דגם:</em> {{mobile.name}}</p>
       <p> <em class="emphasized-label">מחיר:</em> {{"₪" + mobile.price }} </p>
 
