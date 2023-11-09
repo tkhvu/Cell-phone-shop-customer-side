@@ -105,4 +105,7 @@ export class AppComponent implements OnInit {
       BackMain(){
         this.router.navigate(['/Listmobile']);
       }
+  
+      
+      
 }

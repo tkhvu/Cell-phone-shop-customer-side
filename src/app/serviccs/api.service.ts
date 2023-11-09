@@ -29,46 +29,46 @@ export class ApiService {
   email: any
   // https://lonely-kilt-tick.cyclic.app
   // https://server-side-58yz.onrender.com
-  // http://localhost:3000
+  // https://api-pi72mex7aq-uc.a.run.app/
   public getmobile() {
-    const url: string = "http://localhost:3000/getMobile";
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//getMobile";
     return this.http.get<events[]>(url)
 
   }
 
   public getCategory() {
-    const url: string = "http://localhost:3000/getCategory";
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//getCategory";
     return this.http.get<any[]>(url)
 
   }
 
   public deleteCategory(id: string) {
-    const url: string = "http://localhost:3000/deleteCategory" + id;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//deleteCategory" + id;
     return this.http.get<string>(url).subscribe();
 
   }
 
   public deleteProduct(id: string) {
-    const url: string = "http://localhost:3000/deleteProduct" + id;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//deleteProduct" + id;
     return this.http.get<string>(url).subscribe();
 
   }
 
   public localStorage(id: string): Observable<USER> {
 
-    const url: string = "http://localhost:3000/localStorage" + id;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//localStorage" + id;
     return this.http.get<USER>(url)
   }
 
   public MobileDetails(id: string) {
 
-    const url: string = "http://localhost:3000/MobileDetails" + id;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//MobileDetails" + id;
     return this.http.get<USER>(url)
   }
 
 
   public getCart(id: string) {
-    const url: string = "http://localhost:3000/getCart" + id;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//getCart" + id;
     return this.http.get<USER>(url)
   }
 
@@ -77,7 +77,7 @@ export class ApiService {
 
 
   public addCart(addid: string) {
-    const url: string = "http://localhost:3000/addCart" + addid;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//addCart" + addid;
     this.cartLength++;
     return this.http.get<events[]>(url)
       .subscribe();
@@ -85,7 +85,7 @@ export class ApiService {
 
   public async addUser(user: USER[]) {
     this.isLoading = true;
-    const url: string = "http://localhost:3000/CreatingUser";
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//CreatingUser";
     return this.http.post<USER[]>(url, user).subscribe((data) => {
       this.isLoading = false;
       const dataString = JSON.stringify(data);
@@ -98,13 +98,13 @@ export class ApiService {
 
 
   public UsernameCheck(query: string) {
-    const url: string = "http://localhost:3000/UsernameCheck" + query;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//UsernameCheck" + query;
     return this.http.get<USER>(url)
   }
 
   public userMatch(query: string) {
 
-    const url: string = "http://localhost:3000/userMatch" + query;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//userMatch" + query;
     return this.http.get<USER>(url)
       .subscribe((data: any) => {
         this.isLoading = false;
@@ -136,7 +136,7 @@ export class ApiService {
   addFavorites(addid: string) {
 
 
-    const url: string = " http://localhost:3000/addFavorites" + addid;
+    const url: string = " https://api-pi72mex7aq-uc.a.run.app//addFavorites" + addid;
     this.http.get(url)
       .subscribe()
   }
@@ -144,7 +144,7 @@ export class ApiService {
   public getUsers() {
 
 
-    const url: string = "http://localhost:3000/getUsers";
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//getUsers";
     return this.http.get<USER[]>(url)
 
   }
@@ -152,7 +152,7 @@ export class ApiService {
   public deleteFavorites(addid: string) {
 
 
-    const url: string = "http://localhost:3000/deleteFavorites" + addid;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//deleteFavorites" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
   }
@@ -174,7 +174,7 @@ export class ApiService {
 
   updateAddCart(addid: string) {
 
-    const url: string = "http://localhost:3000/cartUpdate" + addid;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//cartUpdate" + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
 
@@ -182,24 +182,24 @@ export class ApiService {
 
 
   public async Emailorderconfirmation(combinedData: combinedData) {
-    const url: string = "http://localhost:3000/Emailorderconfirmation";
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//Emailorderconfirmation";
     return this.http.post<combinedData>(url, combinedData)
   }
 
   public async uploadProduct(formData: {}) {
 
-    this.http.post('http://localhost:3000/upload', formData).subscribe();
+    this.http.post('https://api-pi72mex7aq-uc.a.run.app//upload', formData).subscribe();
   }
 
   public async addCategory(category: {}) {
 
 
-    this.http.post('http://localhost:3000/addCategory', category).subscribe();
+    this.http.post('https://api-pi72mex7aq-uc.a.run.app//addCategory', category).subscribe();
   }
 
   categoryUpdate(addid: string) {
 
-    const url: string = "http://localhost:3000/categoryUpdate" + addid;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//categoryUpdate" + addid;
     console.log(url)
     return this.http.get<USER[]>(url)
       .subscribe()
@@ -208,13 +208,13 @@ export class ApiService {
 
   ProductUpdate(addid: string) {
 
-    const url: string = "http://localhost:3000/ProductUpdate" + addid;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//ProductUpdate" + addid;
     return this.http.get<USER[]>(url).subscribe()
   }
 
   ademptyCart(addid: string) {
 
-    const url: string = "http://localhost:3000/emptyCart" + addid;
+    const url: string = "https://api-pi72mex7aq-uc.a.run.app//emptyCart" + addid;
     console.log(url)
     return this.http.get<USER[]>(url).subscribe()
   }
