@@ -46,6 +46,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,7 +99,6 @@ import { FavouritesComponent } from './favourites/favourites.component';
     MatButtonToggleModule,
     MatSnackBarModule,
     MatTabsModule
-
 
 
 

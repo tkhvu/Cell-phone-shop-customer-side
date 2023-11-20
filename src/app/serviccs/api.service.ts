@@ -27,48 +27,50 @@ export class ApiService {
   Category: any = [];
   sourceData: events[] = [];
   email: any
+  url: string = "https://api-pi72mex7aq-uc.a.run.app";
   // https://lonely-kilt-tick.cyclic.app
   // https://server-side-58yz.onrender.com
   // https://api-pi72mex7aq-uc.a.run.app/
+
   public getmobile() {
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//getMobile";
+    const url: string = `${this.url}/getMobile`;
     return this.http.get<events[]>(url)
 
   }
 
   public getCategory() {
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//getCategory";
+    const url: string = `${this.url}/getCategory`;
     return this.http.get<any[]>(url)
 
   }
 
   public deleteCategory(id: string) {
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//deleteCategory" + id;
+    const url: string = `${this.url}/deleteCategory` + id;
     return this.http.get<string>(url).subscribe();
 
   }
 
   public deleteProduct(id: string) {
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//deleteProduct" + id;
+    const url: string = `${this.url}/deleteProduct` + id;
     return this.http.get<string>(url).subscribe();
 
   }
 
-  public localStorage(id: string): Observable<USER> {
+  public localStorage(id: string) {
 
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//localStorage" + id;
+    const url: string = `${this.url}/localStorage` + id;
     return this.http.get<USER>(url)
   }
 
   public MobileDetails(id: string) {
 
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//MobileDetails" + id;
+    const url: string = `${this.url}/MobileDetails` + id;
     return this.http.get<USER>(url)
   }
 
 
   public getCart(id: string) {
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//getCart" + id;
+    const url: string = `${this.url}/getCart` + id;
     return this.http.get<USER>(url)
   }
 
@@ -77,7 +79,7 @@ export class ApiService {
 
 
   public addCart(addid: string) {
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//addCart" + addid;
+    const url: string = `${this.url}/addCart` + addid;
     this.cartLength++;
     return this.http.get<events[]>(url)
       .subscribe();
@@ -85,7 +87,7 @@ export class ApiService {
 
   public async addUser(user: USER[]) {
     this.isLoading = true;
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//CreatingUser";
+    const url: string = `${this.url}/CreatingUser`;
     return this.http.post<USER[]>(url, user).subscribe((data) => {
       this.isLoading = false;
       const dataString = JSON.stringify(data);
@@ -98,13 +100,13 @@ export class ApiService {
 
 
   public UsernameCheck(query: string) {
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//UsernameCheck" + query;
+    const url: string = `${this.url}/UsernameCheck` + query;
     return this.http.get<USER>(url)
   }
 
   public userMatch(query: string) {
 
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//userMatch" + query;
+    const url: string = `${this.url}/userMatch` + query;
     return this.http.get<USER>(url)
       .subscribe((data: any) => {
         this.isLoading = false;
@@ -115,6 +117,7 @@ export class ApiService {
         }
         this.loginerror = false;
         this.user = data;
+        console.log( "dd", this.user[0].firstname)
         localStorage.setItem('_id', this.user[0]._id);
         const id = `/?_id=${this.user[0].cart[0]}`
 
@@ -136,7 +139,7 @@ export class ApiService {
   addFavorites(addid: string) {
 
 
-    const url: string = " https://api-pi72mex7aq-uc.a.run.app//addFavorites" + addid;
+    const url: string = `${this.url}/addFavorites` + addid;
     this.http.get(url)
       .subscribe()
   }
@@ -144,7 +147,7 @@ export class ApiService {
   public getUsers() {
 
 
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//getUsers";
+    const url: string = `${this.url}/getUsers`;
     return this.http.get<USER[]>(url)
 
   }
@@ -152,7 +155,7 @@ export class ApiService {
   public deleteFavorites(addid: string) {
 
 
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//deleteFavorites" + addid;
+    const url: string = `${this.url}/deleteFavorites` + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
   }
@@ -174,7 +177,7 @@ export class ApiService {
 
   updateAddCart(addid: string) {
 
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//cartUpdate" + addid;
+    const url: string = `${this.url}/cartUpdate` + addid;
     return this.http.get<USER[]>(url)
       .subscribe()
 
@@ -182,24 +185,24 @@ export class ApiService {
 
 
   public async Emailorderconfirmation(combinedData: combinedData) {
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//Emailorderconfirmation";
+    const url: string = `${this.url}/Emailorderconfirmation`;
     return this.http.post<combinedData>(url, combinedData)
   }
 
   public async uploadProduct(formData: {}) {
 
-    this.http.post('https://api-pi72mex7aq-uc.a.run.app//upload', formData).subscribe();
+    this.http.post(`${this.url}/upload`, formData).subscribe();
   }
 
   public async addCategory(category: {}) {
 
 
-    this.http.post('https://api-pi72mex7aq-uc.a.run.app//addCategory', category).subscribe();
+    this.http.post(`${this.url}/addCategory`, category).subscribe();
   }
 
   categoryUpdate(addid: string) {
 
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//categoryUpdate" + addid;
+    const url: string = `${this.url}/categoryUpdate` + addid;
     console.log(url)
     return this.http.get<USER[]>(url)
       .subscribe()
@@ -208,13 +211,13 @@ export class ApiService {
 
   ProductUpdate(addid: string) {
 
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//ProductUpdate" + addid;
+    const url: string = `${this.url}/ProductUpdate` + addid;
     return this.http.get<USER[]>(url).subscribe()
   }
 
   ademptyCart(addid: string) {
 
-    const url: string = "https://api-pi72mex7aq-uc.a.run.app//emptyCart" + addid;
+    const url: string = `${this.url}/emptyCart` + addid;
     console.log(url)
     return this.http.get<USER[]>(url).subscribe()
   }

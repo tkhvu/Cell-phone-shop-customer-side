@@ -15,6 +15,7 @@ export class ProductsComponent {
   constructor(private api: ApiService, public dialog: MatDialog) { }
   displayedColumns: string[] = ['name', 'price', 'Image', 'actions'];
   dataSource = new MatTableDataSource<events>();
+  
   ngOnInit() {
     this.api.getmobile().subscribe((data) => {
       this.dataSource.data = data;

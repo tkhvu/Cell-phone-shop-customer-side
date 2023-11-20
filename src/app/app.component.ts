@@ -3,6 +3,7 @@ import { ApiService } from './serviccs/api.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   constructor(public api: ApiService, public dialog: MatDialog, private router: Router) { }
+
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
@@ -25,6 +27,7 @@ export class AppComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe();
   }
+  
   ngOnInit() {
 
     const id = localStorage.getItem('_id');
@@ -61,6 +64,7 @@ export class AppComponent implements OnInit {
       this.api.isLoading = false;
       this.api.loginerror = false;
       this.api.user = [data];
+      
       this.api.getCategory().subscribe((data) => {
         this.api.Category = data
       })
@@ -81,6 +85,7 @@ export class AppComponent implements OnInit {
     })
   }
 
+ 
   getCart() {
     const id = `/?_id=${this.api.user[0].cart[0]}`
     this.api.getCart(id).subscribe((data: any) => {
@@ -106,6 +111,19 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/Listmobile']);
       }
   
-      
+
+// async getmobile(): Promise<any> {
+//   const data = await this.api.getmobile().pipe(take(1)).toPromise();
+//   this.data = this.modifyMyData(data);
+// }
+
+// async function getData(this: any) {
+//   try {
+//     const data = await this.api.getmobile();
+//     return data;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
       
 }

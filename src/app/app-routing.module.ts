@@ -6,20 +6,16 @@ import { ListmobileComponent } from './listmobile/listmobile.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { DirectorComponent } from './director/director.component';
 import { FavouritesComponent } from './favourites/favourites.component';
+import { AdminGuard } from './Role-based-authentication';
 
 const routes: Routes = [
-  { path: '', component: ListmobileComponent }, 
+  { path: '', component: ListmobileComponent}, 
   { path: 'Login', component: LoginComponent },
   { path: 'Createaccount', component: CreateaccountComponent },
-  { path: 'Listmobile', component: ListmobileComponent },
+  { path: 'Listmobile', component: ListmobileComponent  },
   { path: 'orderconfirmation', component: OrderConfirmationComponent },
-  { path: 'Director', component: DirectorComponent },
+  { path: 'Director', component: DirectorComponent, canActivate: [AdminGuard] },
   { path: 'Favourites', component: FavouritesComponent },
-
-
-
-  
-
 ];
 
 @NgModule({
