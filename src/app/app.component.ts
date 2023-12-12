@@ -1,19 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './serviccs/api.service';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CartDialogComponent } from './cart-dialog/cart-dialog.component';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 export class AppComponent implements OnInit {
-  constructor(public api: ApiService, public dialog: MatDialog, private router: Router) { }
-
-
+  constructor(public api: ApiService, public dialog: MatDialog, private router: Router, private sanitizer: DomSanitizer) { }
+  
+  // YouTube: string = "d9LxXAwWw5g"
+  // urlYouTube: string = `https://www.youtube.com/embed/${this.YouTube}`;
+  // get sanitize(): SafeResourceUrl {
+  //   console.log(this.urlYouTube)
+  //   return this.sanitizer.bypassSecurityTrustResourceUrl(this.urlYouTube);
+  // }
   openDialog() {
     const dialogConfig = new MatDialogConfig();
 
@@ -27,7 +36,7 @@ export class AppComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe();
   }
-  
+
   ngOnInit() {
 
     const id = localStorage.getItem('_id');
@@ -64,7 +73,7 @@ export class AppComponent implements OnInit {
       this.api.isLoading = false;
       this.api.loginerror = false;
       this.api.user = [data];
-      
+
       this.api.getCategory().subscribe((data) => {
         this.api.Category = data
       })
@@ -85,7 +94,7 @@ export class AppComponent implements OnInit {
     })
   }
 
- 
+
   getCart() {
     const id = `/?_id=${this.api.user[0].cart[0]}`
     this.api.getCart(id).subscribe((data: any) => {
@@ -99,31 +108,32 @@ export class AppComponent implements OnInit {
     );
   }
 
-  Login(){
+  Login() {
     this.router.navigate(['/Login']);
-    this.api.login = !this.api.login;  }
+    this.api.login = !this.api.login;
+  }
 
-    Definitions(){
-      this.router.navigate(['/Director']);
-      }
+  Definitions() {
+    this.router.navigate(['/Director']);
+  }
 
-      BackMain(){
-        this.router.navigate(['/Listmobile']);
-      }
-  
+  BackMain() {
+    this.router.navigate(['/Listmobile']);
+  }
 
-// async getmobile(): Promise<any> {
-//   const data = await this.api.getmobile().pipe(take(1)).toPromise();
-//   this.data = this.modifyMyData(data);
-// }
 
-// async function getData(this: any) {
-//   try {
-//     const data = await this.api.getmobile();
-//     return data;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-      
+  // async getmobile(): Promise<any> {
+  //   const data = await this.api.getmobile().pipe(take(1)).toPromise();
+  //   this.data = this.modifyMyData(data);
+  // }
+
+  // async function getData(this: any) {
+  //   try {
+  //     const data = await this.api.getmobile();
+  //     return data;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
 }

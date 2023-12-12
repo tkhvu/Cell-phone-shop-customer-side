@@ -1,45 +1,40 @@
-
-<h2 class="filter-container">חנות פלאפונים</h2>
+<h1 class="title">חנות פלאפונים</h1>
 <mat-toolbar class="toolbar">
-  
-  <button mat-button color="primary" *ngFor="let mobile of this.api.Category" 
-    (click)="filter(mobile); activeButton = mobile.category"
-    [class.active-button]="activeButton === mobile.category">{{ mobile.category }}</button>
-    <button mat-raised-button color="primary" (click)="showall(); activeButton = 'showAll' "
+
+  <button mat-button color="primary" *ngFor="let mobile of this.api.Category"
+    (click)="filter(mobile); activeButton = mobile.category" [class.active-button]="activeButton === mobile.category">{{
+    mobile.category }}</button>
+  <button mat-raised-button color="primary" (click)="showall(); activeButton = 'showAll' "
     [class.active-button]="activeButton === 'showAll'"> הצג הכול</button>
 </mat-toolbar>
 
 <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+
   <div class="grid-container">
 
-  <div *cdkVirtualFor="let mobile of this.api.listmobileMock">
+    <div *cdkVirtualFor="let mobile of this.api.listmobileMock">
 
-    <mat-card>
-      <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="auto" height="222">
-      <p><em class="emphasized-label">דגם:</em> {{mobile.name}}</p>
-      <p> <em class="emphasized-label">מחיר:</em> {{"₪" + mobile.price }} </p>
+      <mat-card>
+        <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="auto" height="222">
+        <p><em class="emphasized-label">דגם:</em> {{mobile.name}}</p>
+        <p> <em class="emphasized-label">מחיר:</em> {{"₪" + mobile.price }} </p>
 
-      <mat-card-actions>
-        <button mat-icon-button *ngIf="mobile.love === true"
-          (click)="mobile.love =false; deleteFavorites(mobile._id)">
-          <mat-icon>favorite </mat-icon>
-        </button>
+        <mat-card-actions>
+          <button mat-icon-button *ngIf="mobile.love === true"
+            (click)="mobile.love =false; deleteFavorites(mobile._id)">
+            <mat-icon>favorite </mat-icon>
+          </button>
 
-        <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addFavorites(mobile._id)">
-          <mat-icon>favorite_border </mat-icon>
-        </button>
-        <button mat-raised-button color="warn" (click)="addCart(mobile._id)">
-          הוספה לסל
-        </button>
+          <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addFavorites(mobile._id)">
+            <mat-icon>favorite_border </mat-icon>
+          </button>
+          <button mat-raised-button color="warn" (click)="addCart(mobile._id)">
+            הוספה לסל
+          </button>
 
-      </mat-card-actions>
-    </mat-card>
-  </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
 
   </div>
 </cdk-virtual-scroll-viewport>
-
-
-
-
-

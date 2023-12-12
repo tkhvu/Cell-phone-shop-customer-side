@@ -19,7 +19,8 @@ export class ApiService {
   cartLength: number = 0;
   error = "";
   loginerror: boolean = false;
-  query = ""
+  query = "";
+  logindetails: {} = {}
   combinedData = {} as combinedData;
   cartItems: CartItem[] = [];
   listmobileMock: events[] = [];
@@ -94,7 +95,7 @@ export class ApiService {
       const parsedData = JSON.parse(dataString);
       const insertedId = parsedData.insertedId;
       localStorage.setItem('_id', insertedId);
-      this.userMatch(this.query)
+      this.userMatch(this.logindetails)
     });;
   }
 
@@ -104,10 +105,10 @@ export class ApiService {
     return this.http.get<USER>(url)
   }
 
-  public userMatch(query: string) {
+  public userMatch(logindetails: {}) {
 
-    const url: string = `${this.url}/userMatch` + query;
-    return this.http.get<USER>(url)
+    const url: string = `${this.url}/userMatch`;
+    return this.http.post<Body>(url, logindetails, {withCredentials: true})
       .subscribe((data: any) => {
         this.isLoading = false;
         if (data.length === 0) {
@@ -117,7 +118,6 @@ export class ApiService {
         }
         this.loginerror = false;
         this.user = data;
-        console.log( "dd", this.user[0].firstname)
         localStorage.setItem('_id', this.user[0]._id);
         const id = `/?_id=${this.user[0].cart[0]}`
 
@@ -146,9 +146,8 @@ export class ApiService {
 
   public getUsers() {
 
-
     const url: string = `${this.url}/getUsers`;
-    return this.http.get<USER[]>(url)
+    return this.http.get<USER[]>(url, {withCredentials: true})
 
   }
 
@@ -186,7 +185,7 @@ export class ApiService {
 
   public async Emailorderconfirmation(combinedData: combinedData) {
     const url: string = `${this.url}/Emailorderconfirmation`;
-    return this.http.post<combinedData>(url, combinedData)
+    return this.http.post<combinedData>(url, combinedData, {withCredentials: true})
   }
 
   public async uploadProduct(formData: {}) {

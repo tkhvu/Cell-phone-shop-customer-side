@@ -6,21 +6,17 @@
     margin: 20px;
   }
   
-  
-  
 
   .grid-container mat-card {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
 
-  .filter-container {
-   
-    align-items: center;
+  .title {
     text-align: center;
   }
+
 
 
   .my-custom-button:hover {
@@ -32,7 +28,12 @@
     justify-content: space-between; 
   }
   
- 
+  .example-viewport {
+    height:510px;
+    width: 1530px;
+  }
+
+/*  
   .centered-text {
     text-align: center; 
   }
@@ -41,16 +42,13 @@
   .active-button {
     background-color: darkorange;
     color: white;
-  }
+  } */
 
 
-  .example-viewport {
-    height:530px;
-    width: 1530px;
-  }
+ 
   
 
-
+/* 
   .emphasized-label {
     font-weight: bold;
     font-size: 16px;
@@ -68,4 +66,4 @@
   max-width: 124px;
 }
 
-
+ */

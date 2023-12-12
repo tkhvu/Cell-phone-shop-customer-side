@@ -9,10 +9,9 @@ import { ApiService } from '../serviccs/api.service';
 export class LoginComponent {
 
   constructor(public api: ApiService) { }
-  
+
   username = '';
   password = '';
-
   onSubmit(connection: any) {
     if (connection.form.valid) {
       this.userMatch()
@@ -21,8 +20,8 @@ export class LoginComponent {
 
   userMatch() {
     this.api.isLoading = true;
-   this.api.query = `/?username=${this.username}&password=${this.password}`;
-    this.api.userMatch(this.api.query)
+    this.api.logindetails = { username: this.username, password: this.password };
+    this.api.userMatch(this.api.logindetails)
   }
 
 }
