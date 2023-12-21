@@ -17,12 +17,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class AppComponent implements OnInit {
   constructor(public api: ApiService, public dialog: MatDialog, private router: Router, private sanitizer: DomSanitizer) { }
   
-  // YouTube: string = "d9LxXAwWw5g"
-  // urlYouTube: string = `https://www.youtube.com/embed/${this.YouTube}`;
-  // get sanitize(): SafeResourceUrl {
-  //   console.log(this.urlYouTube)
-  //   return this.sanitizer.bypassSecurityTrustResourceUrl(this.urlYouTube);
-  // }
+
   openDialog() {
     const dialogConfig = new MatDialogConfig();
 
@@ -70,6 +65,8 @@ export class AppComponent implements OnInit {
   localStorage(_id: string) {
     const id = `/?_id=${_id}`;
     this.api.localStorage(id).subscribe((data: any) => {
+      console.log(data.Director);
+      this.api.director = data.Director
       this.api.isLoading = false;
       this.api.loginerror = false;
       this.api.user = [data];

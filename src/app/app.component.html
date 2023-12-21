@@ -16,7 +16,7 @@
   
   <span class="example-spacer">
     <span *ngIf="api.Connected">
-    <div *ngIf="api.user[0]._id == '654b6bbaf4bc6fe44d64a750'">
+    <div *ngIf="api.director">
       <button mat-button color="warn" (click)="Definitions()">
         <span class="material-icons">settings</span>
       </button>
@@ -35,13 +35,6 @@
 
 </mat-toolbar>
 
-
-<!-- <div><iframe width="560" height="315" src="https://www.youtube.com/embed/d9LxXAwWw5g" frameborder="0" allowfullscreen></iframe>
-  <mat-form-field>
-    <input matInput [(ngModel)]="urlYouTube" />
-</mat-form-field>
-<button mat-button  (click)="sanitizedUrl()"></button>
-</div> -->
 
 
 <router-outlet></router-outlet>

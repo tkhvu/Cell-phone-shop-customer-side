@@ -27,8 +27,9 @@ export class ApiService {
   dataFavorites: any = [];
   Category: any = [];
   sourceData: events[] = [];
-  email: any
-  url: string = "https://api-pi72mex7aq-uc.a.run.app";
+  email: any;
+  director = false
+  url: string = "http://localhost:3000";
   // https://lonely-kilt-tick.cyclic.app
   // https://server-side-58yz.onrender.com
   // https://api-pi72mex7aq-uc.a.run.app/
@@ -110,6 +111,8 @@ export class ApiService {
     const url: string = `${this.url}/userMatch`;
     return this.http.post<Body>(url, logindetails, {withCredentials: true})
       .subscribe((data: any) => {
+        console.log(data);
+        this.director = data.Director
         this.isLoading = false;
         if (data.length === 0) {
           this.loginerror = true;
