@@ -17,9 +17,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { LoginComponent } from './login/login.component';
-import { CreateaccountComponent } from './createaccount/createaccount.component';
+import { adduserComponent } from './adduser/adduser.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { StrengthCheckerComponent } from './createaccount/strength-checker.component';
+import { StrengthCheckerComponent } from './adduser/strength-checker.component';
 import { MatCardModule } from '@angular/material/card';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatMenuModule } from '@angular/material/menu';
@@ -38,7 +38,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddingProductDialogComponent } from './adding-product-dialog/adding-product-dialog.component';
 import { AddingCategoryComponent } from './adding-category/adding-category.component';
-// import { CategorieDeleteComponent } from './categorie-delete/categorie-delete.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DisplayusersComponent } from './displayusers/displayusers.component';
 import { ProductsComponent } from './products/products.component';
@@ -52,14 +51,13 @@ import { FavouritesComponent } from './favourites/favourites.component';
     AppComponent,
     ListmobileComponent,
     LoginComponent,
-    CreateaccountComponent,
+    adduserComponent,
     StrengthCheckerComponent,
     CartDialogComponent,
     OrderConfirmationComponent,
     DirectorComponent,
     AddingProductDialogComponent,
     AddingCategoryComponent,
-    // CategorieDeleteComponent,
     DisplayusersComponent,
     ProductsComponent,
     CategoriesComponent,

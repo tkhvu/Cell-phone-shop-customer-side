@@ -5,11 +5,11 @@ import { USER } from '../modeluser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-createaccount',
-  templateUrl: './createaccount.component.html',
-  styleUrls: ['./createaccount.component.css']
+  selector: 'app-adduser',
+  templateUrl: './adduser.component.html',
+  styleUrls: ['./adduser.component.css']
 })
-export class CreateaccountComponent {
+export class adduserComponent {
   
 
   passwordIsValid = false;
@@ -38,8 +38,8 @@ export class CreateaccountComponent {
     this.passwordIsValid = event;
   }
 
-  onSelect(name: any) {
-    this.api.addUser(name)
+  onSelect(user: any) {
+    this.api.addUser(user)
    }
 
   callingFunction() {

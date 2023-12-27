@@ -58,10 +58,10 @@ export class ApiService {
 
   }
 
-  public localStorage(id: string) {
+  public localStorage() {
 
-    const url: string = `${this.url}/localStorage` + id;
-    return this.http.get<USER>(url)
+    const url: string = `${this.url}/localStorage`;
+    return this.http.get<USER>(url, {withCredentials: true})
   }
 
   public MobileDetails(id: string) {
@@ -96,7 +96,7 @@ export class ApiService {
       const parsedData = JSON.parse(dataString);
       const insertedId = parsedData.insertedId;
       localStorage.setItem('_id', insertedId);
-      this.userMatch(this.logindetails)
+      this.userMatch(user)
     });;
   }
 
@@ -111,7 +111,6 @@ export class ApiService {
     const url: string = `${this.url}/userMatch`;
     return this.http.post<Body>(url, logindetails, {withCredentials: true})
       .subscribe((data: any) => {
-        console.log(data);
         this.director = data.Director
         this.isLoading = false;
         if (data.length === 0) {

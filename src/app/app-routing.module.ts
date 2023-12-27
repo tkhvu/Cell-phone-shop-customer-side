@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { CreateaccountComponent } from './createaccount/createaccount.component';
+import { adduserComponent } from './adduser/adduser.component';
 import { ListmobileComponent } from './listmobile/listmobile.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { DirectorComponent } from './director/director.component';
@@ -11,7 +11,7 @@ import { AdminGuard } from './Role-based-authentication';
 const routes: Routes = [
   { path: '', component: ListmobileComponent}, 
   { path: 'Login', component: LoginComponent },
-  { path: 'Createaccount', component: CreateaccountComponent },
+  { path: 'Createaccount', component: adduserComponent },
   { path: 'Listmobile', component: ListmobileComponent  },
   { path: 'orderconfirmation', component: OrderConfirmationComponent },
   { path: 'Director', component: DirectorComponent, canActivate: [AdminGuard] },

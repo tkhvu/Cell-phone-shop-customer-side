@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
 
     const id = localStorage.getItem('_id');
     if (id) {
-      this.localStorage(id);
+      this.localStorage();
     }
     this.api.getCategory().subscribe((data) => {
       this.api.Category = data
@@ -62,9 +62,9 @@ export class AppComponent implements OnInit {
   }
 
 
-  localStorage(_id: string) {
-    const id = `/?_id=${_id}`;
-    this.api.localStorage(id).subscribe((data: any) => {
+  localStorage() {
+    // const id = `/?_id=${_id}`;
+    this.api.localStorage().subscribe((data: any) => {
       console.log(data.Director);
       this.api.director = data.Director
       this.api.isLoading = false;
