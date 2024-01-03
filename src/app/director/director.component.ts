@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
-import {MatTableDataSource } from '@angular/material/table';
-import { events } from '../interfaces';
-// import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-// import { AddingProductDialogComponent } from '../adding-product-dialog/adding-product-dialog.component';
-// import { AddingCategoryComponent } from '../adding-category/adding-category.component';
-// import { CategorieDeleteComponent } from '../categorie-delete/categorie-delete.component';
-import { Router } from '@angular/router';
-
-
+import { HttpClient } from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-director',
@@ -18,7 +11,34 @@ import { Router } from '@angular/router';
 })
 export class DirectorComponent implements OnInit{
 
-  constructor(private fb: FormBuilder, public api: ApiService, private router: Router) {
+  ngOnInit() {
+    this.api.getCategory().subscribe((data) => {
+      this.categories = data
+    })
+  }
+  ManagerChange = 0;
+  categories: any = [];
+  isEditable = false;
+
+
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+
+  bioSection: FormGroup;
+  bioSection1: FormGroup;
+
+  constructor(private fb: FormBuilder, public api: ApiService, private http: HttpClient,private _snackBar: MatSnackBar) {
     this.bioSection = this.fb.group({
       price: ['', [Validators.pattern('^[0-9]+$'), Validators.required]],
       name: ['', Validators.required],
@@ -31,34 +51,15 @@ export class DirectorComponent implements OnInit{
     });
   }
 
-  displayedColumns: string[] = [ 'name', 'price',  'Image', 'actions'  ];
-  displayedColumnsusers: string[] = [ 'email',  'lastname', 'firstname' ];
-
-  dataSource = new MatTableDataSource<events>();
-  usersData: any = [];
-  categories: any = [];
-  bioSection: FormGroup;
-  bioSection1: FormGroup;
-  selectedFile: File | undefined;
-  displayuser: boolean = false
-
-
-  ngOnInit() {
-    this.api.getCategory().subscribe((data) => {
-      this.categories = data
-    });
-
-    this.api.getmobile().subscribe((data) => {
-      this.dataSource.data = data
-    });
-  }
-
-
   OrderConfirmation() {
     this.uploadProduct()
+    const action = "סגור";
+    const message = "העלאה הסתיימה בהצלחה"
+    this.openSnackBar(action, message)
   }
 
 
+  selectedFile: File | undefined;
 
   uploadProduct() {
     if (this.selectedFile) {
@@ -69,7 +70,7 @@ export class DirectorComponent implements OnInit{
 
       formData.append('image', this.selectedFile);
 
-      this.api.uploadProduct( formData);
+      this.http.post('http://localhost:3000/upload', formData).subscribe();
     }
   }
 
@@ -78,23 +79,16 @@ export class DirectorComponent implements OnInit{
   }
 
   addCategory(){
-    this.api.addCategory(this.bioSection1.value)
-  }
- 
-
-  removeRow(_id: string) {
-    this.deleteProduct(_id)
-    this.dataSource.data = this.dataSource.data.filter(
-      (u: events) => u._id !== _id,
-    )
+    console.log(this.bioSection1.value)
+    this.http.post('http://localhost:3000/addCategory', this.bioSection1.value).subscribe(response => {
+      console.log(response);
+    });
   }
 
-  deleteProduct(_id: string){
-    const id = `/?_id=${_id}`;
-    this.api.deleteProduct(id)
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(action, message, {
+      duration: 10000, // משך הצגת ההודעה במילי-שניות
+      panelClass: ['custom-class'], // עיצוב נוסף
+    });
   }
-
-  BackMain(){
-  this.router.navigate(['/Listmobile']);
-}
 }

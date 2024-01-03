@@ -48,7 +48,7 @@ export class adduserComponent {
       this.api.UsernameCheck(this.api.query)
       .subscribe((data: any) => {
         this.api.query = `/?username=${this.bioSection.value.username}&password=${this.bioSection.value.password}`;
-       if(data.available){
+       if(!data.available){
         this.onSelect(this.bioSection.value);
       } else {
         this.showErrorMessage('שם משתמש תפוס');

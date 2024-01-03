@@ -1,0 +1,62 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  
+  .p {
+  
+  margin-top: 5px;
+  margin-bottom: 0px;
+  
+  }
+  
+  
+  ::ng-deep .custom-menu {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  ::ng-deep .menu-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+   .menu-item {
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  ::ng-deep .empty-message {
+    color: #999;
+    padding: 16px;
+  }
+  
+  mat-toolbar {
+    background-color: black;}
+  
+    mat-toolbar-row, .mat-toolbar-single-row {
+      padding-right: 0; 
+  }
+  
+    .fixed-bottom-button {
+      position: fixed;
+      bottom: 20px; 
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
+  
+  
+    .Just-caption {
+      color: white
+    }
+    
+  
+  
+  
+  
+  
+  
+  
+  

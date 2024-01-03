@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
-import { CartItem } from '../interfaces';
 import { Router } from '@angular/router';
 
 
@@ -18,7 +17,7 @@ export class CartDialogComponent implements OnInit {
 
   ngOnInit() {
     const _id = localStorage.getItem('_id');
-    const id = `/?_id=${this.apiService.user[0].cart[0]}`;
+    const id = `/?_id=${this.apiService.user.cart}`;
     if (_id != null) {
       this.apiService.MobileDetails(id)
         .subscribe((data: any) => {
@@ -30,7 +29,7 @@ export class CartDialogComponent implements OnInit {
   }
 
   getCart() {
-    const id = `/?_id=${this.apiService.user[0].cart[0]}`
+    const id = `/?_id=${this.apiService.user.cart}`
     this.apiService.getCart(id).subscribe((data: any) => {
       let totalCount = 0;
       for (const item of data.cart) {
@@ -57,7 +56,7 @@ export class CartDialogComponent implements OnInit {
     if (index >= 0 && index < data.length) {
       data.splice(index, 1);
       this.apiService.cartItems = [...data];
-      let id = `/?_id=${this.apiService.user[0].cart.toString()}&id=${element._id}`
+      let id = `/?_id=${this.apiService.user.cart}&id=${element._id}`
       this.apiService.updateAddCart(id);
       this.apiService.cartLength -= element.count;
       console.log(this.apiService.cartLength)
@@ -68,8 +67,10 @@ export class CartDialogComponent implements OnInit {
   updateAddCart(index: number, item: any, action: string) {
     if (action === "remove") {
       item.count--;
-      if(item.count < 1){
+      console.log("item.count1=", item.count)
 
+      if (item.count < 1) {
+        console.log("item.count2=", item.count)
         this.deleteItem(index, item)
       }
       this.apiService.cartLength--;
@@ -77,12 +78,14 @@ export class CartDialogComponent implements OnInit {
       item.count++;
       this.apiService.cartLength++;
     }
-    let id = `/?_id=${this.apiService.user[0].cart.toString()}&id=${item._id}&count=${item.count}`
+    let id = `/?_id=${this.apiService.user.cart}&id=${item._id}&count=${item.count}`
+    console.log("item.count3=",item.count)
+
     this.apiService.updateAddCart(id);
   }
 
 
- navigateToorderconfirmation() {
+  navigateToorderconfirmation() {
     this.router.navigate(['/orderconfirmation']);
   }
 }

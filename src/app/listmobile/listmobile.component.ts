@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
-import { events } from '../interfaces';
+import { Ievents } from '../interfaces';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CartDialogComponent } from '../cart-dialog/cart-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -34,7 +34,7 @@ export class ListmobileComponent {
   }
 
   deleteFavorites(_id: string) {
-    const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
+    const id = `/?_id=${this.api.user._id}&id=${_id}`;
     this.api.deleteFavorites(id);
 
   }
@@ -42,7 +42,7 @@ export class ListmobileComponent {
 
   addCart(_id: any) {
     if (this.api.Connected) {
-      const id = `/?_id=${this.api.user[0].cart[0]}&id=${_id}`;
+      const id = `/?_id=${this.api.user.cart}&id=${_id}`;
       this.api.addCart(id);
     } else {
       this.showErrorMessage('על מנת לשמור את המוצר בסל שלך, יש להתחבר');
@@ -53,7 +53,7 @@ export class ListmobileComponent {
 
   addFavorites(_id: string) {
     if (this.api.Connected) {
-      const id = `/?_id=${this.api.user[0]._id}&id=${_id}`;
+      const id = `/?_id=${this.api.user._id}&id=${_id}`;
       this.api.addFavorites(id);
     } else {
       this.showErrorMessage('על מנת לשמור את המוצר ברשימת המועדפים שלך, יש להתחבר');
@@ -76,7 +76,7 @@ export class ListmobileComponent {
   removeRow(_id: string) {
     this.deleteFavorites(_id)
     this.api.dataFavorites.data = this.api.dataFavorites.data.filter(
-      (u: events) => u._id !== _id,
+      (u: Ievents) => u._id !== _id,
     )
   }
 

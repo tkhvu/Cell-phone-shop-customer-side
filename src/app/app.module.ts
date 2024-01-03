@@ -44,7 +44,7 @@ import { ProductsComponent } from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { FavouritesComponent } from './favourites/favourites.component';
-
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +63,7 @@ import { FavouritesComponent } from './favourites/favourites.component';
     CategoriesComponent,
     MessageDialogComponent,
     FavouritesComponent,
-
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -97,13 +97,10 @@ import { FavouritesComponent } from './favourites/favourites.component';
     MatButtonToggleModule,
     MatSnackBarModule,
     MatTabsModule
-
-
-
-
   ],
 
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

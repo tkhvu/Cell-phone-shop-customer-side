@@ -7,20 +7,16 @@ import { ApiService } from './serviccs/api.service';
 })
 export class AdminGuard {
 
-  constructor(private router: Router, private api: ApiService) {}
-  // ngOnInit() {
+  constructor(private router: Router, private api: ApiService) { }
 
-  //   const id = localStorage.getItem('_id');
-  // }
- 
+
   canActivate() {
-    // const id = localStorage.getItem('_id');
     if (this.api.director) {
       return true;
     } else {
       this.router.navigate(['/Listmobile']);
       return false;
     }
-}
+  }
 }
 

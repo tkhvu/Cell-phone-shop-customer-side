@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { Category } from '../interfaces';
+import { Icategory } from '../interfaces';
 
 @Component({
   selector: 'app-categories',
@@ -32,7 +32,7 @@ export class CategoriesComponent {
       (u: any) => u._id !== _id,
     )}
 
-    CategoryUpdate(element: Category){
+    CategoryUpdate(element: Icategory){
 
       let id = `/?_id=${element._id}&category=${element.category}`
 
@@ -41,7 +41,7 @@ export class CategoriesComponent {
     }
 
     addRow() {
-      const newRow: Category = {
+      const newRow: Icategory = {
         category: '',
         isEdit: true,
       }

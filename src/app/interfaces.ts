@@ -1,4 +1,4 @@
-export interface events {
+export interface Ievents {
   isEdit?: boolean;
   id?: number;
   price?: number;
@@ -9,7 +9,7 @@ export interface events {
   category?: any;
 }
 
-export interface USER {
+export interface Iuser {
   lastname?: string;
   firstname?: string;
   email?: string;
@@ -23,7 +23,7 @@ export interface USER {
 
 
 
-export interface CartItem {
+export interface IcartItem {
   _id: string;
   count: number;
   id?: number;
@@ -33,7 +33,7 @@ export interface CartItem {
   // Add other properties if there are any
 }
 
-export interface DeliveryDetails {
+export interface IdeliveryDetails {
   count: number;
   id?: number;
   price?: number;
@@ -42,13 +42,13 @@ export interface DeliveryDetails {
   // Add other properties if there are any
 }
 
-export interface combinedData {
-  user: USER[] ;
-  orders: CartItem[],
+export interface IcombinedData {
+  user: Iuser ;
+  orders: IcartItem[],
   DeliveryDetails: any,
 }
 
-export interface Category {
+export interface Icategory {
   _id?: string;
   category: string,
   isEdit?: boolean

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { CartItem, events, USER, combinedData } from '../interfaces';
+import { IcartItem, Ievents, Iuser, IcombinedData } from '../interfaces';
 import { Router } from '@angular/router';
 
 
@@ -13,20 +12,20 @@ export class ApiService {
   constructor(private http: HttpClient, private router: Router) { }
   Connected: boolean = false;
   login: boolean = false;
-  user: USER[] = [];
-  cart: CartItem[] = [];
+  user = {} as Iuser;
+  cart: IcartItem[] = [];
   isLoading: boolean = false;
   cartLength: number = 0;
   error = "";
   loginerror: boolean = false;
   query = "";
   logindetails: {} = {}
-  combinedData = {} as combinedData;
-  cartItems: CartItem[] = [];
-  listmobileMock: events[] = [];
+  combinedData = {} as IcombinedData;
+  cartItems: IcartItem[] = [];
+  listmobileMock: Ievents[] = [];
   dataFavorites: any = [];
   Category: any = [];
-  sourceData: events[] = [];
+  sourceData: Ievents[] = [];
   email: any;
   director = false
   url: string = "http://localhost:3000";
@@ -36,7 +35,7 @@ export class ApiService {
 
   public getmobile() {
     const url: string = `${this.url}/getMobile`;
-    return this.http.get<events[]>(url)
+    return this.http.get<Ievents[]>(url)
 
   }
 
@@ -61,19 +60,19 @@ export class ApiService {
   public localStorage() {
 
     const url: string = `${this.url}/localStorage`;
-    return this.http.get<USER>(url, {withCredentials: true})
+    return this.http.get<Iuser>(url, {withCredentials: true})
   }
 
   public MobileDetails(id: string) {
 
     const url: string = `${this.url}/MobileDetails` + id;
-    return this.http.get<USER>(url)
+    return this.http.get<Iuser>(url)
   }
 
 
   public getCart(id: string) {
     const url: string = `${this.url}/getCart` + id;
-    return this.http.get<USER>(url)
+    return this.http.get<Iuser>(url)
   }
 
 
@@ -83,14 +82,14 @@ export class ApiService {
   public addCart(addid: string) {
     const url: string = `${this.url}/addCart` + addid;
     this.cartLength++;
-    return this.http.get<events[]>(url)
+    return this.http.get<Ievents[]>(url)
       .subscribe();
   }
 
-  public async addUser(user: USER[]) {
+  public async addUser(user: Iuser[]) {
     this.isLoading = true;
     const url: string = `${this.url}/CreatingUser`;
-    return this.http.post<USER[]>(url, user).subscribe((data) => {
+    return this.http.post<Iuser[]>(url, user).subscribe((data) => {
       this.isLoading = false;
       const dataString = JSON.stringify(data);
       const parsedData = JSON.parse(dataString);
@@ -103,7 +102,7 @@ export class ApiService {
 
   public UsernameCheck(query: string) {
     const url: string = `${this.url}/UsernameCheck` + query;
-    return this.http.get<USER>(url)
+    return this.http.get<Iuser>(url)
   }
 
   public userMatch(logindetails: {}) {
@@ -120,8 +119,8 @@ export class ApiService {
         }
         this.loginerror = false;
         this.user = data;
-        localStorage.setItem('_id', this.user[0]._id);
-        const id = `/?_id=${this.user[0].cart[0]}`
+        localStorage.setItem('_id', this.user._id);
+        const id = `/?_id=${this.user.cart}`
 
         this.getCart(id).subscribe((data: any) => {
           let totalCount = 0;
@@ -149,7 +148,7 @@ export class ApiService {
   public getUsers() {
 
     const url: string = `${this.url}/getUsers`;
-    return this.http.get<USER[]>(url, {withCredentials: true})
+    return this.http.get<Iuser[]>(url, {withCredentials: true})
 
   }
 
@@ -157,7 +156,7 @@ export class ApiService {
 
 
     const url: string = `${this.url}/deleteFavorites` + addid;
-    return this.http.get<USER[]>(url)
+    return this.http.get<Iuser[]>(url)
       .subscribe()
   }
 
@@ -171,7 +170,7 @@ export class ApiService {
     this.Connected = false
     this.router.navigate(['/Login']);
     localStorage.removeItem('_id');
-    this.user = [];
+    this.user = {} as Iuser;
     this.cartLength = 0;
 
   }
@@ -179,15 +178,15 @@ export class ApiService {
   updateAddCart(addid: string) {
 
     const url: string = `${this.url}/cartUpdate` + addid;
-    return this.http.get<USER[]>(url)
+    return this.http.get<Iuser[]>(url)
       .subscribe()
 
   }
 
 
-  public async Emailorderconfirmation(combinedData: combinedData) {
+  public async Emailorderconfirmation(combinedData: IcombinedData) {
     const url: string = `${this.url}/Emailorderconfirmation`;
-    return this.http.post<combinedData>(url, combinedData, {withCredentials: true})
+    return this.http.post<IcombinedData>(url, combinedData, {withCredentials: true})
   }
 
   public async uploadProduct(formData: {}) {
@@ -205,7 +204,7 @@ export class ApiService {
 
     const url: string = `${this.url}/categoryUpdate` + addid;
     console.log(url)
-    return this.http.get<USER[]>(url)
+    return this.http.get<Iuser[]>(url)
       .subscribe()
 
   }
@@ -213,14 +212,13 @@ export class ApiService {
   ProductUpdate(addid: string) {
 
     const url: string = `${this.url}/ProductUpdate` + addid;
-    return this.http.get<USER[]>(url).subscribe()
+    return this.http.get<Iuser[]>(url).subscribe()
   }
 
   ademptyCart(addid: string) {
 
     const url: string = `${this.url}/emptyCart` + addid;
-    console.log(url)
-    return this.http.get<USER[]>(url).subscribe()
+    return this.http.get<Iuser[]>(url).subscribe()
   }
 
   Favorites() {
@@ -229,7 +227,3 @@ export class ApiService {
   }
 
 }
-
-
-
-
