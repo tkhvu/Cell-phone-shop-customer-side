@@ -15,13 +15,10 @@ export class FavouritesComponent {
 
 
   removeRow(_id: string) {
-    this.deleteFavorites(_id)
+    const id = `/?_id=${this.api.user._id}&id=${_id}`;
+    this.api.deleteFavorites(id);
     this.api.dataFavorites.data = this.api.dataFavorites.data.filter(
       (u: Ievents) => u._id !== _id,
     )
-  }
-  deleteFavorites(_id: string) {
-    const id = `/?_id=${this.api.user._id}&id=${_id}`;
-    this.api.deleteFavorites(id);
   }
 }

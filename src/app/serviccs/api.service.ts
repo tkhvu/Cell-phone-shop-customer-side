@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IcartItem, Ievents, Iuser, IcombinedData } from '../interfaces';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -184,7 +185,7 @@ export class ApiService {
   }
 
 
-  public async Emailorderconfirmation(combinedData: IcombinedData) {
+   Emailorderconfirmation(combinedData: IcombinedData): Observable<any> {
     const url: string = `${this.url}/Emailorderconfirmation`;
     return this.http.post<IcombinedData>(url, combinedData, {withCredentials: true})
   }
@@ -200,15 +201,31 @@ export class ApiService {
     this.http.post(`${this.url}/addCategory`, category).subscribe();
   }
 
-  categoryUpdate(addid: string) {
+  // categoryUpdate(addid: string) {
 
-    const url: string = `${this.url}/categoryUpdate` + addid;
-    console.log(url)
-    return this.http.get<Iuser[]>(url)
-      .subscribe()
+  //   const url: string = `${this.url}/categoryUpdate` + addid;
+  //   return this.http.get<Iuser[]>(url)
+  //     .subscribe()
 
+  // }
+
+  // categoryUpdate(addid: string): Observable<Iuser[]> {
+  //   const url: string = `${this.url}/categoryUpdate${addid}`;
+  //   this.http.get<Iuser[]>(url).subscribe(
+  //     (data) => {
+  //       // Handle the data
+  //     },
+  //     (error) => {
+  //       // Handle the error
+  //     }
+  //   );
+  // }
+
+  categoryUpdate(addid: string): Observable<Iuser[]> {
+    const url: string = `${this.url}/categoryUpdate${addid}`;
+    return this.http.get<Iuser[]>(url);
   }
-
+  
   ProductUpdate(addid: string) {
 
     const url: string = `${this.url}/ProductUpdate` + addid;

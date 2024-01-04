@@ -30,7 +30,6 @@ export interface IcartItem {
   price?: number;
   name?: string;
   src?: string;
-  // Add other properties if there are any
 }
 
 export interface IdeliveryDetails {

@@ -12,8 +12,6 @@ import { Router } from '@angular/router';
 export class CartDialogComponent implements OnInit {
 
   constructor(public apiService: ApiService, private router: Router) { }
-  cartLength = 8
-
 
   ngOnInit() {
     const _id = localStorage.getItem('_id');
@@ -36,8 +34,7 @@ export class CartDialogComponent implements OnInit {
         totalCount += parseInt(item.count, 10);
       }
       this.apiService.cartLength = totalCount;
-      this.apiService.cart = data;
-      this.apiService.cart = Object.values(this.apiService.cart).flat();
+      this.apiService.cart = data.cart;
 
       const combinedArray = this.apiService.cartItems.map((item) => {
         const matchingCountItem = this.apiService.cart.find((countItem) => countItem._id === item._id);
@@ -51,36 +48,27 @@ export class CartDialogComponent implements OnInit {
     );
   }
 
-  deleteItem(index: number, element: any) {
-    let data = this.apiService.cartItems;
-    if (index >= 0 && index < data.length) {
-      data.splice(index, 1);
-      this.apiService.cartItems = [...data];
+  deleteItem(index: number, element: any){
+    let item = this.apiService.cartItems;
+    if (index >= 0 && index < item.length){
+      item.splice(index, 1);
+      this.apiService.cartItems = [...item];
       let id = `/?_id=${this.apiService.user.cart}&id=${element._id}`
       this.apiService.updateAddCart(id);
       this.apiService.cartLength -= element.count;
-      console.log(this.apiService.cartLength)
     }
   }
 
 
-  updateAddCart(index: number, item: any, action: string) {
+  updateAddCart( item: any, action: string) {
     if (action === "remove") {
       item.count--;
-      console.log("item.count1=", item.count)
-
-      if (item.count < 1) {
-        console.log("item.count2=", item.count)
-        this.deleteItem(index, item)
-      }
       this.apiService.cartLength--;
     } else {
       item.count++;
       this.apiService.cartLength++;
     }
     let id = `/?_id=${this.apiService.user.cart}&id=${item._id}&count=${item.count}`
-    console.log("item.count3=",item.count)
-
     this.apiService.updateAddCart(id);
   }
 

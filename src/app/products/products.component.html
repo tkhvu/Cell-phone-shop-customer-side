@@ -14,16 +14,7 @@
             <div *ngIf="element.isEdit">
                 <button mat-button (click)="element.isEdit = !element.isEdit; ProductUpdate(element)">בוצע</button>
             </div>
-            <!-- <div>
-                @if (!element.isEdit) {
-                <button mat-button (click)="element.isEdit = !element.isEdit"><span
-                        class="material-icons">edit</span></button>
-                <button mat-button (click)="removeRow(element._id)"> <span class="material-icons">delete</span></button>
-                }
-                @else {
-                <button mat-button (click)="element.isEdit = !element.isEdit; ProductUpdate(element)">בוצע</button>
-                }
-            </div> -->
+         
         </td>
     </ng-container>
 
@@ -66,4 +57,3 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<!-- <button mat-button (click)=" openDialog()">בוצע</button> -->

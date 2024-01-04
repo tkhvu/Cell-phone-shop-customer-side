@@ -29,13 +29,22 @@ export class OrderConfirmationComponent {
 
 
   OrderConfirmation() {
+
+    this.api.cartItems = this.api.cartItems.map(item => {
+      const newItem = { ...item }; 
+      delete newItem.src;          
+      return newItem;              
+    });
+
     this.api.combinedData = {
       user: this.api.user,
       orders: this.api.cartItems,
       DeliveryDetails: this.bioSection.value
     };
+
     this.DeletionConfirmation()
   }
+  
   displayedColumns: string[] = ['name', 'price', "src"];
 
 
@@ -56,23 +65,31 @@ export class OrderConfirmationComponent {
     })
   }
 
-   DeletionConfirmation() {
+
+  DeletionConfirmation() {
     const data = "?האם ברצונך לבצע את ההזמנה";
     const dialogRef = this.dialog.open(MessageDialogComponent, {
       data: data,
     });
-    dialogRef.afterClosed().subscribe(async (result) => {
+  
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-         (await this.api.Emailorderconfirmation(this.api.combinedData)).subscribe((data) => {
-          this.api.email = data
-          if (this.api.email === "Email sent successfully") {
-            const _id = `/?_id=${this.api.user.cart}`;
-            this.api.ademptyCart(_id);
-            this.ActionConfirmationMessage()
+         this.api.Emailorderconfirmation(this.api.combinedData).subscribe({
+          next: (data) => {
+            console.log(this.api.combinedData)
+
+            this.api.email = data;
+            if (this.api.email === "Email sent successfully") {
+              const _id = `/?_id=${this.api.user.cart}`;
+              this.api.ademptyCart(_id);
+              this.ActionConfirmationMessage();
+            }
+          },
+          error: (err) => {
+            console.error('Failed to send confirmation', err);
           }
         });
-    
       }
-    })
+    });
   }
 }

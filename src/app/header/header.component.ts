@@ -3,21 +3,17 @@ import { ApiService } from '../serviccs/api.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CartDialogComponent } from '../cart-dialog/cart-dialog.component';
 import { Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
-// import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  // standalone: true,
-  // imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-  constructor(public api: ApiService, public dialog: MatDialog, private router: Router, private sanitizer: DomSanitizer) { }
+  constructor(public api: ApiService, public dialog: MatDialog, private router: Router) { }
   
 
-  openDialog() {
+  ShoppingCart() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.restoreFocus = false;
