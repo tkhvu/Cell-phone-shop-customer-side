@@ -92,6 +92,7 @@ export class HeaderComponent implements OnInit {
       for (const item of data.cart) {
         totalCount += parseInt(item.count, 10);
       }
+
       this.api.cartLength = totalCount;
       this.api.cart = data;
     }

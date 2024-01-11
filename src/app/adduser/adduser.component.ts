@@ -1,8 +1,18 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
-import { USER } from '../modeluser';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+
+export class USER {
+  constructor(
+  public  firstname?: string,
+  public lastname?: string,
+  public email?: string,
+  public username?: string,
+  public password?: any,
+  ) {  }
+}
 
 @Component({
   selector: 'app-adduser',
@@ -80,8 +90,6 @@ export class adduserComponent {
     this.api.query = `/?username=${this.bioSection.value.username}`;
     this.api.UsernameCheck(this.api.query).subscribe((data: any) => {
      if(data.available){
-    //   this.onSelect(this.bioSection.value);
-    // } else {
       this.showErrorMessage('שם משתמש תפוס');
     }
   })
