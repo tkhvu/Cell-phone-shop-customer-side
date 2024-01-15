@@ -76,7 +76,6 @@ export class OrderConfirmationComponent {
       if (result) {
          this.api.Emailorderconfirmation(this.api.combinedData).subscribe({
           next: (data) => {
-            console.log(this.api.combinedData)
 
             this.api.email = data;
             if (this.api.email === "Email sent successfully") {

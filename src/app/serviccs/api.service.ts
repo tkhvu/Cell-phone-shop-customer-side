@@ -72,6 +72,7 @@ export class ApiService {
 
 
   public getCart(id: string) {
+
     const url: string = `${this.url}/getCart` + id;
     return this.http.get<Iuser>(url)
   }
@@ -120,6 +121,9 @@ export class ApiService {
         }
         this.loginerror = false;
         this.user = data;
+        console.log(data.cart)
+        console.log(data)
+
         localStorage.setItem('_id', this.user._id);
         const id = `/?_id=${this.user.cart}`
 

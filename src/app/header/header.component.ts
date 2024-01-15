@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
       this.api.Category = data
     })
     this.api.getmobile().subscribe((data) => {
+      console.log(data)
       this.api.listmobileMock = data;
       if (this.api.listmobileMock.length > 0) {
         if (this.api.user._id.length > 0) {
@@ -87,6 +88,7 @@ export class HeaderComponent implements OnInit {
 
   getCart() {
     const id = `/?_id=${this.api.user.cart}`
+
     this.api.getCart(id).subscribe((data: any) => {
       let totalCount = 0;
       for (const item of data.cart) {

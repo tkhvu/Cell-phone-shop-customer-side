@@ -41,6 +41,7 @@ export class adduserComponent {
   ngOnInit() {
     this.api.getUsers().subscribe((data) => {
       this.usersData = data
+      console.log("data", data )
     })
   }
 

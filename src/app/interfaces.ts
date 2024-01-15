@@ -10,6 +10,7 @@ export interface Ievents {
 }
 
 export interface Iuser {
+  _doc: any;
   lastname?: string;
   firstname?: string;
   email?: string;
