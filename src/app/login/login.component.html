@@ -1,28 +1,27 @@
-
-
 <div class="center">
-  <form #connection="ngForm" (ngSubmit)="onSubmit(connection)">
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
 
     <mat-form-field>
       <mat-label>שם משתמש </mat-label>
-      <input matInput name="username" required [(ngModel)]="username">
+      <input matInput #input1 formControlName="username" required>
     </mat-form-field>
     <br>
+
     <mat-form-field>
       <mat-label>סיסמה</mat-label>
-      <input matInput required name="password" [(ngModel)]="password" type="password">
+      <input matInput #input [type]="'password'" required formControlName="password">
     </mat-form-field>
 
-    <div *ngIf="api.loginerror" class="error-message">{{ api.error }}</div>
-
-
     <div>
-      <button mat-raised-button class="margin" color="warn" routerLink="/Createaccount">הרשמה</button>
-      <button mat-raised-button color="warn" type="submit" [disabled]="!connection.form.valid">התחברות</button>
+      <button mat-raised-button color="warn" type="submit" [disabled]="!loginForm.valid">התחברות</button>
     </div>
-
   </form>
 
+  <div *ngIf="api.error.length > 4">{{api.error}}</div>
+
 </div>
+
 <div class="spinner-container"><mat-spinner *ngIf="api.isLoading"></mat-spinner>
 </div>

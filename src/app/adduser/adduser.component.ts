@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../serviccs/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { catchError, of } from 'rxjs';
 
 
 export class USER {
@@ -25,7 +26,6 @@ export class adduserComponent {
   passwordIsValid = false;
   bioSection: FormGroup;
   model: USER = new USER('', '', '', '', '');
-  usersData: any = [];
   username = "33331www";
 
   constructor(public api: ApiService, private fb: FormBuilder, private snackBar: MatSnackBar) {
@@ -38,12 +38,6 @@ export class adduserComponent {
     });
   }
 
-  ngOnInit() {
-    this.api.getUsers().subscribe((data) => {
-      this.usersData = data
-      console.log("data", data )
-    })
-  }
 
   passwordValid(event: any) {
     this.passwordIsValid = event;

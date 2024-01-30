@@ -20,6 +20,7 @@ export interface Iuser {
   love?:any;
   cart:string[];
   favorites:[];
+  Director?: boolean;
 }
 
 
@@ -52,4 +53,20 @@ export interface Icategory {
   _id?: string;
   category: string,
   isEdit?: boolean
+}
+
+
+export interface IloginDetails {
+  username: string;
+  password: string;
+}
+
+export interface ICartItem {
+  _id: string;
+  count: number;
+}
+
+export interface ICart {
+  _id: string;
+  cart: ICartItem[];
 }

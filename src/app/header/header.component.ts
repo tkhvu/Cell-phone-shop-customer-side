@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   constructor(public api: ApiService, public dialog: MatDialog, private router: Router) { }
-  
+
 
   ShoppingCart() {
     const dialogConfig = new MatDialogConfig();
@@ -37,7 +37,6 @@ export class HeaderComponent implements OnInit {
       this.api.Category = data
     })
     this.api.getmobile().subscribe((data) => {
-      console.log(data)
       this.api.listmobileMock = data;
       if (this.api.listmobileMock.length > 0) {
         if (this.api.user._id.length > 0) {
@@ -89,21 +88,20 @@ export class HeaderComponent implements OnInit {
   getCart() {
     const id = `/?_id=${this.api.user.cart}`
 
-    this.api.getCart(id).subscribe((data: any) => {
-      let totalCount = 0;
-      for (const item of data.cart) {
-        totalCount += parseInt(item.count, 10);
-      }
-
-      this.api.cartLength = totalCount;
-      this.api.cart = data;
-    }
-    );
+    this.api.getCart(id).subscribe({
+      next: (data) => {
+        this.api.totalCount = 0;
+        for (const item of data.cart) {
+          this.api.totalCount += item.count;
+        }
+        this.api.cart = data.cart;
+      },
+      error: (err) => console.error('Error fetching cart:', err),
+    });
   }
 
   Login() {
     this.router.navigate(['/Login']);
-    this.api.login = !this.api.login;
   }
 
   Definitions() {

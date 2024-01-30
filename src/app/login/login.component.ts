@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,20 +9,25 @@ import { ApiService } from '../serviccs/api.service';
 })
 export class LoginComponent {
 
+  loginForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+  });
+
   constructor(public api: ApiService) { }
 
-  username = '';
-  password = '';
-  onSubmit(connection: any) {
-    if (connection.form.valid) {
+  logindetails = {}
+
+  onSubmit() {
+    if (this.loginForm.valid) {
       this.userMatch()
     }
   }
 
   userMatch() {
     this.api.isLoading = true;
-    this.api.logindetails = { username: this.username, password: this.password };
-    this.api.userMatch(this.api.logindetails)
+    this.logindetails = this.loginForm.value;
+    this.api.userMatch(this.loginForm.value)
   }
 
 }

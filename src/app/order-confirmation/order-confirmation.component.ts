@@ -61,7 +61,7 @@ export class OrderConfirmationComponent {
     dialogRef.afterClosed().subscribe(result => {
       
         this.router.navigate(['/Listmobile']);
-        this.api.cartLength = 0;
+        this.api.totalCount = 0;
     })
   }
 

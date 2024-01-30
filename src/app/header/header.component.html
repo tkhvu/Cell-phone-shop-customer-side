@@ -1,6 +1,6 @@
-<mat-toolbar *ngIf="!api.login" class="Just-caption">
+<mat-toolbar class="Just-caption">
     <button mat-raised-button aria-label="סל הקניות" (click)="ShoppingCart()"
-      [matBadge]="api.Connected ? api.cartLength : '0'" matBadgePosition="before" matBadgeColor="warn">
+      [matBadge]="api.Connected ? api.totalCount : '0'" matBadgePosition="before" matBadgeColor="warn">
       <span class="material-icons">shopping_cart</span>
     </button>
     <span *ngIf="!api.Connected">

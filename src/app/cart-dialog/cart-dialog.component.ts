@@ -29,45 +29,47 @@ export class CartDialogComponent implements OnInit {
   getCart() {
     const id = `/?_id=${this.apiService.user.cart}`
 
-    this.apiService.getCart(id).subscribe((data: any) => {
-      let totalCount = 0;
-      for (const item of data.cart) {
-        totalCount += parseInt(item.count, 10);
-      }
-      this.apiService.cartLength = totalCount;
-      this.apiService.cart = data.cart;
+    this.apiService.getCart(id).subscribe({
+      next: (data) => {
+        this.apiService.totalCount = 0;
 
-      const combinedArray = this.apiService.cartItems.map((item) => {
-        const matchingCountItem = this.apiService.cart.find((countItem) => countItem._id === item._id);
-        if (matchingCountItem) {
-          return { ...item, count: matchingCountItem.count };
+        for (const item of data.cart) {
+          this.apiService.totalCount += item.count;
         }
-        return item;
-      });
-      this.apiService.cartItems = combinedArray
-    }
-    );
+        this.apiService.cart = data.cart;
+
+        const combinedArray = this.apiService.cartItems.map((item) => {
+          const matchingCountItem = this.apiService.cart.find((countItem) => countItem._id === item._id);
+          if (matchingCountItem) {
+            return { ...item, count: matchingCountItem.count };
+          }
+          return item;
+        });
+        this.apiService.cartItems = combinedArray
+      },
+      error: (err) => console.error('Error fetching cart:', err),
+   });
   }
 
-  deleteItem(index: number, element: any){
+  deleteItem(index: number, element: any) {
     let item = this.apiService.cartItems;
-    if (index >= 0 && index < item.length){
+    if (index >= 0 && index < item.length) {
       item.splice(index, 1);
       this.apiService.cartItems = [...item];
       let id = `/?_id=${this.apiService.user.cart}&id=${element._id}`
       this.apiService.updateAddCart(id);
-      this.apiService.cartLength -= element.count;
+      this.apiService.totalCount -= element.count;
     }
   }
 
 
-  updateAddCart( item: any, action: string) {
+  updateAddCart(item: any, action: string) {
     if (action === "remove") {
       item.count--;
-      this.apiService.cartLength--;
+      this.apiService.totalCount--;
     } else {
       item.count++;
-      this.apiService.cartLength++;
+      this.apiService.totalCount++;
     }
     let id = `/?_id=${this.apiService.user.cart}&id=${item._id}&count=${item.count}`
     this.apiService.updateAddCart(id);

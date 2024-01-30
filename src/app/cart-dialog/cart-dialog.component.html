@@ -46,7 +46,7 @@
 </table>
 
 <mat-dialog-actions>
-  <button mat-button (click)="navigateToorderconfirmation()" [disabled]="apiService.cartLength < 1"
+  <button mat-button (click)="navigateToorderconfirmation()" [disabled]="apiService.totalCount < 1"
     mat-dialog-close>ביצוע הזמנה</button>
   <button mat-button mat-dialog-close>להמשך קניות</button>
 </mat-dialog-actions>
