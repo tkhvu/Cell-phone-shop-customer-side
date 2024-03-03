@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(public api: ApiService) { }
+  constructor(public api: ApiService, private router: Router) { }
 
   logindetails = {}
 
@@ -29,5 +30,13 @@ export class LoginComponent {
     this.logindetails = this.loginForm.value;
     this.api.userMatch(this.loginForm.value)
   }
+
+  enrollment(){
+
+    this.router.navigate(['/Createaccount']);
+
+  }
+
+
 
 }

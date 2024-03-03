@@ -76,8 +76,7 @@ export class OrderConfirmationComponent {
       if (result) {
          this.api.Emailorderconfirmation(this.api.combinedData).subscribe({
           next: (data) => {
-
-            this.api.email = data;
+            this.api.email = data.message;
             if (this.api.email === "Email sent successfully") {
               const _id = `/?_id=${this.api.user.cart}`;
               this.api.ademptyCart(_id);

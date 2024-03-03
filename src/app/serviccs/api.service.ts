@@ -28,12 +28,8 @@ export class ApiService {
   sourceData: Ievents[] = [];
   email: any;
   director = false
-  url: string = "https://api-pi72mex7aq-uc.a.run.app";
-    // url: string = "http://127.0.0.1:5001/new-teste-be28e/us-central1/api";
+  url: string = "http://localhost:3000";
 
-  // url: string = "http://localhost:3000";
-  // url: string = https://lonely-kilt-tick.cyclic.app
-  // url: string = https://server-side-58yz.onrender.com
 
   public getmobile() {
     const url: string = `${this.url}/getMobile`;
@@ -55,7 +51,7 @@ export class ApiService {
 
   public deleteProduct(id: string) {
     const url: string = `${this.url}/deleteProduct` + id;
-    return this.http.get<string>(url).subscribe();
+    return this.http.delete<string>(url).subscribe();
 
   }
 
@@ -204,7 +200,7 @@ export class ApiService {
 
 
     const url: string = `${this.url}/deleteFavorites` + addid;
-    return this.http.get<Iuser[]>(url)
+    return this.http.delete<Iuser[]>(url)
       .subscribe()
   }
 
