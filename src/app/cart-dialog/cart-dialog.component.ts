@@ -31,6 +31,8 @@ export class CartDialogComponent implements OnInit {
 
     this.apiService.getCart(id).subscribe({
       next: (data) => {
+        console.log("data==", data)
+
         this.apiService.totalCount = 0;
 
         for (const item of data.cart) {
