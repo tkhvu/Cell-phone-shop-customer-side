@@ -32,38 +32,38 @@ export class ApiService {
 
 
   public getmobile() {
-    const url: string = `${this.url}/getMobile`;
+    const url: string = `${this.url}/api/mobile/getMobile`;
     return this.http.get<Ievents[]>(url)
 
   }
 
   public getCategory() {
-    const url: string = `${this.url}/getCategory`;
+    const url: string = `${this.url}/api/category/getCategory`;
     return this.http.get<any[]>(url)
 
   }
 
   public deleteCategory(id: string) {
-    const url: string = `${this.url}/deleteCategory` + id;
+    const url: string = `${this.url}/api/category/deleteCategory` + id;
     return this.http.get<string>(url).subscribe();
 
   }
 
   public deleteProduct(id: string) {
-    const url: string = `${this.url}/deleteProduct` + id;
+    const url: string = `${this.url}/api/mobile/deleteProduct` + id;
     return this.http.delete<string>(url).subscribe();
 
   }
 
   public localStorage() {
 
-    const url: string = `${this.url}/localStorage`;
+    const url: string = `${this.url}/api/users/localStorage`;
     return this.http.get<Iuser>(url, { withCredentials: true })
   }
 
   public MobileDetails(id: string) {
 
-    const url: string = `${this.url}/MobileDetails` + id;
+    const url: string = `${this.url}/api/mobile/MobileDetails` + id;
     return this.http.get<Iuser>(url)
   }
 
@@ -72,7 +72,7 @@ export class ApiService {
 
 
   public addCart(addid: string) {
-    const url: string = `${this.url}/addCart` + addid;
+    const url: string = `${this.url}/api/cart/addCart` + addid;
     this.totalCount++;
     return this.http.get<Ievents[]>(url)
       .subscribe();
@@ -80,7 +80,7 @@ export class ApiService {
 
   public async addUser(user: Iuser[]) {
     this.isLoading = true;
-    const url: string = `${this.url}/CreatingUser`;
+    const url: string = `${this.url}/api/users/CreatingUser`;
     return this.http.post<Iuser[]>(url, user).subscribe((data) => {
       this.isLoading = false;
       const dataString = JSON.stringify(data);
@@ -93,13 +93,13 @@ export class ApiService {
 
 
   public UsernameCheck(query: string) {
-    const url: string = `${this.url}/UsernameCheck` + query;
+    const url: string = `${this.url}/api/users/UsernameCheck` + query;
     return this.http.get<Iuser>(url)
   }
 
 
   public getCart(id: string): Observable<any> {
-    const url: string = `${this.url}/getCart${id}`;
+    const url: string = `${this.url}/api/cart/getCart${id}`;
     return this.http.get<any>(url).pipe(
       catchError(err => {
         console.error(err);
@@ -110,7 +110,7 @@ export class ApiService {
 
   public userMatch(logindetails: {}): void {
 
-    const url: string = `${this.url}/userMatch`;
+    const url: string = `${this.url}/api/users/userMatch`;
      this.http.post<Body>(url, logindetails, {withCredentials: true})
       .subscribe((data: any) => {
         this.director = data.Director
@@ -183,14 +183,14 @@ export class ApiService {
   addFavorites(addid: string) {
 
 
-    const url: string = `${this.url}/addFavorites` + addid;
+    const url: string = `${this.url}/api/favorites/addFavorites` + addid;
     this.http.get(url)
       .subscribe()
   }
 
   public getUsers() {
 
-    const url: string = `${this.url}/getUsers`;
+    const url: string = `${this.url}/api/users/getUsers`;
     return this.http.get<Iuser[]>(url, { withCredentials: true })
 
 
@@ -199,7 +199,7 @@ export class ApiService {
   public deleteFavorites(addid: string) {
 
 
-    const url: string = `${this.url}/deleteFavorites` + addid;
+    const url: string = `${this.url}/api/favorites/deleteFavorites` + addid;
     return this.http.delete<Iuser[]>(url)
       .subscribe()
   }
@@ -221,7 +221,7 @@ export class ApiService {
 
   updateAddCart(addid: string) {
 
-    const url: string = `${this.url}/cartUpdate` + addid;
+    const url: string = `${this.url}/api/cart/cartUpdate` + addid;
     return this.http.get<Iuser[]>(url)
       .subscribe()
 
@@ -229,35 +229,36 @@ export class ApiService {
 
 
   Emailorderconfirmation(combinedData: IcombinedData): Observable<any> {
-    const url: string = `${this.url}/Emailorderconfirmation`;
+    const url: string = `${this.url}/api/email/Emailorderconfirmation`;
     return this.http.post<IcombinedData>(url, combinedData, { withCredentials: true })
   }
 
   public async uploadProduct(formData: {}) {
 
-    this.http.post(`${this.url}/upload`, formData).subscribe();
+    this.http.post(`${this.url}/api/upload/upload`, formData).subscribe();
   }
 
   public async addCategory(category: {}) {
 
-    this.http.post(`${this.url}/addCategory`, category).subscribe();
+    this.http.post(`${this.url}/api/category/addCategory`, category).subscribe();
   }
 
 
   categoryUpdate(addid: string): Observable<Iuser[]> {
-    const url: string = `${this.url}/categoryUpdate${addid}`;
+    const url: string = `${this.url}/api/category/categoryUpdate${addid}`;
     return this.http.get<Iuser[]>(url);
   }
 
   ProductUpdate(addid: string) {
+    console.log(addid)
 
-    const url: string = `${this.url}/ProductUpdate` + addid;
+    const url: string = `${this.url}/api/mobile/ProductUpdate` + addid;
     return this.http.get<Iuser[]>(url).subscribe()
   }
 
   ademptyCart(addid: string) {
 
-    const url: string = `${this.url}/emptyCart` + addid;
+    const url: string = `${this.url}/api/cart/emptyCart` + addid;
     return this.http.get<Iuser[]>(url).subscribe()
   }
 

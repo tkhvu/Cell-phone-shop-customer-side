@@ -1,69 +1,81 @@
 
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px;
-    margin: 20px;
-  }
-  
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  margin: 20px;
+}
 
-  .grid-container mat-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .title {
-    text-align: center;
+mat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; 
+  background-color: #d3d9d3; 
   }
 
 
 
-  .my-custom-button:hover {
-    background-color: red; 
-  }
 
-  .toolbar {
-    display: flex;
-    justify-content: space-between; 
-  }
-  
-  .example-viewport {
-    height:510px;
-    width: 1530px;
-  }
-
-/*  
-  .centered-text {
-    text-align: center; 
-  }
-  
-
-  .active-button {
-    background-color: darkorange;
-    color: white;
-  } */
+.title {
+  text-align: center;
+}
 
 
+
+.my-custom-button:hover {
+  background-color: red; 
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between; 
+}
+
+.example-viewport {
+  height:510px;
+  width: 1530px;
+}
+
+
+.sale-gif {
  
-  
-
-/* 
-  .emphasized-label {
-    font-weight: bold;
-    font-size: 16px;
-  }
-
-
-
-.mat-column-Image {
-  width: 50px;
-  padding-left: 16px;
+  transform: translateX(-100%); 
+  position: absolute; 
+  top: 40px; 
 }
 
 
-.mat-column-actions {
-  max-width: 124px;
+.my-black-button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
 }
 
- */
+
+
+.my-black-button mat-icon {
+  margin-right: 8px; 
+}
+
+
+mat-card-actions {
+  display: flex;
+  gap: 60px;
+}
+
+mat-card-actions button, .my-black-button {
+  height: 48px; 
+  padding: 0 15px; /* Adjust horizontal padding if needed, no vertical padding */
+
+}
+
+
+
+

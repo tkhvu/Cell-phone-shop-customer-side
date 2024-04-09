@@ -15,11 +15,13 @@
     <div *cdkVirtualFor="let mobile of this.api.listmobileMock">
 
       <mat-card>
-        <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" width="auto" height="222">
-        <p><em class="emphasized-label">דגם:</em> {{mobile.name}}</p>
+        <img src="assets/Sale.gif" class="sale-gif">
+        <img [src]="mobile.src" [title]="mobile.name" alt="Lamp" height="222">
+        <p><em class="emphasized-label"></em> {{mobile.name}}</p>
+       
         <p> <em class="emphasized-label">מחיר:</em> {{"₪" + mobile.price }} </p>
-
         <mat-card-actions>
+<!-- 
           <button mat-icon-button *ngIf="mobile.love === true"
             (click)="mobile.love =false; deleteFavorites(mobile._id)">
             <mat-icon>favorite </mat-icon>
@@ -27,10 +29,14 @@
 
           <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addFavorites(mobile._id)">
             <mat-icon>favorite_border </mat-icon>
+          </button> -->
+          <button class="my-black-button" (click)="addCart(mobile._id)">
+            <mat-icon>shopping_cart</mat-icon>  הוסף לסל
           </button>
-          <button mat-raised-button color="warn" (click)="addCart(mobile._id)">
-            הוספה לסל
+          <button class="my-black-button" style="background-color: rgb(28, 28, 78); color: white; border: none;">
+            קנה עכשיו
           </button>
+          
 
         </mat-card-actions>
       </mat-card>
@@ -38,4 +44,3 @@
 
   </div>
 </cdk-virtual-scroll-viewport>
-
