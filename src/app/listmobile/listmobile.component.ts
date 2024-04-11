@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
-import { Ievents } from '../interfaces';
+// import { Ievents } from '../interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
@@ -41,7 +41,6 @@ export class ListmobileComponent {
     if (this.api.Connected) {
       const id = `/?_id=${this.api.user.cart}&id=${_id}`;
       this.api.addCart(id);
-      console.log(this.api.listmobileMock.length)
     } else {
       this.showErrorMessage('על מנת לשמור את המוצר בסל שלך, יש להתחבר');
     }
@@ -65,8 +64,10 @@ export class ListmobileComponent {
     });
   }
 
-  buyNow(_id: string){
-    this.addCart(_id)
+  buyNow(mobile: any){
+    mobile.count = 1;
+    this.api.cartItems = [mobile]
+    // this.addCart(_id)
     this.router.navigate(['/orderconfirmation']);
   }
 }

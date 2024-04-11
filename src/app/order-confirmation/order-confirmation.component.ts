@@ -4,6 +4,7 @@ import { ApiService } from '../serviccs/api.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
+import { IcartItem } from '../interfaces';
 
 
 
@@ -15,7 +16,7 @@ import { MessageDialogComponent } from '../message-dialog/message-dialog.compone
 export class OrderConfirmationComponent {
   firstNameAutofilled: boolean | undefined;
   lastNameAutofilled: boolean | undefined;
-
+  cartItems: IcartItem[] = [];
   bioSection: FormGroup;
   constructor(private fb: FormBuilder, public api: ApiService, public dialog: MatDialog, private router: Router) {
     this.bioSection = this.fb.group({
@@ -27,49 +28,11 @@ export class OrderConfirmationComponent {
     });
   }
 
-  // ngOnInit() {
-  //   const _id = localStorage.getItem('_id');
-  //   const id = `/?_id=${this.api.user.cart}`;
-  //   if (_id != null) {
-  //     this.api.MobileDetails(id)
-  //       .subscribe((data: any) => {
-  //         this.api.cartItems = data[0].cart;
-  //         this.getCart()
-  //       }
-  //       );
-  //   }
-  // }
-
-  //   getCart() {
-  //   const id = `/?_id=${this.api.user.cart}`
-
-  //   this.api.getCart(id).subscribe({
-  //     next: (data) => {
-
-  //       this.api.totalCount = 0;
-
-  //       for (const item of data.cart) {
-  //         this.api.totalCount += item.count;
-  //       }
-  //       this.api.cart = data.cart;
-
-  //       const combinedArray = this.api.cartItems.map((item) => {
-  //         const matchingCountItem = this.api.cart.find((countItem) => countItem._id === item._id);
-  //         if (matchingCountItem) {
-  //           return { ...item, count: matchingCountItem.count };
-  //         }
-  //         return item;
-  //       });
-  //       this.api.cartItems = combinedArray
-  //     },
-  //     error: (err) => console.error('Error fetching cart:', err),
-  //  });
-  // }
-
 
   OrderConfirmation() {
 
-    this.api.cartItems = this.api.cartItems.map(item => {
+    this.api.cartItems = this.cartItems;
+    this.cartItems = this.api.cartItems.map(item => {
       const newItem = { ...item }; 
       delete newItem.src;          
       return newItem;              

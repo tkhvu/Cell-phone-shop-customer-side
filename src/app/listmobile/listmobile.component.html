@@ -30,7 +30,7 @@
           <button class="my-black-button" (click)="addCart(mobile._id)">
             <mat-icon>shopping_cart</mat-icon>  הוסף לסל
           </button>
-          <button mat-icon-button *ngIf="mobile.love === true"
+          <!-- <button mat-icon-button *ngIf="mobile.love === true"
             (click)="mobile.love =false; deleteFavorites(mobile._id)">
             <mat-icon>favorite </mat-icon>
           </button>
@@ -38,11 +38,11 @@
           <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addFavorites(mobile._id)">
             <mat-icon>favorite_border </mat-icon>
           </button>
-          
-          <!-- <button class="my-black-button" (click)="buyNow(mobile._id)">
+           -->
+          <button class="my-black-button" (click)="buyNow(mobile)">
             
             קנה עכשיו
-          </button> -->
+          </button>
           
 
         </mat-card-actions>
