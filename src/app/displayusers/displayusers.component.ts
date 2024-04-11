@@ -12,6 +12,7 @@ export class DisplayusersComponent {
   constructor(private api: ApiService, private router: Router) { }
   usersData: any = [];
   displayedColumnsusers: string[] = ['email', 'lastname', 'firstname'];
+  LoadingComplete: boolean = false;
 
   ngOnInit() {
     this.api.getUsers().pipe(
@@ -25,5 +26,7 @@ if (error.error.error === "jwt expired"){
     ).subscribe((data) => {
       this.usersData.data = data
     })
+    this.LoadingComplete = true
   }
+  
 }

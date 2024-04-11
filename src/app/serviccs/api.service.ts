@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Observable, catchError, of } from 'rxjs';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -120,7 +119,6 @@ export class ApiService {
           this.error = 'שם המשתמש או הסיסמה אינם נכונים.';
           return;
         }
-        // this.loginerror = false;
         this.user = data;
 
         localStorage.setItem('_id', this.user._id);
@@ -138,46 +136,6 @@ export class ApiService {
       })
   }
 
-
-
-  //   public userMatch(logindetails: {}): Observable<any> {
-
-  //     const url: string = `${this.url}/userMatch`;
-  //     return this.http.post<Iuser>(url, logindetails, { withCredentials: true })
-  //       .pipe(
-  //         switchMap((data: any) => {
-  //           this.director = data.Director
-  //           this.isLoading = false;
-  //           if (data.length === 0) {
-  //             this.loginerror = true;
-  //             this.error = 'שם המשתמש או הסיסמה אינם נכונים.';
-  //             return;
-  //           }
-  //           this.loginerror = false;
-  //           this.user = data;
-
-  //           localStorage.setItem('_id', this.user._id);
-  //           const id = `/?_id=${this.user.cart}`
-
-
-  //           this.login = false;
-  //           this.navigateToshop()
-  //           this.Connected = true;
-  // })
-  // )},
-  // this.getCart(id).subscribe((data: any) => {
-  //           let totalCount = 0;
-  //           for (const item of data.cart) {
-  //             totalCount += parseInt(item.count, 10);
-  //           }
-  //           this.cartLength = totalCount;
-  //           this.cart = data;
-  //         }
-  //         );
-  //         this.login = false;
-  //         this.navigateToshop()
-  //         this.Connected = true;
-  //       }),
 
 
   addFavorites(addid: string) {

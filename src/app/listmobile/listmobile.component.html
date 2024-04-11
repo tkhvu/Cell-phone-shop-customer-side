@@ -8,7 +8,12 @@
     [class.active-button]="activeButton === 'showAll'"> הצג הכול</button>
 </mat-toolbar>
 
-<cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+<div *ngIf="api.listmobileMock?.length === 0" class="loading-container">
+  <img src="assets/loading-loading-forever.gif" alt="Loading...">
+</div>
+
+
+<cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport" *ngIf="this.api.listmobileMock">
 
   <div class="grid-container">
 
@@ -22,20 +27,22 @@
         <p> <em class="emphasized-label">מחיר:</em> {{"₪" + mobile.price }} </p>
         <mat-card-actions>
             
-          <!-- <button mat-icon-button *ngIf="mobile.love === true"
+          <button class="my-black-button" (click)="addCart(mobile._id)">
+            <mat-icon>shopping_cart</mat-icon>  הוסף לסל
+          </button>
+          <button mat-icon-button *ngIf="mobile.love === true"
             (click)="mobile.love =false; deleteFavorites(mobile._id)">
             <mat-icon>favorite </mat-icon>
           </button>
 
           <button mat-icon-button *ngIf="mobile.love === false" (click)="mobile.love =true; addFavorites(mobile._id)">
             <mat-icon>favorite_border </mat-icon>
-          </button> -->
-          <button class="my-black-button" (click)="addCart(mobile._id)">
-            <mat-icon>shopping_cart</mat-icon>  הוסף לסל
           </button>
-          <button class="my-black-button" style="background-color: rgb(28, 28, 78); color: white; border: none;">
+          
+          <!-- <button class="my-black-button" (click)="buyNow(mobile._id)">
+            
             קנה עכשיו
-          </button>
+          </button> -->
           
 
         </mat-card-actions>
@@ -44,3 +51,4 @@
 
   </div>
 </cdk-virtual-scroll-viewport>
+

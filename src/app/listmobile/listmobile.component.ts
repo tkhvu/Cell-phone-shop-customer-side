@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../serviccs/api.service';
 import { Ievents } from '../interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,11 +13,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ListmobileComponent {
 
-  constructor(public api: ApiService, private snackBar: MatSnackBar) { }
+  constructor(public api: ApiService, private snackBar: MatSnackBar, private router: Router) { }
   activeButton: any;
   dataSource: any = [];
 
   displayedColumns: string[] = ['Image', 'name', 'price', 'actions'];
+  LoadingComplete: boolean = false;
 
 
   deleteFavorites(_id: string) {
@@ -39,10 +41,10 @@ export class ListmobileComponent {
     if (this.api.Connected) {
       const id = `/?_id=${this.api.user.cart}&id=${_id}`;
       this.api.addCart(id);
+      console.log(this.api.listmobileMock.length)
     } else {
       this.showErrorMessage('על מנת לשמור את המוצר בסל שלך, יש להתחבר');
     }
-
   }
 
   filter(mobile: any) {
@@ -61,5 +63,10 @@ export class ListmobileComponent {
       duration: 3000,
       panelClass: ['error-snackbar'],
     });
+  }
+
+  buyNow(_id: string){
+    this.addCart(_id)
+    this.router.navigate(['/orderconfirmation']);
   }
 }

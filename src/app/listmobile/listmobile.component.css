@@ -47,7 +47,7 @@ mat-card {
 
 
 .my-black-button {
-  background-color: black;
+  background-color: rgb(42, 33, 33);
   color: white;
   border: none;
   padding: 5px 10px;
@@ -72,10 +72,21 @@ mat-card-actions {
 
 mat-card-actions button, .my-black-button {
   height: 48px; 
-  padding: 0 15px; /* Adjust horizontal padding if needed, no vertical padding */
+  padding: 0 15px; 
 
 }
 
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(10%); 
+}
 
 
 

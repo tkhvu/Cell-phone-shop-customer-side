@@ -27,6 +27,45 @@ export class OrderConfirmationComponent {
     });
   }
 
+  // ngOnInit() {
+  //   const _id = localStorage.getItem('_id');
+  //   const id = `/?_id=${this.api.user.cart}`;
+  //   if (_id != null) {
+  //     this.api.MobileDetails(id)
+  //       .subscribe((data: any) => {
+  //         this.api.cartItems = data[0].cart;
+  //         this.getCart()
+  //       }
+  //       );
+  //   }
+  // }
+
+  //   getCart() {
+  //   const id = `/?_id=${this.api.user.cart}`
+
+  //   this.api.getCart(id).subscribe({
+  //     next: (data) => {
+
+  //       this.api.totalCount = 0;
+
+  //       for (const item of data.cart) {
+  //         this.api.totalCount += item.count;
+  //       }
+  //       this.api.cart = data.cart;
+
+  //       const combinedArray = this.api.cartItems.map((item) => {
+  //         const matchingCountItem = this.api.cart.find((countItem) => countItem._id === item._id);
+  //         if (matchingCountItem) {
+  //           return { ...item, count: matchingCountItem.count };
+  //         }
+  //         return item;
+  //       });
+  //       this.api.cartItems = combinedArray
+  //     },
+  //     error: (err) => console.error('Error fetching cart:', err),
+  //  });
+  // }
+
 
   OrderConfirmation() {
 

@@ -12,10 +12,9 @@ import { MessageDialogComponent } from '../message-dialog/message-dialog.compone
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
-  constructor(private api: ApiService, public dialog: MatDialog) { }
+  constructor(public api: ApiService, public dialog: MatDialog) { }
   displayedColumns: string[] = ['name', 'price', 'Image', 'actions'];
   dataSource = new MatTableDataSource<Ievents>();
-  
   ngOnInit() {
     this.api.getmobile().subscribe((data) => {
       this.dataSource.data = data;
