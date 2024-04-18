@@ -26,7 +26,7 @@ export class adduserComponent {
   passwordIsValid = false;
   bioSection: FormGroup;
   model: USER = new USER('', '', '', '', '');
-  username = "33331www";
+  // username = "33331www";
 
   constructor(public api: ApiService, private fb: FormBuilder, private snackBar: MatSnackBar) {
     this.bioSection = this.fb.group({

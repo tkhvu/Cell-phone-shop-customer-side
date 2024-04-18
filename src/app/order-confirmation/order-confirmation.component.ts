@@ -29,10 +29,10 @@ export class OrderConfirmationComponent {
   }
 
 
+
   OrderConfirmation() {
 
-    this.api.cartItems = this.cartItems;
-    this.cartItems = this.api.cartItems.map(item => {
+    this.api.cartItems = this.api.cartItems.map(item => {
       const newItem = { ...item }; 
       delete newItem.src;          
       return newItem;              
@@ -43,7 +43,6 @@ export class OrderConfirmationComponent {
       orders: this.api.cartItems,
       DeliveryDetails: this.bioSection.value
     };
-
     this.DeletionConfirmation()
   }
   

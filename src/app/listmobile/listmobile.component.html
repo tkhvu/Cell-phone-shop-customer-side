@@ -1,11 +1,22 @@
 <h1 class="title">חנות פלאפונים</h1>
-<mat-toolbar class="toolbar">
+<!-- <mat-toolbar class="toolbar">
 
   <button mat-button color="primary" *ngFor="let mobile of this.api.Category"
     (click)="filter(mobile); activeButton = mobile.category" [class.active-button]="activeButton === mobile.category">{{
     mobile.category }}</button>
   <button mat-raised-button color="primary" (click)="showall(); activeButton = 'showAll' "
     [class.active-button]="activeButton === 'showAll'"> הצג הכול</button>
+</mat-toolbar> -->
+
+
+<mat-toolbar  class="toolbar">
+  <div class="topic-buttons-container">
+    <button  *ngFor="let mobile of this.api.Category" 
+    (click)="filter(mobile); activeButton = mobile.category" [class.active-button]="activeButton === mobile.category">
+    {{mobile.category }}</button>
+  <button (click)="showall(); activeButton = 'showAll' "
+    [class.active-button]="activeButton === 'showAll'"> הצג הכול</button>
+    </div>
 </mat-toolbar>
 
 <div *ngIf="api.listmobileMock?.length === 0" class="loading-container">

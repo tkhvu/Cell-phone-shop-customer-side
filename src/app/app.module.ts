@@ -37,7 +37,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddingProductDialogComponent } from './adding-product-dialog/adding-product-dialog.component';
-import { AddingCategoryComponent } from './adding-category/adding-category.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DisplayusersComponent } from './displayusers/displayusers.component';
 import { ProductsComponent } from './products/products.component';
@@ -57,7 +56,6 @@ import { HeaderComponent } from './header/header.component';
     OrderConfirmationComponent,
     DirectorComponent,
     AddingProductDialogComponent,
-    AddingCategoryComponent,
     DisplayusersComponent,
     ProductsComponent,
     CategoriesComponent,
