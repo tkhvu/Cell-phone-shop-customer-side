@@ -27,7 +27,7 @@ export class ApiService {
   sourceData: Ievents[] = [];
   email: any;
   director = false
-  url: string = "http://localhost:3000";
+  url: string = "https://api-pi72mex7aq-uc.a.run.app";
 
 
   public getmobile() {
