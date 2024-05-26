@@ -9,8 +9,8 @@
 //   styleUrls: ['./sitemap.component.css']
 // })
 // export class SitemapComponent implements OnInit {
-//   sitemapData: string;
-//   sitemapDownloadUrl: SafeUrl;
+//     sitemapData: string = '';
+//     sitemapDownloadUrl: SafeUrl = '';
 
 //   constructor(private sitemapService: SitemapService, private sanitizer: DomSanitizer) { }
 
